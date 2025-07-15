@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg width="800" height="450" viewBox="0 0 800 450" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Video Background -->
+  <rect width="800" height="450" fill="#000000"/>
+  
+  <!-- Video Content (Placeholder) -->
+  <rect x="0" y="0" width="800" height="400" fill="#111111"/>
+  <circle cx="400" cy="200" r="50" fill="#FF0000" opacity="0.8"/>
+  <polygon points="385,175 385,225 425,200" fill="white"/>
+  
+  <!-- Video Controls -->
+  <rect x="0" y="400" width="800" height="50" fill="#111111"/>
+  <rect x="20" y="415" width="20" height="20" rx="2" fill="#FFFFFF"/>
+  <rect x="60" y="423" width="680" height="4" rx="2" fill="#333333"/>
+  <rect x="60" y="423" width="240" height="4" rx="2" fill="#FF0000"/>
+  <text x="760" y="427" font-family="Arial" font-size="12" fill="#FFFFFF" text-anchor="end">2:15 / 4:56</text>
+  
+  <!-- Toast Notifications -->
+  <g>
+    <rect x="480" y="320" width="300" height="60" rx="6" fill="rgba(0,0,0,0.85)"/>
+    <text x="500" y="350" font-family="Arial" font-size="14" fill="#FFFFFF" width="260">This extension shows captions as toast notifications.</text>
+  </g>
+  <g>
+    <rect x="480" y="250" width="300" height="60" rx="6" fill="rgba(0,0,0,0.85)" opacity="0.6"/>
+    <text x="500" y="280" font-family="Arial" font-size="14" fill="#FFFFFF" width="260" opacity="0.6">Previous caption is fading out.</text>
+  </g>
+</svg>

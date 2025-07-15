@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg width="512" height="512" viewBox="0 0 512 512" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- YouTube Logo Background - increased height and overall size -->
+  <rect x="56" y="156" width="400" height="200" rx="40" fill="#FF0000"/>
+  
+  <!-- YouTube Play Button - using official style -->
+  <path d="M160 206L220 256L160 306V206Z" fill="white"/>
+  
+  <!-- Fast Forward Arrows - matching official play button style -->
+  <path d="M230 206L290 256L230 306V206Z" fill="white"/>
+  <path d="M300 206L360 256L300 306V206Z" fill="white"/>
+</svg>
