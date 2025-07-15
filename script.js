@@ -6,6 +6,9 @@
 document.addEventListener('DOMContentLoaded', function() {
     // Initialize FAQ accordion functionality
     initFaqAccordion();
+    
+    // Generate FAQ structured data for SEO
+    generateFaqStructuredData();
 });
 
 /**
@@ -82,4 +85,56 @@ document.addEventListener('DOMContentLoaded', function() {
     
     // Check on scroll
     window.addEventListener('scroll', checkVisibility);
+});
+
+/**
+ * Generate FAQ structured data for SEO
+ * Creates JSON-LD structured data for FAQs
+ */
+function generateFaqStructuredData() {
+    const faqItems = document.querySelectorAll('.faq-item');
+    const faqData = {
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        "mainEntity": []
+    };
+    
+    faqItems.forEach(item => {
+        const question = item.querySelector('.faq-question h3').textContent;
+        const answer = item.querySelector('.faq-answer p').textContent;
+        
+        faqData.mainEntity.push({
+            "@type": "Question",
+            "name": question,
+            "acceptedAnswer": {
+                "@type": "Answer",
+                "text": answer
+            }
+        });
+    });
+    
+    // Create the script element
+    const script = document.createElement('script');
+    script.type = 'application/ld+json';
+    script.textContent = JSON.stringify(faqData);
+    
+    // Append to the document
+    document.head.appendChild(script);
+}
+
+/**
+ * Performance optimization
+ * Lazy loads images and defers non-critical resources
+ */
+document.addEventListener('DOMContentLoaded', function() {
+    // Add lazy loading to all images that don't already have it
+    document.querySelectorAll('img:not([loading])').forEach(img => {
+        img.setAttribute('loading', 'lazy');
+    });
+    
+    // Prefetch important pages
+    const prefetchLink = document.createElement('link');
+    prefetchLink.rel = 'dns-prefetch';
+    prefetchLink.href = 'https://www.youtube.com';
+    document.head.appendChild(prefetchLink);
 });

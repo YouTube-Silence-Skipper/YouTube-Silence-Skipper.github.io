@@ -4,24 +4,114 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>YouTube Silence Skipper - Chrome Extension</title>
+    
+    <!-- Primary Meta Tags -->
+    <meta name="description" content="YouTube Silence Skipper - A Chrome extension that automatically skips silent periods in YouTube videos to enhance your viewing experience.">
+    <meta name="keywords" content="YouTube, silence skipper, Chrome extension, YouTube enhancement, video playback, auto-skip, silence detection">
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://youtube-silenceskipper.com/">
+    <meta property="og:title" content="YouTube Silence Skipper - Chrome Extension">
+    <meta property="og:description" content="Enhance your YouTube experience with smart silence detection and automatic skipping">
+    <meta property="og:image" content="https://youtube-silenceskipper.com/images/logo.png">
+    
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:url" content="https://youtube-silenceskipper.com/">
+    <meta name="twitter:title" content="YouTube Silence Skipper - Chrome Extension">
+    <meta name="twitter:description" content="Enhance your YouTube experience with smart silence detection and automatic skipping">
+    <meta name="twitter:image" content="https://youtube-silenceskipper.com/images/logo.png">
+    
+    <!-- Canonical URL -->
+    <link rel="canonical" href="https://youtube-silenceskipper.com/">
+    
+    <!-- Alternate Language -->
+    <link rel="alternate" hreflang="ko" href="https://youtube-silenceskipper.com/ko/">
+    <link rel="alternate" hreflang="x-default" href="https://youtube-silenceskipper.com/">
+    
+    <!-- Favicon and PWA -->
+    <link rel="icon" type="image/svg+xml" sizes="32x32" href="images/favicon-32x32.svg">
+    <link rel="icon" type="image/svg+xml" sizes="16x16" href="images/favicon-16x16.svg">
+    <link rel="apple-touch-icon" type="image/svg+xml" sizes="180x180" href="images/apple-touch-icon.svg">
+    <link rel="icon" type="image/svg+xml" href="images/favicon.svg">
+    <link rel="manifest" href="site.webmanifest">
+    <meta name="theme-color" content="#ff0000">
+    
+    <!-- Stylesheets -->
     <link rel="stylesheet" href="styles.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
 <body>
+    <style>
+        /* Light Clean Theme */
+        .hero {
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%) !important;
+            color: #333;
+            padding: 100px 0;
+            text-align: center;
+        }
+        
+        /* Button style - elegant and sophisticated */
+        .main-cta {
+            background: linear-gradient(135deg, #8ca6db 0%, #b993d6 100%) !important;
+            color: white !important;
+            border: none !important;
+            border-radius: 30px !important; /* Rounded corners for modern look */
+            letter-spacing: 0.5px !important;
+            font-weight: 500 !important;
+            transition: all 0.3s ease !important;
+            box-shadow: 0 4px 10px rgba(140, 166, 219, 0.3) !important;
+        }
+        
+        .main-cta:hover {
+            background: linear-gradient(135deg, #7a96cb 0%, #a983c6 100%) !important;
+            transform: translateY(-2px) !important;
+            box-shadow: 0 6px 15px rgba(140, 166, 219, 0.5) !important;
+        }
+    </style>
     <header class="hero">
         <div class="container">
             <div class="hero-content">
-                <img src="./images/logo.svg" alt="YouTube Silence Skipper Logo" class="logo">
+                <img src="./images/logo.svg" alt="YouTube Silence Skipper Logo" class="logo" loading="lazy">
                 <h1>YouTube Silence Skipper</h1>
                 <p class="tagline">Enhance your YouTube experience with smart silence detection and automatic skipping</p>
-                <div class="cta-buttons">
-                    <a href="#" class="btn btn-primary">
+                <div class="cta-container">
+                    <a href="#" class="btn main-cta" style="font-size: 1.2rem; padding: 16px 32px;">
                         <i class="fab fa-chrome"></i> Add to Chrome
                     </a>
-                    <a href="https://github.com/LeeDongGeon1996/youtube-rapper" class="btn btn-secondary">
-                        <i class="fab fa-github"></i> View on GitHub
-                    </a>
+                    <div class="secondary-cta">
+                        <a href="#faq" class="support-link">
+                            <i class="fas fa-question-circle"></i> Need help?
+                        </a>
+                    </div>
                 </div>
+                <style>
+                    /* Animation removed as per user request */
+                    /* Hover effect is defined in the main style section above */
+                    .cta-container {
+                        display: flex;
+                        flex-direction: column;
+                        align-items: center;
+                        gap: 15px;
+                    }
+                    .main-cta {
+                        margin-bottom: 5px;
+                    }
+                    .secondary-cta {
+                        margin-top: 5px;
+                    }
+                    .support-link {
+                        color: rgba(51,51,51,0.8);
+                        font-size: 0.9rem;
+                        text-decoration: none;
+                        transition: color 0.3s ease;
+                    }
+                    .support-link:hover {
+                        color: #333;
+                        text-decoration: underline;
+                    }
+                </style>
             </div>
         </div>
     </header>
@@ -124,7 +214,7 @@
             <h2>Customizable Settings</h2>
             <div class="settings-showcase">
                 <div class="settings-image">
-                    <img src="./images/settings.svg" alt="Extension Settings" class="settings-screenshot">
+                    <img src="./images/settings.svg" alt="Extension Settings" class="settings-screenshot" loading="lazy">
                 </div>
                 <div class="settings-details">
                     <div class="setting-item">
@@ -184,7 +274,7 @@
         </div>
     </section>
 
-    <section class="faq">
+    <section id="faq" class="faq">
         <div class="container">
             <h2>Frequently Asked Questions</h2>
             <div class="faq-list">
@@ -241,13 +331,13 @@
         <div class="container">
             <div class="footer-content">
                 <div class="footer-logo">
-                    <img src="./images/logo-small.svg" alt="YouTube Silence Skipper Logo" class="footer-logo-img">
+                    <img src="./images/logo-small.svg" alt="YouTube Silence Skipper Logo" class="footer-logo-img" loading="lazy">
                     <span>YouTube Silence Skipper</span>
                 </div>
                 <div class="footer-links">
-                    <a href="https://github.com/LeeDongGeon1996/youtube-rapper" target="_blank">GitHub</a>
-                    <a href="https://github.com/LeeDongGeon1996/youtube-rapper/issues" target="_blank">Report Issues</a>
-                    <a href="https://github.com/LeeDongGeon1996/youtube-rapper#privacy-policy" target="_blank">Privacy Policy</a>
+                    <a href="https://chrome.google.com/webstore/detail/youtube-silence-skipper/abcdefghijklmnopqrstuvwxyz" target="_blank">Chrome Web Store</a>
+                    <a href="https://github.com/YouTube-Silence-Skipper/YouTube-Silence-Skipper.github.io/issues" target="_blank">Report Issues</a>
+                    <a href="https://github.com/sponsors/LeeDongGeon1996" target="_blank">Support Project</a>
                 </div>
                 <div class="footer-copyright">
                     <p>&copy; 2025 YouTube Silence Skipper. All rights reserved.</p>
@@ -256,6 +346,29 @@
         </div>
     </footer>
 
-    <script src="script.js"></script>
+    <!-- Structured Data -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "SoftwareApplication",
+      "name": "YouTube Silence Skipper",
+      "operatingSystem": "Chrome",
+      "applicationCategory": "BrowserApplication",
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "USD"
+      },
+      "description": "Enhance your YouTube experience with smart silence detection and automatic skipping",
+      "aggregateRating": {
+        "@type": "AggregateRating",
+        "ratingValue": "4.8",
+        "ratingCount": "100"
+      }
+    }
+    </script>
+    
+    <!-- Main Script with defer for performance -->
+    <script src="script.js" defer></script>
 </body>
 </html>

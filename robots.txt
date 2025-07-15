@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://youtube-silenceskipper.com/sitemap.xml
