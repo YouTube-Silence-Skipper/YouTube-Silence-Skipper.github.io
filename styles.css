@@ -643,12 +643,12 @@ footer {
 }
 
 .footer-logo img {
-  height: 56px;
+  height: 48px;
   width: auto;
 }
 
 .footer-logo span {
-  font-size: 1.5rem;
+  font-size: 1.3rem;
   font-weight: 600;
 }
 
