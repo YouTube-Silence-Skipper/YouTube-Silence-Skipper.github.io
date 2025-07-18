@@ -367,10 +367,18 @@ section {
   display: flex;
   align-items: center;
   gap: 0.8rem;
+  line-height: 1.5;
 }
 
 .demo-text li i {
   color: var(--primary);
+  font-size: 1.2rem;
+  width: 1.5rem;
+  height: 1.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
 }
 
 /* Installation Section */
@@ -555,10 +563,18 @@ section {
   display: flex;
   align-items: center;
   gap: 0.8rem;
+  line-height: 1.5;
 }
 
 .settings-text li i {
   color: var(--primary);
+  font-size: 1.2rem;
+  width: 1.5rem;
+  height: 1.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
 }
 
 /* FAQ Section */
