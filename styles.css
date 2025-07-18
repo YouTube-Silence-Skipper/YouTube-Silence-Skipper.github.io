@@ -606,8 +606,13 @@ footer {
 }
 
 .footer-logo img {
-  height: 32px;
+  height: 56px;
   width: auto;
+}
+
+.footer-logo span {
+  font-size: 1.5rem;
+  font-weight: 600;
 }
 
 .footer-links {
