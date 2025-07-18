@@ -314,6 +314,8 @@ section {
 
 .demo-video {
   flex: 1;
+  min-width: 280px; /* Ensure minimum width on small screens */
+  width: 100%;
 }
 
 .video-container {
@@ -323,6 +325,7 @@ section {
   height: 0;
   overflow: hidden;
   border-radius: var(--radius);
+  margin-bottom: 1.5rem; /* Add space below video on mobile */
 }
 
 .video-container iframe {
@@ -683,6 +686,11 @@ footer {
     flex-direction: column;
   }
   
+  .demo-video {
+    width: 100%;
+    margin-bottom: 2rem;
+  }
+  
   .settings-content {
     flex-direction: column;
   }
@@ -727,5 +735,14 @@ footer {
   
   .faq-grid {
     grid-template-columns: 1fr;
+  }
+  
+  .demo-video {
+    min-width: 100%;
+  }
+  
+  .video-container {
+    margin-bottom: 1rem;
+    border: 1px solid var(--border);
   }
 }
