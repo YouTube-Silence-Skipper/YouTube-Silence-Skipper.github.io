@@ -10,14 +10,14 @@
 
 ## Overview
 
-YouTube Silence Skipper is a powerful Chrome extension that automatically detects and skips silent portions in YouTube videos, creating a more efficient and enjoyable viewing experience. The extension intelligently identifies moments of silence or low audio activity in videos and seamlessly advances the playback, saving you valuable time without missing any important content.
+YouTube Silence Skipper is a powerful Chrome extension that automatically detects and skips silent portions in YouTube videos, creating a more efficient and enjoyable viewing experience. The extension intelligently identifies moments of silence in videos and seamlessly advances the playback, saving you valuable time without missing any important content.
 
 ## Features
 
 ### ⏩ Automatic Silence Detection & Skipping
-- Analyzes audio in real-time to identify silent periods
+- Intelligently detects silent periods in video content
 - Automatically skips forward when silence exceeds your minimum threshold
-- Works with all types of YouTube videos
+- Works with most YouTube videos
 
 ### ⚙️ Customizable Settings
 - **Auto Skip Silence**: Toggle the automatic skipping feature on or off
