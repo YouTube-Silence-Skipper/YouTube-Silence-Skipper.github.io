@@ -5,76 +5,123 @@
 </p>
 
 <p align="center">
-  A Chrome extension that automatically skips silent periods in YouTube videos for a smoother viewing experience.
+  <strong>Skip silent moments in YouTube videos automatically</strong><br>
+  Save time and enjoy a smoother viewing experience
 </p>
 
-## Overview
+<p align="center">
+  <a href="https://chromewebstore.google.com/detail/youtube-silence-skipper/ijlnjklmlhhfodgfpidpnccipnodohgl">
+    <img src="https://img.shields.io/badge/Chrome%20Web%20Store-Install-blue?style=for-the-badge&logo=google-chrome" alt="Install from Chrome Web Store">
+  </a>
+</p>
 
-YouTube Silence Skipper is a powerful Chrome extension that automatically detects and skips silent portions in YouTube videos, creating a more efficient and enjoyable viewing experience. The extension intelligently identifies moments of silence in videos and seamlessly advances the playback, saving you valuable time without missing any important content.
+---
 
-## Features
+## 🚀 What is YouTube Silence Skipper?
 
-### ⏩ Automatic Silence Detection & Skipping
-- Intelligently detects silent periods in video content
-- Automatically skips forward when silence exceeds your minimum threshold
-- Works with most YouTube videos
+YouTube Silence Skipper is a lightweight Chrome extension that automatically detects and skips silent portions in YouTube videos. Whether you're watching educational content, interviews, or gaming videos, this extension helps you save valuable time by seamlessly advancing through quiet moments without missing any important content.
 
-### ⚙️ Customizable Settings
-- **Auto Skip Silence**: Toggle the automatic skipping feature on or off
-- **Skip After Manual Seek**: Choose whether the extension should continue skipping silence after you manually change the video position
-- **Minimum Skip Duration**: Set the minimum length of silence (in seconds) that should trigger a skip
+## ✨ Key Features
 
-### 🔔 Unobtrusive Notifications
-- Subtle toast notifications appear briefly when silence is skipped
-- Keeps you informed without disrupting your viewing
+| Feature | Description |
+|---------|-------------|
+| 🎯 **Smart Detection** | Intelligently identifies silent periods in video content |
+| ⚡ **Automatic Skipping** | Instantly jumps forward when silence exceeds your threshold |
+| 🎛️ **Customizable Settings** | Adjust minimum skip duration and behavior preferences |
+| 🔔 **Subtle Notifications** | Get informed about skips without viewing disruption |
+| 🛡️ **Ad-Aware** | Automatically pauses during ads and resumes after |
+| 🔒 **Privacy First** | No data collection - everything happens locally |
+| 🐛 **Debug Mode** | Optional detailed information for power users |
 
-### 🛑 Smart Ad Detection
-- Automatically pauses functionality during ads
-- Resumes normal operation after ads finish playing
+## 📦 Quick Start
 
-### 🐞 Debug Mode
-- Optional debug mode for those who want to see detailed information about silence detection
+### Installation
+1. **Add to Chrome**: Install from the [Chrome Web Store](https://chromewebstore.google.com/detail/youtube-silence-skipper/ijlnjklmlhhfodgfpidpnccipnodohgl)
+2. **Auto-Activation**: Extension automatically works when you visit YouTube
+3. **Customize**: Click the extension icon to adjust settings (optional)
 
-## Use Cases
+### Basic Usage
+- **Just watch videos normally** - silent periods are automatically skipped
+- **Click the extension icon** to access settings and preferences
+- **Toggle on/off** anytime without page refresh
 
-- **Educational Content**: Skip through pauses in lectures and tutorials
-- **Interviews & Podcasts**: Bypass awkward silences or extended pauses
-- **Gaming Videos**: Skip quiet moments when creators are concentrating
-- **Music Tutorials**: Jump past silent sections when instructors are demonstrating
-- **Conference Recordings**: Avoid delays between speakers
-- **Vlogs & Commentary**: Skip through moments when creators pause to think
+## 🎯 Perfect For
 
-## Installation
+- **📚 Educational Content** - Lectures, tutorials, online courses
+- **🎙️ Interviews & Podcasts** - Skip awkward pauses and delays
+- **🎮 Gaming Videos** - Jump past quiet strategic moments
+- **🎵 Music Tutorials** - Skip silent demonstration periods
+- **👥 Conference Recordings** - Avoid delays between speakers
+- **📹 Vlogs & Commentary** - Skip thinking pauses
 
-1. Install from the [Chrome Web Store](https://youtube-silence-skipper.github.io/)
-2. The extension will automatically activate when you visit YouTube
-3. Click the extension icon to adjust settings as needed
+## ⚙️ Settings & Configuration
 
-## How to Use
+Access settings by clicking the extension icon in your browser toolbar:
 
-1. **Visit YouTube**: The extension automatically activates on YouTube pages
-2. **Watch Videos Normally**: Silent periods will be automatically skipped
-3. **Adjust Settings (Optional)**:
-   - Click the extension icon in your browser toolbar
-   - Toggle features on/off or adjust the minimum skip duration
-   - Changes take effect immediately
+| Setting | Default | Description |
+|---------|---------|-------------|
+| **Auto Skip Silence** | Enabled | Toggle automatic skipping on/off |
+| **Skip After Manual Seek** | Disabled | Continue skipping after you manually change position |
+| **Minimum Skip Duration** | 0.10s | Minimum silence length to trigger a skip |
+| **Debug Mode** | Disabled | Show detailed detection information |
 
-## Privacy
+## 🔒 Privacy & Security
 
-YouTube Silence Skipper respects your privacy:
-- No data collection or tracking
-- All processing happens locally on your device
-- No personal information is stored or transmitted
-- Only runs on YouTube pages
+Your privacy is our priority:
+- ✅ **No data collection** or user tracking
+- ✅ **Local processing** - everything happens on your device
+- ✅ **No external servers** - no data transmission
+- ✅ **YouTube-only** - extension only runs on YouTube pages
+- ✅ **Open source** - transparent development
 
-## Support & Feedback
+## ❓ FAQ
 
-- **Homepage**: [https://youtube-silence-skipper.github.io/](https://youtube-silence-skipper.github.io/)
-- **Report Issues**: [GitHub Issues](https://github.com/YouTube-Silence-Skipper/YouTube-Silence-Skipper.github.io/issues)
+<details>
+<summary><strong>How does the extension detect silence?</strong></summary>
+The extension analyzes video content patterns to identify gaps between spoken content, which typically represent silent periods.
+</details>
 
+<details>
+<summary><strong>Does it work with all YouTube videos?</strong></summary>
+The extension works with most YouTube videos and provides the best experience with videos that have clear speech patterns.
+</details>
+
+<details>
+<summary><strong>Will it affect video quality or performance?</strong></summary>
+No. The extension is lightweight and doesn't affect video quality, playback performance, or loading times.
+</details>
+
+<details>
+<summary><strong>Can I disable it for specific videos?</strong></summary>
+Yes! You can toggle the extension on/off anytime using the extension icon, and changes take effect immediately.
+</details>
+
+## 🛠️ Technical Requirements
+
+- **Browser**: Google Chrome (version 88+)
+- **Platform**: Windows, macOS, Linux
+- **Permissions**: Access to YouTube pages only
+- **Storage**: < 1MB
+
+## 🤝 Support & Contribution
+
+### Get Help
+- 🌐 **Homepage**: [youtube-silence-skipper.github.io](https://youtube-silence-skipper.github.io/)
+- 🐛 **Bug Reports**: [GitHub Issues](https://github.com/YouTube-Silence-Skipper/YouTube-Silence-Skipper.github.io/issues)
+- 💬 **Questions**: Open an issue with the "question" label
+
+### Show Support
+- ⭐ **Star this repository** if you find it useful
+- 💝 **Sponsor the project**: [GitHub Sponsors](https://github.com/sponsors/LeeDongGeon1996)
+- 📢 **Share with friends** who spend time on YouTube
+
+## 📄 License
+
+This project is open source. See the repository for license details.
 
 ---
 
 <p align="center">
-  Made with ❤️ for YouTube viewers who value their time
+  <strong>Made with ❤️ for YouTube viewers who value their time</strong><br>
+  <small>Save hours, not seconds</small>
 </p>
