@@ -115,9 +115,6 @@ Yes! You can toggle the extension on/off anytime using the extension icon, and c
 - 💝 **Sponsor the project**: [GitHub Sponsors](https://github.com/sponsors/LeeDongGeon1996)
 - 📢 **Share with friends** who spend time on YouTube
 
-## 📄 License
-
-This project is open source. See the repository for license details.
 
 ---
 
