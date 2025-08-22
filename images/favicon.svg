@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- YouTube Logo Background -->
+  <rect x="3.52" y="9.6" width="24.96" height="12.8" rx="2.56" fill="#FF0000"/>
+  
+  <!-- Play Button -->
+  <path d="M9.92 12.8L13.76 16L9.92 19.2V12.8Z" fill="white"/>
+  
+  <!-- Fast Forward Arrows -->
+  <path d="M14.4 12.8L18.24 16L14.4 19.2V12.8Z" fill="white"/>
+  <path d="M18.88 12.8L22.72 16L18.88 19.2V12.8Z" fill="white"/>
+</svg>
