@@ -7,241 +7,578 @@
   <meta name="description" content="Welcome to YouTube Silence Skipper Pro! Your subscription is now active.">
   <link rel="stylesheet" href="styles.css">
   <link rel="icon" href="images/favicon-32x32.svg" type="image/svg+xml">
+  
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  
   <!-- Font Awesome for icons -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+  
   <style>
-    .success-content {
-      padding: 4rem 0;
-      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-      min-height: 80vh;
+    /* Success Page Specific Styles */
+    .success-hero {
+      min-height: calc(100vh - 80px);
       display: flex;
       align-items: center;
+      background: var(--youtube-bg);
+      position: relative;
+      overflow: hidden;
+      padding: 6rem 0;
+      margin-top: 80px;
     }
+
+    .success-hero::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: radial-gradient(circle at 30% 20%, rgba(255, 0, 0, 0.15) 0%, transparent 50%),
+                  radial-gradient(circle at 70% 80%, rgba(255, 68, 68, 0.1) 0%, transparent 50%);
+      pointer-events: none;
+    }
+
     .success-container {
-      max-width: 800px;
+      max-width: 1200px;
       margin: 0 auto;
+      padding: 0 2rem;
       text-align: center;
-      color: white;
+      position: relative;
+      z-index: 1;
     }
-    .success-icon {
-      font-size: 5rem;
-      color: #4CAF50;
+
+    .celebration-icon {
+      font-size: 6rem;
+      background: var(--gradient-red);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
       margin-bottom: 2rem;
-      animation: bounce 2s infinite;
+      animation: celebrationFloat 3s ease-in-out infinite;
+      filter: drop-shadow(0 0 20px rgba(255, 0, 0, 0.5));
     }
-    @keyframes bounce {
-      0%, 20%, 50%, 80%, 100% {
-        transform: translateY(0);
-      }
-      40% {
-        transform: translateY(-30px);
-      }
-      60% {
-        transform: translateY(-15px);
-      }
+
+    @keyframes celebrationFloat {
+      0%, 100% { transform: translateY(0px) rotate(0deg); }
+      25% { transform: translateY(-20px) rotate(5deg); }
+      50% { transform: translateY(-10px) rotate(-5deg); }
+      75% { transform: translateY(-15px) rotate(3deg); }
     }
+
     .success-title {
-      font-size: 3rem;
-      margin-bottom: 1rem;
-      font-weight: bold;
+      font-size: 4rem;
+      font-weight: 800;
+      margin-bottom: 1.5rem;
+      background: linear-gradient(135deg, var(--text-primary) 0%, var(--youtube-red) 50%, var(--youtube-light-red) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      line-height: 1.1;
     }
+
     .success-subtitle {
       font-size: 1.5rem;
-      margin-bottom: 2rem;
-      opacity: 0.9;
+      color: var(--text-secondary);
+      margin-bottom: 3rem;
+      line-height: 1.6;
     }
+
     .success-card {
-      background: rgba(255, 255, 255, 0.1);
-      backdrop-filter: blur(10px);
+      background: rgba(255, 255, 255, 0.03);
+      backdrop-filter: blur(15px);
+      border: 1px solid rgba(255, 0, 0, 0.2);
+      border-radius: 25px;
+      padding: 3rem;
+      margin: 3rem 0;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .success-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 3px;
+      background: var(--gradient-red);
+    }
+
+
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 2rem;
+      margin: 2rem 0;
+    }
+
+    .feature-highlight {
+      background: rgba(255, 0, 0, 0.05);
+      border: 1px solid rgba(255, 0, 0, 0.1);
+      border-radius: 15px;
+      padding: 1.5rem;
+      transition: var(--transition);
+    }
+
+    .feature-highlight:hover {
+      transform: translateY(-5px);
+      border-color: rgba(255, 0, 0, 0.3);
+      box-shadow: 0 10px 30px rgba(255, 0, 0, 0.2);
+    }
+
+    .feature-highlight i {
+      font-size: 2rem;
+      color: var(--youtube-red);
+      margin-bottom: 1rem;
+      display: block;
+    }
+
+    .feature-highlight h3 {
+      font-size: 1.1rem;
+      font-weight: 600;
+      color: var(--text-primary);
+      margin-bottom: 0.5rem;
+    }
+
+    .feature-highlight p {
+      color: var(--text-secondary);
+      font-size: 0.9rem;
+      line-height: 1.5;
+    }
+
+    .next-steps {
+      background: var(--youtube-dark);
+      border: 1px solid var(--border);
       border-radius: 20px;
       padding: 3rem;
-      margin: 2rem 0;
-      border: 1px solid rgba(255, 255, 255, 0.2);
+      margin: 4rem auto;
+      max-width: 800px;
+      text-align: center;
     }
-    .feature-highlight {
+
+    .next-steps h3 {
+      color: var(--youtube-red);
+      font-size: 2rem;
+      font-weight: 700;
+      margin-bottom: 2.5rem;
+      text-align: center;
       display: flex;
       align-items: center;
       justify-content: center;
-      margin: 1.5rem 0;
-      font-size: 1.1rem;
+      gap: 0.75rem;
     }
-    .feature-highlight i {
-      color: #4CAF50;
-      margin-right: 1rem;
-      font-size: 1.3rem;
+
+    .steps-list {
+      display: grid;
+      gap: 1.5rem;
     }
-    .next-steps {
-      background: rgba(255, 255, 255, 0.95);
-      color: #333;
-      border-radius: 15px;
-      padding: 2.5rem;
-      margin: 3rem auto;
-      max-width: 600px;
-    }
-    .next-steps h3 {
-      color: var(--primary);
-      margin-bottom: 1.5rem;
-      font-size: 1.8rem;
-    }
+
     .step-item {
       display: flex;
       align-items: flex-start;
-      margin-bottom: 1.5rem;
+      gap: 1.25rem;
+      padding: 1.5rem;
+      background: rgba(255, 255, 255, 0.02);
+      border-radius: 15px;
+      border: 1px solid rgba(255, 255, 255, 0.05);
+      transition: var(--transition);
       text-align: left;
     }
+
+    .step-item:hover {
+      background: rgba(255, 0, 0, 0.05);
+      border-color: rgba(255, 0, 0, 0.2);
+    }
+
     .step-number {
-      background: var(--primary);
+      background: var(--gradient-red);
       color: white;
-      width: 30px;
-      height: 30px;
+      width: 40px;
+      height: 40px;
       border-radius: 50%;
       display: flex;
       align-items: center;
       justify-content: center;
-      font-weight: bold;
-      margin-right: 1rem;
+      font-weight: 700;
+      font-size: 1.1rem;
       flex-shrink: 0;
+      box-shadow: 0 4px 15px rgba(255, 0, 0, 0.3);
     }
+
+    .step-content h4 {
+      color: var(--text-primary);
+      font-weight: 600;
+      margin-bottom: 0.75rem;
+      font-size: 1.2rem;
+      line-height: 1.3;
+    }
+
+    .step-content p {
+      color: var(--text-secondary);
+      line-height: 1.5;
+      margin: 0;
+    }
+
     .success-buttons {
-      margin-top: 3rem;
       display: flex;
-      gap: 1rem;
+      gap: 1.5rem;
       justify-content: center;
       flex-wrap: wrap;
+      margin-top: 3rem;
+      align-items: center;
     }
-    .btn-success {
-      background: #4CAF50;
+
+    .btn-celebration {
+      background: var(--gradient-red);
       color: white;
+      padding: 1.2rem 2.5rem;
+      border-radius: 50px;
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 1.1rem;
+      transition: var(--transition);
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      box-shadow: 0 8px 25px rgba(255, 0, 0, 0.4);
+      animation: celebrationPulse 2s ease-in-out infinite;
+    }
+
+    @keyframes celebrationPulse {
+      0%, 100% { 
+        transform: scale(1);
+        box-shadow: 0 8px 25px rgba(255, 0, 0, 0.4);
+      }
+      50% { 
+        transform: scale(1.05);
+        box-shadow: 0 12px 35px rgba(255, 0, 0, 0.6);
+      }
+    }
+
+    .btn-celebration:hover {
+      transform: scale(1.05) translateY(-3px);
+      box-shadow: 0 15px 40px rgba(255, 0, 0, 0.6);
+      animation: none;
+    }
+
+    .btn-home {
+      background: transparent;
+      color: var(--text-primary);
+      padding: 1.2rem 2.5rem;
+      border: 2px solid var(--border);
+      border-radius: 50px;
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 1.1rem;
+      transition: var(--transition);
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+
+    .btn-home:hover {
+      border-color: var(--youtube-red);
+      color: var(--youtube-red);
+      transform: translateY(-3px);
+      background: rgba(255, 0, 0, 0.05);
+    }
+
+    .support-section {
+      padding: 6rem 0;
+      background: var(--youtube-dark);
+      border-top: 1px solid var(--border);
+    }
+
+    .support-content {
+      text-align: center;
+      max-width: 800px;
+      margin: 0 auto;
+    }
+
+    .support-content h2 {
+      font-size: 2.5rem;
+      font-weight: 700;
+      color: var(--text-primary);
+      margin-bottom: 1.5rem;
+    }
+
+    .support-content p {
+      font-size: 1.2rem;
+      color: var(--text-secondary);
+      margin-bottom: 3rem;
+      line-height: 1.7;
+    }
+
+    .support-buttons {
+      display: flex;
+      gap: 1.5rem;
+      justify-content: center;
+      flex-wrap: wrap;
+      align-items: center;
+    }
+
+    .support-btn {
+      background: var(--youtube-bg);
+      border: 2px solid var(--border);
+      color: var(--text-primary);
       padding: 1rem 2rem;
       border-radius: 50px;
       text-decoration: none;
-      font-weight: bold;
-      transition: all 0.3s ease;
-      display: inline-flex;
+      font-weight: 600;
+      transition: var(--transition);
+      display: flex;
       align-items: center;
-      gap: 0.5rem;
+      gap: 0.75rem;
     }
-    .btn-success:hover {
-      background: #45a049;
+
+    .support-btn:hover {
+      border-color: var(--youtube-red);
+      color: var(--youtube-red);
       transform: translateY(-2px);
-      box-shadow: 0 5px 15px rgba(76, 175, 80, 0.3);
+      background: rgba(255, 0, 0, 0.05);
     }
-    .btn-secondary-white {
-      background: rgba(255, 255, 255, 0.2);
-      color: white;
-      padding: 1rem 2rem;
-      border-radius: 50px;
-      text-decoration: none;
-      font-weight: bold;
-      transition: all 0.3s ease;
-      border: 2px solid rgba(255, 255, 255, 0.3);
-      display: inline-flex;
-      align-items: center;
-      gap: 0.5rem;
+
+    /* Confetti Animation */
+    .confetti {
+      position: fixed;
+      width: 10px;
+      height: 10px;
+      z-index: 1000;
+      pointer-events: none;
     }
-    .btn-secondary-white:hover {
-      background: rgba(255, 255, 255, 0.3);
-      transform: translateY(-2px);
+
+    @keyframes confetti-fall {
+      0% {
+        transform: translateY(-100vh) rotate(0deg);
+        opacity: 1;
+      }
+      100% {
+        transform: translateY(100vh) rotate(720deg);
+        opacity: 0;
+      }
+    }
+
+    /* Responsive Design */
+    @media (max-width: 1024px) {
+      .success-hero {
+        padding: 4rem 0;
+      }
+      
+      .success-container {
+        padding: 0 1.5rem;
+      }
+    }
+    
+    @media (max-width: 768px) {
+      .success-title {
+        font-size: 2.5rem;
+      }
+
+      .success-subtitle {
+        font-size: 1.2rem;
+      }
+
+      .celebration-icon {
+        font-size: 4rem;
+      }
+
+      .success-card {
+        padding: 2rem;
+        margin: 2rem 0;
+      }
+      
+
+      .features-grid {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+      }
+
+      .success-buttons {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 1rem;
+      }
+
+      .btn-celebration,
+      .btn-home {
+        width: 100%;
+        justify-content: center;
+        text-align: center;
+      }
+      
+      .support-buttons {
+        flex-direction: column;
+        align-items: stretch;
+      }
+      
+      .support-btn {
+        width: 100%;
+        justify-content: center;
+      }
+      
+      .next-steps {
+        padding: 2rem;
+        margin: 3rem auto;
+      }
+      
+      .next-steps h3 {
+        font-size: 1.5rem;
+        flex-direction: column;
+        gap: 0.5rem;
+        margin-bottom: 2rem;
+      }
+      
+      .step-item {
+        padding: 1.25rem;
+        gap: 1rem;
+      }
+      
+      .step-content h4 {
+        font-size: 1.1rem;
+      }
+      
+      .step-content p {
+        font-size: 0.95rem;
+      }
+    }
+    
+    @media (max-width: 480px) {
+      .success-hero {
+        padding: 3rem 0;
+      }
+      
+      .success-container {
+        padding: 0 1rem;
+      }
+      
+      .success-title {
+        font-size: 2rem;
+      }
+      
+      .celebration-icon {
+        font-size: 3rem;
+      }
+      
+      .success-card {
+        padding: 1.5rem;
+      }
+      
+      .feature-highlight {
+        padding: 1rem;
+      }
+      
+      .next-steps {
+        padding: 1.5rem;
+        margin: 2rem auto;
+      }
+      
+      .next-steps h3 {
+        font-size: 1.3rem;
+      }
+      
+      .step-item {
+        padding: 1rem;
+        gap: 0.75rem;
+      }
+      
+      .step-number {
+        width: 35px;
+        height: 35px;
+        font-size: 1rem;
+      }
     }
   </style>
 </head>
 <body>
   <!-- Navigation -->
   <nav class="navbar">
-    <div class="container">
-      <div class="logo">
+    <div class="nav-container">
+      <a href="index.html" class="logo">
         <img src="images/logo.png" alt="YouTube Silence Skipper Logo">
         <span>YouTube Silence Skipper</span>
-      </div>
-      <ul class="nav-links">
+      </a>
+      <ul class="nav-menu">
         <li><a href="index.html">Home</a></li>
         <li><a href="index.html#features">Features</a></li>
+        <li><a href="index.html#pricing">Pricing</a></li>
         <li><a href="index.html#how-it-works">How It Works</a></li>
-        <li><a href="index.html#installation">Installation</a></li>
         <li><a href="index.html#faq">FAQ</a></li>
       </ul>
+      <a href="https://chromewebstore.google.com/detail/youtube-silence-skipper/ijlnjklmlhhfodgfpidpnccipnodohgl" class="cta-btn">
+        <i class="fab fa-chrome"></i>
+        Get Extension
+      </a>
     </div>
   </nav>
 
-  <!-- Success Content -->
-  <section class="success-content">
-    <div class="container">
-      <div class="success-container">
-        <div class="success-icon">
-          <i class="fas fa-check-circle"></i>
-        </div>
-        <h1 class="success-title">🎉 Welcome to Pro!</h1>
-        <p class="success-subtitle">Your YouTube Silence Skipper Pro subscription is now active</p>
-        
-        <div class="success-card">
-          <h2>You now have access to:</h2>
-          <div class="feature-highlight">
-            <i class="fas fa-robot"></i>
-            <span>Auto-generated caption support for more videos</span>
-          </div>
-          <div class="feature-highlight">
-            <i class="fas fa-video"></i>
-            <span>Works on many more videos</span>
-          </div>
-          <div class="feature-highlight">
-            <i class="fas fa-brain"></i>
-            <span>Smart processing algorithms</span>
-          </div>
-        </div>
+  <!-- Success Hero Section -->
+  <section class="success-hero">
+    <div class="success-container">
+      <div class="celebration-icon">
+        <i class="fas fa-rocket"></i>
+      </div>
+      <h1 class="success-title">🎉 Welcome to Pro!</h1>
+      <p class="success-subtitle">Your subscription is now active. Time to experience YouTube like never before!</p>
+      
 
-        <div class="next-steps">
-          <h3>Next Steps</h3>
+      <div class="next-steps">
+        <h3><i class="fas fa-list-check"></i> Next Steps</h3>
+        <div class="steps-list">
           <div class="step-item">
             <div class="step-number">1</div>
-            <div>
-              <strong>Refresh YouTube</strong><br>
-              If you have YouTube open, refresh the page to activate Pro features
+            <div class="step-content">
+              <h4>Refresh YouTube</h4>
+              <p>If you have YouTube open, refresh the page to activate Pro features immediately</p>
             </div>
           </div>
           <div class="step-item">
             <div class="step-number">2</div>
-            <div>
-              <strong>Check Extension Status</strong><br>
-              Click the extension icon to verify your Pro subscription is active
+            <div class="step-content">
+              <h4>Check Extension Status</h4>
+              <p>Click the extension icon in your browser to verify your Pro subscription is active</p>
             </div>
           </div>
           <div class="step-item">
             <div class="step-number">3</div>
-            <div>
-              <strong>Enjoy Enhanced Performance</strong><br>
-              Pro features work automatically - no additional setup required!
+            <div class="step-content">
+              <h4>Enjoy Enhanced Performance</h4>
+              <p>Pro features work automatically - no additional setup required! Start saving time instantly</p>
             </div>
           </div>
         </div>
+      </div>
 
-        <div class="success-buttons">
-          <a href="https://youtube.com" target="_blank" class="btn-success">
-            <i class="fab fa-youtube"></i>
-            Start Watching on YouTube
-          </a>
-          <a href="index.html" class="btn-secondary-white">
-            <i class="fas fa-home"></i>
-            Return to Homepage
-          </a>
-        </div>
+      <div class="success-buttons">
+        <a href="https://youtube.com" target="_blank" class="btn-celebration">
+          <i class="fab fa-youtube"></i>
+          Start Watching on YouTube
+        </a>
+        <a href="index.html" class="btn-home">
+          <i class="fas fa-home"></i>
+          Return to Homepage
+        </a>
       </div>
     </div>
   </section>
 
   <!-- Support Section -->
-  <section style="background: #f8f9fa; padding: 4rem 0;">
+  <section class="support-section">
     <div class="container">
-      <div style="text-align: center; max-width: 600px; margin: 0 auto;">
-        <h2 style="color: var(--primary); margin-bottom: 2rem;">Need Help?</h2>
-        <p style="font-size: 1.1rem; color: #666; margin-bottom: 2rem;">
-          If you experience any issues with your Pro subscription or have questions about the new features, we're here to help.
+      <div class="support-content">
+        <h2>Need Help?</h2>
+        <p>
+          If you experience any issues with your Pro subscription or have questions about the new features, 
+          we're here to help you get the most out of your enhanced experience.
         </p>
-        <div style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;">
-          <a href="https://github.com/YouTube-Silence-Skipper/YouTube-Silence-Skipper.github.io/issues" target="_blank" style="display: inline-flex; align-items: center; gap: 0.5rem; background: var(--primary); color: white; padding: 0.8rem 1.5rem; border-radius: 8px; text-decoration: none; transition: all 0.3s ease;">
+        <div class="support-buttons">
+          <a href="https://github.com/YouTube-Silence-Skipper/YouTube-Silence-Skipper.github.io/issues" target="_blank" class="support-btn">
             <i class="fab fa-github"></i>
             Technical Support
           </a>
-          <a href="https://paddle.net/" target="_blank" style="display: inline-flex; align-items: center; gap: 0.5rem; background: #FF6B35; color: white; padding: 0.8rem 1.5rem; border-radius: 8px; text-decoration: none; transition: all 0.3s ease;">
+          <a href="https://paddle.net/" target="_blank" class="support-btn">
             <i class="fas fa-credit-card"></i>
             Billing Support
           </a>
@@ -251,85 +588,122 @@
   </section>
 
   <!-- Footer -->
-  <footer>
+  <footer class="footer">
     <div class="container">
       <div class="footer-content">
-        <div class="footer-logo">
-          <img src="images/logo.png" alt="YouTube Silence Skipper Logo">
-          <span>YouTube Silence Skipper</span>
+        <div>
+          <div class="footer-brand">
+            <img src="images/logo.png" alt="YouTube Silence Skipper">
+            <span>YouTube Silence Skipper</span>
+          </div>
+          <p class="footer-description">
+            The intelligent Chrome extension that automatically skips silent moments in YouTube videos, 
+            saving you time and enhancing your viewing experience.
+          </p>
         </div>
         <div class="footer-links">
-          <div class="footer-column">
-            <h4>Navigation</h4>
-            <ul>
-              <li><a href="index.html#features">Features</a></li>
-              <li><a href="index.html#pricing">Pricing</a></li>
-              <li><a href="index.html#how-it-works">How It Works</a></li>
-              <li><a href="index.html#installation">Installation</a></li>
-              <li><a href="index.html#faq">FAQ</a></li>
-            </ul>
-          </div>
-          <div class="footer-column">
-            <h4>Resources</h4>
-            <ul>
-              <li><a href="https://chromewebstore.google.com/detail/youtube-silence-skipper/ijlnjklmlhhfodgfpidpnccipnodohgl" target="_blank">Chrome Web Store</a></li>
-              <li><a href="https://github.com/YouTube-Silence-Skipper/YouTube-Silence-Skipper.github.io/issues" target="_blank">Report Issues</a></li>
-              <li><a href="https://ko-fi.com/leedonggeon1996" target="_blank">Support Project</a></li>
-              <li><a href="terms-and-conditions.html">Terms & Conditions</a></li>
-              <li><a href="privacy-policy.html">Privacy Policy</a></li>
-            </ul>
-          </div>
+          <h4>Quick Links</h4>
+          <ul>
+            <li><a href="index.html#features">Features</a></li>
+            <li><a href="index.html#pricing">Pricing</a></li>
+            <li><a href="index.html#how-it-works">How It Works</a></li>
+            <li><a href="index.html#faq">FAQ</a></li>
+          </ul>
+        </div>
+        <div class="footer-links">
+          <h4>Resources</h4>
+          <ul>
+            <li><a href="https://chromewebstore.google.com/detail/youtube-silence-skipper/ijlnjklmlhhfodgfpidpnccipnodohgl">Chrome Store</a></li>
+            <li><a href="https://github.com/YouTube-Silence-Skipper/YouTube-Silence-Skipper.github.io/issues">Report Issues</a></li>
+            <li><a href="terms-and-conditions.html">Terms</a></li>
+            <li><a href="privacy-policy.html">Privacy</a></li>
+          </ul>
         </div>
       </div>
       <div class="footer-bottom">
         <p>&copy; 2025 YouTube Silence Skipper. All rights reserved.</p>
-        <p>Made with ❤️ for YouTube viewers who value their time</p>
+        <p>Made with ❤️ for efficient YouTube viewing</p>
       </div>
     </div>
   </footer>
 
+  <script src="script.js"></script>
   <script>
-    // Add some celebration effects
+    // Celebration effects for success page
     document.addEventListener('DOMContentLoaded', function() {
       // Create confetti effect
       function createConfetti() {
-        const colors = ['#ff6b6b', '#4ecdc4', '#45b7d1', '#96ceb4', '#ffeaa7'];
-        const confetti = document.createElement('div');
-        confetti.style.position = 'fixed';
-        confetti.style.left = Math.random() * 100 + 'vw';
-        confetti.style.top = '-10px';
-        confetti.style.width = '10px';
-        confetti.style.height = '10px';
-        confetti.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
-        confetti.style.animation = 'confetti-fall 3s linear forwards';
-        confetti.style.zIndex = '1000';
-        document.body.appendChild(confetti);
+        const colors = [
+          '#ff0000', '#ff4444', '#ff6666', 
+          '#ffffff', '#ffff00', '#00ff00',
+          '#ff69b4', '#00bfff', '#ffa500'
+        ];
+        
+        for (let i = 0; i < 50; i++) {
+          setTimeout(() => {
+            const confetti = document.createElement('div');
+            confetti.className = 'confetti';
+            confetti.style.position = 'fixed';
+            confetti.style.left = Math.random() * 100 + 'vw';
+            confetti.style.top = '-10px';
+            confetti.style.width = Math.random() * 8 + 4 + 'px';
+            confetti.style.height = Math.random() * 8 + 4 + 'px';
+            confetti.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+            confetti.style.borderRadius = Math.random() > 0.5 ? '50%' : '0';
+            confetti.style.animation = `confetti-fall ${Math.random() * 3 + 2}s linear forwards`;
+            confetti.style.zIndex = '1000';
+            confetti.style.pointerEvents = 'none';
+            
+            document.body.appendChild(confetti);
 
-        setTimeout(() => {
-          confetti.remove();
-        }, 3000);
-      }
-
-      // Add confetti CSS animation
-      const style = document.createElement('style');
-      style.textContent = `
-        @keyframes confetti-fall {
-          0% {
-            transform: translateY(-10px) rotate(0deg);
-            opacity: 1;
-          }
-          100% {
-            transform: translateY(100vh) rotate(360deg);
-            opacity: 0;
-          }
+            setTimeout(() => {
+              if (confetti && confetti.parentNode) {
+                confetti.remove();
+              }
+            }, 5000);
+          }, i * 100);
         }
-      `;
-      document.head.appendChild(style);
-
-      // Create confetti for first few seconds
-      for (let i = 0; i < 30; i++) {
-        setTimeout(createConfetti, i * 100);
       }
+
+      // Trigger confetti celebration
+      createConfetti();
+      
+      // Add celebration pulse to buttons
+      setTimeout(() => {
+        const celebrationBtn = document.querySelector('.btn-celebration');
+        if (celebrationBtn) {
+          celebrationBtn.style.animation = 'celebrationPulse 2s ease-in-out infinite';
+        }
+      }, 1000);
+
+      // Add sparkle effect to features
+      const features = document.querySelectorAll('.feature-highlight');
+      features.forEach((feature, index) => {
+        setTimeout(() => {
+          feature.style.animation = 'fadeInUp 0.6s ease forwards';
+          feature.style.opacity = '0';
+          feature.style.transform = 'translateY(20px)';
+          
+          setTimeout(() => {
+            feature.style.opacity = '1';
+            feature.style.transform = 'translateY(0)';
+          }, 50);
+        }, index * 200);
+      });
+    });
+
+    // Add celebration sound effect simulation (visual feedback)
+    const celebrationElements = document.querySelectorAll('.btn-celebration, .celebration-icon');
+    celebrationElements.forEach(element => {
+      element.addEventListener('mouseenter', function() {
+        this.style.filter = 'brightness(1.2) drop-shadow(0 0 20px rgba(255, 0, 0, 0.8))';
+      });
+      
+      element.addEventListener('mouseleave', function() {
+        this.style.filter = this.classList.contains('celebration-icon') 
+          ? 'drop-shadow(0 0 20px rgba(255, 0, 0, 0.5))' 
+          : '';
+      });
     });
   </script>
 </body>
