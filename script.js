@@ -2,6 +2,73 @@
  * YouTube Silence Skipper Website Scripts
  */
 
+// Paddle 초기화
+let paddleInitialized = false;
+
+function setupPaddleCheckout() {
+  // Pro 플랜 업그레이드 버튼 찾기
+  const upgradeButton = document.querySelector('.plan-btn.plan-pro-btn');
+
+  if (upgradeButton) {
+    // 기존 href 제거하고 클릭 이벤트 추가
+    upgradeButton.removeAttribute('href');
+    upgradeButton.style.cursor = 'pointer';
+    
+    upgradeButton.addEventListener('click', function(e) {
+      e.preventDefault();
+      
+      if (!paddleInitialized) {
+        alert('Payment system is initializing. Please try again in a moment.');
+        return;
+      }
+      
+      // Paddle Checkout 열기
+      try {
+        Paddle.Checkout.open({
+          items: [{
+            priceId: 'pri_01k2q4bxj662c46peqbp3f2aap',
+            quantity: 1
+          }],
+          settings: {
+            // variant: 'one-page',
+            displayMode: 'overlay',
+            successUrl: 'https://youtube-silenceskipper.com/pro-success.html',
+          }
+        })
+      } catch (error) {
+        console.error('Paddle Checkout error:', error);
+        alert('Payment system error occurred.');
+      }
+    });
+  }
+}
+
+function initializePaddle() {
+  if (typeof Paddle !== 'undefined' && !paddleInitialized) {
+    try {
+      Paddle.Environment.set('production');
+      Paddle.Initialize({
+        token: 'live_3ba5a78d5a0dfd653ea01cf09f7', // public token
+        pwCustomer: { }
+      });
+      
+      paddleInitialized = true;
+      console.log('Paddle initialized successfully');
+      
+      // Pro 플랜 업그레이드 버튼에 이벤트 리스너 추가
+      setupPaddleCheckout();
+      
+    } catch (error) {
+      console.error('Paddle initialization failed:', error);
+    }
+  }
+}
+
+document.addEventListener('DOMContentLoaded', function() {
+  // Paddle 초기화
+  initializePaddle();
+});
+
 // Smooth scrolling for navigation links
 document.querySelectorAll('a[href^="#"]').forEach(anchor => {
   anchor.addEventListener('click', function (e) {
