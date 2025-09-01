@@ -27,54 +27,94 @@
   <meta name="twitter:description" content="A Chrome extension that automatically skips silent periods in YouTube videos for a smoother viewing experience. Save time and enhance your YouTube experience.">
   <meta name="twitter:image" content="https://youtube-silenceskipper.com/images/social_title_image.png">
   
-  <link rel="stylesheet" href="styles.css">
   <link rel="icon" href="images/favicon-32x32.svg" type="image/svg+xml">
   <!-- Font Awesome for icons -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
   <!-- Paddle JavaScript SDK -->
   <script src="https://cdn.paddle.com/paddle/v2/paddle.js"></script>
   <!-- Google tag (gtag.js) -->
-  <script async src="https://www.googletagmanager.com/gtag/js?id=G-M1NG5469DK">
-  </script>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-M1NG5469DK"></script>
   <script>
     window.dataLayer = window.dataLayer || [];
     function gtag(){dataLayer.push(arguments);}
     gtag('js', new Date());
-
     gtag('config', 'G-M1NG5469DK');
   </script>
+
+  <link rel="stylesheet" href="styles.css">
 </head>
 <body>
   <!-- Navigation -->
   <nav class="navbar">
-    <div class="container">
-      <div class="logo">
+    <div class="nav-container">
+      <a href="#" class="logo">
         <img src="images/logo.png" alt="YouTube Silence Skipper Logo">
         <span>YouTube Silence Skipper</span>
-      </div>
-      <ul class="nav-links">
+      </a>
+      <ul class="nav-menu">
         <li><a href="#features">Features</a></li>
         <li><a href="#pricing">Pricing</a></li>
         <li><a href="#how-it-works">How It Works</a></li>
-        <li><a href="#installation">Installation</a></li>
         <li><a href="#faq">FAQ</a></li>
       </ul>
+      <a href="#pricing" class="cta-btn">
+        <i class="fab fa-chrome"></i>
+        Get Extension
+      </a>
     </div>
   </nav>
 
   <!-- Hero Section -->
   <section class="hero">
-    <div class="container">
+    <div class="hero-container">
       <div class="hero-content">
-        <h1>Skip Silent Moments in YouTube Videos</h1>
-        <p>YouTube Silence Skipper automatically detects and skips silent portions in videos, creating a more efficient and enjoyable viewing experience.</p>
+        <div class="hero-badge">
+          <i class="fas fa-fire"></i>
+          Skip Silent Moments Instantly
+        </div>
+        <h1>Never Wait Through Silence Again</h1>
+        <p>YouTube Silence Skipper automatically detects and skips silent portions in videos, transforming your viewing experience with intelligent time-saving technology.</p>
         <div class="hero-buttons">
-          <a href="#pricing" target="_blank" class="btn-primary"><i class="fab fa-chrome"></i> Add to Chrome</a>
-          <a href="#features" class="btn-secondary">Learn More</a>
+          <a href="#pricing" class="btn-primary">
+            <i class="fab fa-chrome"></i>
+            Add to Chrome Free
+          </a>
+          <a href="#features" class="btn-secondary">
+            Learn More
+          </a>
         </div>
       </div>
-      <div class="hero-image">
-        <img src="images/logo.svg" alt="YouTube Silence Skipper Extension" class="floating">
+      <div class="hero-visual">
+        <div class="hero-showcase">
+          <!-- Subtle Background Glow -->
+          <div class="logo-glow"></div>
+          
+          <!-- Rotating Ring -->
+          <div class="logo-ring"></div>
+          
+          <!-- Minimal Skip Dots -->
+          <div class="skip-indicators-minimal">
+            <div class="skip-dot"></div>
+            <div class="skip-dot"></div>
+            <div class="skip-dot"></div>
+            <div class="skip-dot"></div>
+            <div class="skip-dot"></div>
+          </div>
+          
+          <!-- Clean Central Logo -->
+          <div class="hero-logo">
+            <img src="images/logo.png" alt="YouTube Silence Skipper">
+          </div>
+          
+          <!-- Simple Progress Line -->
+          <div class="progress-line">
+            <div class="progress-fill"></div>
+          </div>
+        </div>
       </div>
     </div>
   </section>
@@ -82,39 +122,52 @@
   <!-- Features Section -->
   <section id="features" class="features">
     <div class="container">
-      <h2>Key Features</h2>
+      <div class="section-header">
+        <h2 class="section-title">Powerful Features</h2>
+        <p class="section-subtitle">Advanced technology that understands your content and saves your time</p>
+      </div>
       <div class="features-grid">
         <div class="feature-card">
           <div class="feature-icon">
-            <i class="fas fa-forward"></i>
+            <i class="fas fa-bolt"></i>
           </div>
-          <h3>Automatic Silence Detection</h3>
-          <p>Intelligently identifies moments of silence in videos and seamlessly advances the playback.</p>
+          <h3>Lightning Fast Detection</h3>
+          <p>Advanced algorithms instantly identify silence periods and skip them seamlessly, minimizing interruptions to your viewing flow.</p>
         </div>
         <div class="feature-card">
-          <i class="fas fa-sliders-h"></i>
-          <h3>Customizable Settings</h3>
-          <p>Adjust minimum skip duration, toggle features on/off, and customize the extension to your preferences.</p>
+          <div class="feature-icon">
+            <i class="fas fa-cogs"></i>
+          </div>
+          <h3>Smart Customization</h3>
+          <p>Fine-tune skip duration, enable/disable features, and customize behavior to match your viewing preferences perfectly.</p>
         </div>
         <div class="feature-card">
-          <i class="fas fa-bell"></i>
-          <h3>Unobtrusive Notifications</h3>
-          <p>Subtle toast notifications appear briefly when silence is skipped, keeping you informed without disruption.</p>
+          <div class="feature-icon">
+            <i class="fas fa-shield-alt"></i>
+          </div>
+          <h3>Privacy First</h3>
+          <p>Zero data collection, no tracking, no analytics. All processing happens locally on your device for complete privacy.</p>
         </div>
         <div class="feature-card">
-          <i class="fas fa-ad"></i>
-          <h3>Smart Ad Detection</h3>
-          <p>Automatically pauses functionality during ads and resumes normal operation after ads finish playing.</p>
+          <div class="feature-icon">
+            <i class="fas fa-brain"></i>
+          </div>
+          <h3>Smart Silence Detection</h3>
+          <p>Advanced algorithms automatically identify silent periods in videos and skip them seamlessly for a more efficient viewing experience.</p>
         </div>
         <div class="feature-card">
-          <i class="fas fa-bug"></i>
-          <h3>Debug Mode</h3>
-          <p>Optional debug mode for those who want to see detailed information about silence detection.</p>
+          <div class="feature-icon">
+            <i class="fas fa-ad"></i>
+          </div>
+          <h3>Ad-Aware Technology</h3>
+          <p>Automatically pauses during advertisements and resumes intelligent skipping when your content returns.</p>
         </div>
         <div class="feature-card">
-          <i class="fas fa-shield-alt"></i>
-          <h3>Privacy Focused</h3>
-          <p>No data collection or tracking. All processing happens locally on your device.</p>
+          <div class="feature-icon">
+            <i class="fas fa-bell"></i>
+          </div>
+          <h3>Subtle Notifications</h3>
+          <p>Elegant toast notifications show you time saved without disrupting your viewing experience.</p>
         </div>
       </div>
     </div>
@@ -123,112 +176,94 @@
   <!-- Pricing Section -->
   <section id="pricing" class="pricing">
     <div class="container">
-      <h2>Choose Your Plan</h2>
-      <p class="pricing-subtitle">Start for free, upgrade for advanced features</p>
+      <div class="section-header">
+        <h2 class="section-title">Choose Your Plan</h2>
+        <p class="section-subtitle">Start free, upgrade when you need advanced features</p>
+      </div>
       <div class="pricing-grid">
         <div class="pricing-card">
-          <div class="pricing-header">
-            <h3>Free</h3>
-            <div class="price">
-              <span class="currency">$</span>
-              <span class="amount">0</span>
-              <span class="period">/month</span>
-            </div>
-          </div>
-          <div class="pricing-body">
-            <ul class="feature-list">
-              <li><i class="fas fa-check"></i> Manual caption processing</li>
-              <li><i class="fas fa-check"></i> Automatic silence skipping</li>
-              <li><i class="fas fa-check"></i> Customizable settings</li>
-              <li><i class="fas fa-check"></i> Smart ad detection</li>
-              <li><i class="fas fa-check"></i> Privacy focused</li>
-              <li><i class="fas fa-times"></i> Auto-generated caption support</li>
-            </ul>
-            <a href="https://chromewebstore.google.com/detail/youtube-silence-skipper/ijlnjklmlhhfodgfpidpnccipnodohgl" target="_blank" class="btn-pricing">Get Started Free</a>
-          </div>
+          <div class="plan-name">Free</div>
+          <div class="plan-price">$0<span>/month</span></div>
+          <div class="plan-description">Perfect for getting started</div>
+          <ul class="plan-features">
+            <li><i class="fas fa-check check"></i> Manual caption processing</li>
+            <li><i class="fas fa-check check"></i> Basic silence skipping</li>
+            <li><i class="fas fa-check check"></i> Customizable settings</li>
+            <li><i class="fas fa-check check"></i> Ad detection</li>
+            <li><i class="fas fa-check check"></i> Privacy focused</li>
+            <li><i class="fas fa-times cross"></i> Auto-generated captions</li>
+          </ul>
+          <a href="https://chromewebstore.google.com/detail/youtube-silence-skipper/ijlnjklmlhhfodgfpidpnccipnodohgl" class="plan-btn">Get Started Free</a>
         </div>
         
         <div class="pricing-card featured">
-          <div class="popular-badge">Most Popular</div>
-          <div class="pricing-header">
-            <h3>Pro</h3>
-            <div class="price">
-              <span class="currency">$</span>
-              <span class="amount">1.99</span>
-              <span class="period">/month</span>
-            </div>
-          </div>
-          <div class="pricing-body">
-            <ul class="feature-list">
-              <li><i class="fas fa-check"></i> Everything in Free Plan</li>
-              <li>
-                <i class="fas fa-check pro-feature"></i> 
-                <div class="feature-content">
-                  <strong>Auto-generated caption support</strong>
-                  <p>Works seamlessly with YouTube's auto-generated captions, expanding compatibility to more videos</p>
-                </div>
-              </li>
-              <li>
-                <i class="fas fa-check pro-feature"></i> 
-                <div class="feature-content">
-                  <strong>Works on many more videos</strong>
-                  <p>Enhanced compatibility that works seamlessly across a wider variety of video content</p>
-                </div>
-              </li>
-              <li>
-                <i class="fas fa-check pro-feature"></i> 
-                <div class="feature-content">
-                  <strong>Smart processing algorithms</strong>
-                  <p>Advanced algorithms that intelligently adapt to different content types for optimal performance</p>
-                </div>
-              </li>
-              <li>
-                <i class="fas fa-check pro-feature"></i> 
-                <div class="feature-content">
-                  <strong>Multi-language support</strong>
-                  <p>Full support for English, with Korean and Japanese in beta</p>
-                </div>
-              </li>
-            </ul>
-            <a href="#" class="btn-pricing btn-featured">Start 14-Day Free Trial</a>
-          </div>
+          <div class="plan-name">Pro</div>
+          <div class="plan-price">$1.99<span>/month</span></div>
+          <div class="plan-description">Advanced features for power users</div>
+          <ul class="plan-features">
+            <li><i class="fas fa-check check"></i> Everything in Free Plan</li>
+            <li>
+              <i class="fas fa-check check"></i> 
+              <div class="feature-detail">
+                <strong>Auto-generated caption support</strong>
+                <p>Works seamlessly with YouTube's auto-generated captions, expanding compatibility to more videos</p>
+              </div>
+            </li>
+            <li>
+              <i class="fas fa-check check"></i> 
+              <div class="feature-detail">
+                <strong>Enhanced video compatibility</strong>
+                <p>Works across a wider variety of video content with improved processing capabilities</p>
+              </div>
+            </li>
+            <li>
+              <i class="fas fa-check check"></i> 
+              <div class="feature-detail">
+                <strong>Smart processing algorithms</strong>
+                <p>Advanced algorithms that intelligently adapt to different content types for optimal performance</p>
+              </div>
+            </li>
+            <li>
+              <i class="fas fa-check check"></i> 
+              <div class="feature-detail">
+                <strong>Multi-language support</strong>
+                <p>Full support for English, with Korean and Japanese in beta</p>
+              </div>
+            </li>
+          </ul>
+          <a href="#" class="plan-btn">Start 14-Day Free Trial</a>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- How It Works Section -->
+  <!-- How It Works -->
   <section id="how-it-works" class="how-it-works">
     <div class="container">
-      <h2>How It Works</h2>
-      <div class="steps">
+      <div class="section-header">
+        <h2 class="section-title">How It Works</h2>
+        <p class="section-subtitle">Simple technology, powerful results</p>
+      </div>
+      <div class="steps-grid">
         <div class="step">
           <div class="step-number">1</div>
-          <div class="step-content">
-            <h3>Content Analysis</h3>
-            <p>The extension intelligently analyzes video content to identify when speech is occurring in the video.</p>
-          </div>
+          <h3>Analyze Content</h3>
+          <p>Advanced algorithms analyze video captions and timing data to understand speech patterns.</p>
         </div>
         <div class="step">
           <div class="step-number">2</div>
-          <div class="step-content">
-            <h3>Silence Detection</h3>
-            <p>By analyzing speech patterns and timing, the extension identifies periods of silence that exceed your minimum threshold.</p>
-          </div>
+          <h3>Detect Silence</h3>
+          <p>Smart detection identifies periods of silence that exceed your customizable minimum threshold.</p>
         </div>
         <div class="step">
           <div class="step-number">3</div>
-          <div class="step-content">
-            <h3>Smart Skipping</h3>
-            <p>When silence is detected, the video automatically skips forward to the next spoken content, saving you time without missing anything important.</p>
-          </div>
+          <h3>Skip Intelligently</h3>
+          <p>Seamlessly jump to the next spoken content, saving time without missing important information.</p>
         </div>
         <div class="step">
           <div class="step-number">4</div>
-          <div class="step-content">
-            <h3>Notification</h3>
-            <p>A subtle toast notification appears briefly to inform you about the skip and how much time was saved.</p>
-          </div>
+          <h3>Stay Informed</h3>
+          <p>Receive subtle notifications about time saved and skipping activity without distraction.</p>
         </div>
       </div>
     </div>
@@ -236,108 +271,21 @@
 
   <!-- Demo Section -->
   <section class="demo">
-    <div class="container">
-      <h2>See It In Action</h2>
+    <div class="demo-container">
       <div class="demo-content">
-        <div class="demo-video">
-          <div class="video-container">
-            <iframe src="https://www.youtube.com/embed/dQw4w9WgXcQ?si=ge6ouy0OuMBjVEMj" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
-          </div>
-        </div>
-        <div class="demo-text">
-          <h3>Save Time on Every Video</h3>
-          <p>YouTube Silence Skipper can save you significant time when watching:</p>
-          <ul>
-            <li><i class="fas fa-graduation-cap"></i> Educational content and lectures</li>
-            <li><i class="fas fa-microphone"></i> Interviews and podcasts</li>
-            <li><i class="fas fa-gamepad"></i> Gaming videos with quiet moments</li>
-            <li><i class="fas fa-music"></i> Music tutorials</li>
-            <li><i class="fas fa-users"></i> Conference recordings</li>
-            <li><i class="fas fa-video"></i> Vlogs and commentary videos</li>
-          </ul>
-        </div>
+        <h3>Save Hours Every Week</h3>
+        <p>Perfect for viewers who value their time and want to consume content more efficiently.</p>
+        <ul class="demo-list">
+          <li><i class="fas fa-graduation-cap"></i> Educational lectures and tutorials</li>
+          <li><i class="fas fa-microphone"></i> Podcasts and interview content</li>
+          <li><i class="fas fa-gamepad"></i> Gaming streams and reviews</li>
+          <li><i class="fas fa-users"></i> Conference talks and presentations</li>
+          <li><i class="fas fa-music"></i> Music production tutorials</li>
+          <li><i class="fas fa-video"></i> Vlogs and commentary videos</li>
+        </ul>
       </div>
-    </div>
-  </section>
-
-  <!-- Installation Section -->
-  <section id="installation" class="installation">
-    <div class="container">
-      <h2>Installation Guide</h2>
-      <div class="installation-steps">
-        <div class="installation-step">
-          <div class="step-icon">
-            <i class="fas fa-download"></i>
-          </div>
-          <h3>Step 1: Add to Chrome</h3>
-          <p>Add YouTube Silence Skipper from the <a href="#pricing" target="_blank">Chrome Web Store</a>.</p>
-        </div>
-        <div class="installation-step">
-          <div class="step-icon">
-            <i class="fab fa-youtube"></i>
-          </div>
-          <h3>Step 2: Visit YouTube</h3>
-          <p>The extension automatically activates when you visit YouTube.</p>
-        </div>
-        <div class="installation-step">
-          <div class="step-icon">
-            <i class="fas fa-cog"></i>
-          </div>
-          <h3>Step 3: Adjust Settings (Optional)</h3>
-          <p>Click the extension icon in your browser toolbar to customize settings.</p>
-        </div>
-      </div>
-      <div class="installation-cta">
-        <a href="#pricing" target="_blank" class="btn-primary"><i class="fab fa-chrome"></i> Add to Chrome</a>
-      </div>
-    </div>
-  </section>
-
-  <!-- Settings Preview Section -->
-  <section class="settings-preview">
-    <div class="container">
-      <h2>Easy to Configure</h2>
-      <div class="settings-content">
-        <div class="settings-image">
-          <div class="popup-preview">
-            <div class="popup-header">
-              <img src="images/logo-small.svg" alt="YouTube Silence Skipper Logo" class="popup-logo">
-              <h3>YouTube Silence Skipper</h3>
-            </div>
-            <div class="popup-body">
-              <div class="setting-row">
-                <span>Auto Skip Silence</span>
-                <div class="toggle-switch active"></div>
-              </div>
-              <div class="setting-row">
-                <span>Skip After Manual Seek</span>
-                <div class="toggle-switch"></div>
-              </div>
-              <div class="setting-row">
-                <span>Minimum Skip (s)</span>
-                <div class="number-input">0.10</div>
-              </div>
-              <div class="setting-row action-row">
-                <div class="debug-box">
-                  <span>Debug Mode</span>
-                  <div class="toggle-switch small"></div>
-                </div>
-                <button class="apply-btn">Apply</button>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="settings-text">
-          <h3>Simple, Intuitive Controls</h3>
-          <p>YouTube Silence Skipper offers easy-to-use settings that let you:</p>
-          <ul>
-            <li><i class="fas fa-toggle-on"></i> Enable or disable automatic skipping</li>
-            <li><i class="fas fa-clock"></i> Set the minimum silence duration to skip</li>
-            <li><i class="fas fa-hand-pointer"></i> Control behavior after manual seeking</li>
-            <li><i class="fas fa-bug"></i> Toggle debug mode for detailed information</li>
-          </ul>
-          <p>All changes take effect immediately without needing to reload YouTube.</p>
-        </div>
+      <div class="video-container">
+        <iframe src="https://www.youtube.com/embed/dQw4w9WgXcQ?si=ge6ouy0OuMBjVEMj" title="YouTube video player" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
       </div>
     </div>
   </section>
@@ -345,87 +293,78 @@
   <!-- FAQ Section -->
   <section id="faq" class="faq">
     <div class="container">
-      <h2>Frequently Asked Questions</h2>
+      <div class="section-header">
+        <h2 class="section-title">Frequently Asked Questions</h2>
+      </div>
       <div class="faq-grid">
         <div class="faq-item">
-          <h3>How does the extension detect silence?</h3>
-          <p>The extension analyzes YouTube's caption data to identify gaps between spoken content, which typically represent silent periods in the video.</p>
+          <h4>How does silence detection work?</h4>
+          <p>Our extension analyzes YouTube's caption data to identify gaps between spoken words, which typically represent silent periods in videos.</p>
         </div>
         <div class="faq-item">
-          <h3>Does it work with all YouTube videos?</h3>
-          <p>The extension works best with videos that have proper captions. It may not work with videos that have no captions or only auto-generated captions (Pro version supports auto-generated captions).</p>
+          <h4>Will it work on all YouTube videos?</h4>
+          <p>The free version works with manually created captions. Pro version supports auto-generated captions, dramatically expanding compatibility.</p>
         </div>
         <div class="faq-item">
-          <h3>Will it skip important visual content?</h3>
+          <h4>Will it skip important visual content?</h4>
           <p>The extension only skips periods where there is no speech according to the captions. If there's important visual content during silent periods, you might want to adjust the minimum skip duration or disable the feature temporarily.</p>
         </div>
         <div class="faq-item">
-          <h3>Does it collect any data?</h3>
-          <p>No. YouTube Silence Skipper respects your privacy and does not collect or transmit any personal data. All processing happens locally on your device.</p>
+          <h4>Can I customize the skip duration?</h4>
+          <p>Yes! Set your minimum silence duration threshold through the extension settings. Skip only the pauses that matter to you.</p>
         </div>
         <div class="faq-item">
-          <h3>Can I customize how much silence to skip?</h3>
-          <p>Yes! You can set the minimum silence duration (in seconds) that should trigger a skip through the extension's popup settings.</p>
+          <h4>Is my data safe and private?</h4>
+          <p>Yes. The free version collects zero data - no tracking, no analytics. All processing happens locally on your device. For Pro version users, we only collect your email address for account identification and billing purposes.</p>
         </div>
         <div class="faq-item">
-          <h3>Does it work with YouTube ads?</h3>
-          <p>The extension automatically detects when ads are playing and temporarily disables skipping functionality during ads to avoid conflicts.</p>
+          <h4>Does it interfere with YouTube ads?</h4>
+          <p>No. The extension automatically detects ads and temporarily disables skipping to avoid any conflicts with YouTube's ad system.</p>
         </div>
         <div class="faq-item">
-          <h3>What's the difference between Free and Pro?</h3>
-          <p>The Free version works only with manually created captions, while Pro supports auto-generated captions with advanced processing for more precise timing and better performance.</p>
-        </div>
-        <div class="faq-item">
-          <h3>How do I upgrade to Pro?</h3>
-          <p>Pro features are currently in development. The extension will notify you when Pro features become available for purchase.</p>
+          <h4>What's included in the Pro version?</h4>
+          <p>Pro includes auto-generated caption support, advanced algorithms, multi-language support, and works on significantly more videos.</p>
         </div>
       </div>
-    </div>
-  </section>
-
-  <!-- CTA Section -->
-  <section class="cta">
-    <div class="container">
-      <h2>Ready to Save Time on YouTube?</h2>
-      <p>Add YouTube Silence Skipper to Chrome now and enjoy a more efficient viewing experience.</p>
-      <a href="#pricing" target="_blank" class="btn-primary"><i class="fab fa-chrome"></i> Add to Chrome</a>
     </div>
   </section>
 
   <!-- Footer -->
-  <footer>
+  <footer class="footer">
     <div class="container">
       <div class="footer-content">
-        <div class="footer-logo">
-          <img src="images/logo.png" alt="YouTube Silence Skipper Logo">
-          <span>YouTube Silence Skipper</span>
+        <div>
+          <div class="footer-brand">
+            <img src="images/logo.png" alt="YouTube Silence Skipper">
+            <span>YouTube Silence Skipper</span>
+          </div>
+          <p class="footer-description">
+            The intelligent Chrome extension that automatically skips silent moments in YouTube videos, 
+            saving you time and enhancing your viewing experience.
+          </p>
         </div>
         <div class="footer-links">
-          <div class="footer-column">
-            <h4>Navigation</h4>
-            <ul>
-              <li><a href="#features">Features</a></li>
-              <li><a href="#pricing">Pricing</a></li>
-              <li><a href="#how-it-works">How It Works</a></li>
-              <li><a href="#installation">Installation</a></li>
-              <li><a href="#faq">FAQ</a></li>
-            </ul>
-          </div>
-          <div class="footer-column">
-            <h4>Resources</h4>
-            <ul>
-              <li><a href="https://chromewebstore.google.com/detail/youtube-silence-skipper/ijlnjklmlhhfodgfpidpnccipnodohgl" target="_blank">Chrome Web Store</a></li>
-              <li><a href="https://github.com/YouTube-Silence-Skipper/YouTube-Silence-Skipper.github.io/issues" target="_blank">Report Issues</a></li>
-              <li><a href="https://ko-fi.com/leedonggeon1996" target="_blank">Support Project</a></li>
-              <li><a href="terms-and-conditions.html">Terms & Conditions</a></li>
-              <li><a href="privacy-policy.html">Privacy Policy</a></li>
-            </ul>
-          </div>
+          <h4>Quick Links</h4>
+          <ul>
+            <li><a href="#features">Features</a></li>
+            <li><a href="#pricing">Pricing</a></li>
+            <li><a href="#how-it-works">How It Works</a></li>
+            <li><a href="#faq">FAQ</a></li>
+          </ul>
+        </div>
+        <div class="footer-links">
+          <h4>Resources</h4>
+          <ul>
+            <li><a href="https://chromewebstore.google.com/detail/youtube-silence-skipper/ijlnjklmlhhfodgfpidpnccipnodohgl">Chrome Store</a></li>
+            <li><a href="https://github.com/YouTube-Silence-Skipper/YouTube-Silence-Skipper.github.io/issues">Report Issues</a></li>
+            <li><a href="terms-and-conditions.html">Terms</a></li>
+            <li><a href="privacy-policy.html">Privacy</a></li>
+          </ul>
         </div>
       </div>
       <div class="footer-bottom">
         <p>&copy; 2025 YouTube Silence Skipper. All rights reserved.</p>
-        <p>Made with ❤️ for YouTube viewers who value their time</p>
+        <p>Made with ❤️ for efficient YouTube viewing</p>
       </div>
     </div>
   </footer>
