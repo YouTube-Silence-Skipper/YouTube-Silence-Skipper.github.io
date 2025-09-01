@@ -681,16 +681,39 @@
     .plan-features li {
       padding: 0.75rem 0;
       display: flex;
-      align-items: center;
+      align-items: flex-start;
       gap: 0.75rem;
     }
 
     .plan-features .check {
       color: #10b981;
+      margin-top: 0.2rem;
+      flex-shrink: 0;
     }
 
     .plan-features .cross {
       color: #ef4444;
+      margin-top: 0.2rem;
+      flex-shrink: 0;
+    }
+
+    .feature-detail {
+      flex: 1;
+    }
+
+    .feature-detail strong {
+      display: block;
+      color: var(--text-primary);
+      font-weight: 600;
+      margin-bottom: 0.25rem;
+      font-size: 0.95rem;
+    }
+
+    .feature-detail p {
+      font-size: 0.85rem;
+      color: var(--text-secondary);
+      line-height: 1.4;
+      margin: 0;
     }
 
     .plan-btn {
@@ -1117,7 +1140,7 @@
             <i class="fas fa-bolt"></i>
           </div>
           <h3>Lightning Fast Detection</h3>
-          <p>Advanced algorithms instantly identify silence periods and seamlessly skip them without missing any important content.</p>
+          <p>Advanced algorithms instantly identify silence periods and skip them seamlessly, minimizing interruptions to your viewing flow.</p>
         </div>
         <div class="feature-card">
           <div class="feature-icon">
@@ -1137,8 +1160,8 @@
           <div class="feature-icon">
             <i class="fas fa-brain"></i>
           </div>
-          <h3>AI-Powered Smart Detection</h3>
-          <p>Machine learning algorithms that understand context and avoid skipping meaningful pauses in conversations.</p>
+          <h3>Smart Silence Detection</h3>
+          <p>Advanced algorithms automatically identify silent periods in videos and skip them seamlessly for a more efficient viewing experience.</p>
         </div>
         <div class="feature-card">
           <div class="feature-icon">
@@ -1186,12 +1209,35 @@
           <div class="plan-price">$1.99<span>/month</span></div>
           <div class="plan-description">Advanced features for power users</div>
           <ul class="plan-features">
-            <li><i class="fas fa-check check"></i> Everything in Free</li>
-            <li><i class="fas fa-check check"></i> Auto-generated caption support</li>
-            <li><i class="fas fa-check check"></i> Works on 10x more videos</li>
-            <li><i class="fas fa-check check"></i> Smart processing algorithms</li>
-            <li><i class="fas fa-check check"></i> Multi-language support</li>
-            <li><i class="fas fa-check check"></i> Priority support</li>
+            <li><i class="fas fa-check check"></i> Everything in Free Plan</li>
+            <li>
+              <i class="fas fa-check check"></i> 
+              <div class="feature-detail">
+                <strong>Auto-generated caption support</strong>
+                <p>Works seamlessly with YouTube's auto-generated captions, expanding compatibility to more videos</p>
+              </div>
+            </li>
+            <li>
+              <i class="fas fa-check check"></i> 
+              <div class="feature-detail">
+                <strong>Enhanced video compatibility</strong>
+                <p>Works across a wider variety of video content with improved processing capabilities</p>
+              </div>
+            </li>
+            <li>
+              <i class="fas fa-check check"></i> 
+              <div class="feature-detail">
+                <strong>Smart processing algorithms</strong>
+                <p>Advanced algorithms that intelligently adapt to different content types for optimal performance</p>
+              </div>
+            </li>
+            <li>
+              <i class="fas fa-check check"></i> 
+              <div class="feature-detail">
+                <strong>Multi-language support</strong>
+                <p>Full support for English, with Korean and Japanese in beta</p>
+              </div>
+            </li>
           </ul>
           <a href="#" class="plan-btn">Start 14-Day Free Trial</a>
         </div>
