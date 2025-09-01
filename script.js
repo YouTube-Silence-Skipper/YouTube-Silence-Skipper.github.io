@@ -5,31 +5,10 @@
 // Paddle 초기화
 let paddleInitialized = false;
 
-function initializePaddle() {
-  if (typeof Paddle !== 'undefined' && !paddleInitialized) {
-    try {
-      Paddle.Environment.set('production');
-      Paddle.Initialize({
-        token: 'live_3ba5a78d5a0dfd653ea01cf09f7', // public token
-        pwCustomer: { }
-      });
-      
-      paddleInitialized = true;
-      console.log('Paddle initialized successfully');
-      
-      // Pro 플랜 업그레이드 버튼에 이벤트 리스너 추가
-      setupPaddleCheckout();
-      
-    } catch (error) {
-      console.error('Paddle initialization failed:', error);
-    }
-  }
-}
-
 function setupPaddleCheckout() {
   // Pro 플랜 업그레이드 버튼 찾기
-  const upgradeButton = document.querySelector('.btn-pricing.btn-featured');
-  
+  const upgradeButton = document.querySelector('.plan-btn.plan-pro-btn');
+
   if (upgradeButton) {
     // 기존 href 제거하고 클릭 이벤트 추가
     upgradeButton.removeAttribute('href');
@@ -64,98 +43,80 @@ function setupPaddleCheckout() {
   }
 }
 
+function initializePaddle() {
+  if (typeof Paddle !== 'undefined' && !paddleInitialized) {
+    try {
+      Paddle.Environment.set('production');
+      Paddle.Initialize({
+        token: 'live_3ba5a78d5a0dfd653ea01cf09f7', // public token
+        pwCustomer: { }
+      });
+      
+      paddleInitialized = true;
+      console.log('Paddle initialized successfully');
+      
+      // Pro 플랜 업그레이드 버튼에 이벤트 리스너 추가
+      setupPaddleCheckout();
+      
+    } catch (error) {
+      console.error('Paddle initialization failed:', error);
+    }
+  }
+}
+
 document.addEventListener('DOMContentLoaded', function() {
   // Paddle 초기화
   initializePaddle();
-  // Smooth scrolling for anchor links
-  document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-    anchor.addEventListener('click', function(e) {
-      e.preventDefault();
-      
-      const targetId = this.getAttribute('href');
-      if (targetId === '#') return;
-      
-      const targetElement = document.querySelector(targetId);
-      if (targetElement) {
-        // Offset for fixed header
-        const headerOffset = 80;
-        const elementPosition = targetElement.getBoundingClientRect().top;
-        const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
-        
-        window.scrollTo({
-          top: offsetPosition,
-          behavior: 'smooth'
-        });
-      }
-    });
-  });
-  
-  // Navbar scroll effect
-  const navbar = document.querySelector('.navbar');
-  
-  function updateNavbar() {
-    if (window.scrollY > 50) {
-      navbar.style.padding = '0.5rem 0';
-      navbar.style.boxShadow = '0 2px 10px rgba(0, 0, 0, 0.1)';
-    } else {
-      navbar.style.padding = '1rem 0';
-      navbar.style.boxShadow = '0 2px 10px rgba(0, 0, 0, 0.05)';
+});
+
+// Smooth scrolling for navigation links
+document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+  anchor.addEventListener('click', function (e) {
+    e.preventDefault();
+    const target = document.querySelector(this.getAttribute('href'));
+    if (target) {
+      target.scrollIntoView({
+        behavior: 'smooth',
+        block: 'start'
+      });
     }
-  }
-  
-  window.addEventListener('scroll', updateNavbar);
-  updateNavbar(); // Initial call
-  
-  // Toggle switches in settings preview
-  document.querySelectorAll('.toggle-switch').forEach(toggle => {
-    toggle.addEventListener('click', function() {
-      this.classList.toggle('active');
-    });
   });
-  
-  // Apply button effect
-  const applyBtn = document.querySelector('.apply-btn');
-  if (applyBtn) {
-    applyBtn.addEventListener('click', function() {
-      this.textContent = 'Applied!';
-      setTimeout(() => {
-        this.textContent = 'Apply';
-      }, 1500);
-    });
+});
+
+// Add navbar background on scroll
+window.addEventListener('scroll', function() {
+  const navbar = document.querySelector('.navbar');
+  if (window.scrollY > 50) {
+    navbar.style.background = 'rgba(15, 15, 15, 0.98)';
+  } else {
+    navbar.style.background = 'rgba(15, 15, 15, 0.95)';
   }
+});
+
+// Mobile menu toggle
+document.addEventListener('DOMContentLoaded', function() {
+  const mobileMenuToggle = document.querySelector('.mobile-menu-toggle');
+  const mobileMenu = document.querySelector('.mobile-menu');
   
-  // Video placeholder click effect
-  const videoPlaceholder = document.querySelector('.video-placeholder');
-  if (videoPlaceholder) {
-    videoPlaceholder.addEventListener('click', function() {
-      this.innerHTML = '<p>Video demo would play here in a real implementation</p>';
-      this.style.display = 'flex';
-      this.style.alignItems = 'center';
-      this.style.justifyContent = 'center';
-      this.style.padding = '1rem';
-      this.style.textAlign = 'center';
-    });
-  }
-  
-  // Simple animation for feature cards
-  const observerOptions = {
-    threshold: 0.1,
-    rootMargin: '0px 0px -50px 0px'
-  };
-  
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        entry.target.style.opacity = '1';
-        entry.target.style.transform = 'translateY(0)';
+  if (mobileMenuToggle && mobileMenu) {
+    mobileMenuToggle.addEventListener('click', function() {
+      mobileMenu.classList.toggle('active');
+      
+      // 아이콘 변경
+      const icon = mobileMenuToggle.querySelector('i');
+      if (mobileMenu.classList.contains('active')) {
+        icon.className = 'fas fa-times';
+      } else {
+        icon.className = 'fas fa-bars';
       }
     });
-  }, observerOptions);
-  
-  document.querySelectorAll('.feature-card, .faq-item, .installation-step').forEach(item => {
-    item.style.opacity = '0';
-    item.style.transform = 'translateY(20px)';
-    item.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
-    observer.observe(item);
-  });
+    
+    // 모바일 메뉴 링크 클릭 시 메뉴 닫기
+    mobileMenu.querySelectorAll('a').forEach(link => {
+      link.addEventListener('click', function() {
+        mobileMenu.classList.remove('active');
+        mobileMenuToggle.querySelector('i').className = 'fas fa-bars';
+      });
+    });
+  }
 });

@@ -5,405 +5,55 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Terms and Conditions - YouTube Silence Skipper</title>
   <meta name="description" content="Terms and Conditions for YouTube Silence Skipper Chrome extension.">
+  <link rel="stylesheet" href="styles.css">
   <link rel="icon" href="images/favicon-32x32.svg" type="image/svg+xml">
   <!-- Font Awesome for icons -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-  <!-- Google Fonts -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-
   <style>
-    :root {
-      --youtube-red: #ff0000;
-      --youtube-dark-red: #cc0000;
-      --youtube-light-red: #ff4444;
-      --youtube-bg: #0f0f0f;
-      --youtube-dark: #181818;
-      --youtube-medium: #272727;
-      --youtube-light: #3f3f3f;
-      --text-primary: #ffffff;
-      --text-secondary: #aaa;
-      --text-muted: #717171;
-      --border: #3f3f3f;
-      --shadow: rgba(0, 0, 0, 0.3);
-      --gradient-red: linear-gradient(135deg, #ff0000 0%, #ff4444 100%);
-      --gradient-dark: linear-gradient(135deg, #0f0f0f 0%, #181818 100%);
-      --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-    }
-
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
-
-    body {
-      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-      background: var(--youtube-bg);
-      color: var(--text-primary);
-      line-height: 1.6;
-      overflow-x: hidden;
-    }
-
-    html {
-      scroll-behavior: smooth;
-    }
-
-    /* Navigation */
-    .navbar {
-      position: fixed;
-      top: 0;
-      left: 0;
-      right: 0;
-      background: rgba(15, 15, 15, 0.95);
-      backdrop-filter: blur(10px);
-      border-bottom: 1px solid var(--border);
-      z-index: 1000;
-      padding: 1rem 0;
-    }
-
-    .nav-container {
-      max-width: 1400px;
-      margin: 0 auto;
-      padding: 0 2rem;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-    }
-
-    .logo {
-      display: flex;
-      align-items: center;
-      gap: 0.75rem;
-      font-size: 1.25rem;
-      font-weight: 700;
-      color: var(--text-primary);
-      text-decoration: none;
-    }
-
-    .logo img {
-      height: 36px;
-      width: auto;
-    }
-
-    .nav-menu {
-      display: flex;
-      gap: 2rem;
-      list-style: none;
-    }
-
-    .nav-menu a {
-      color: var(--text-secondary);
-      text-decoration: none;
-      font-weight: 500;
-      transition: var(--transition);
-      position: relative;
-    }
-
-    .nav-menu a:hover {
-      color: var(--youtube-red);
-    }
-
-    .nav-menu a::after {
-      content: '';
-      position: absolute;
-      bottom: -4px;
-      left: 0;
-      width: 0;
-      height: 2px;
-      background: var(--youtube-red);
-      transition: width 0.3s ease;
-    }
-
-    .nav-menu a:hover::after {
-      width: 100%;
-    }
-
-    /* Hero Section */
-    .hero {
-      padding: 120px 0 80px;
-      background: var(--gradient-dark);
-      position: relative;
-      overflow: hidden;
-    }
-
-    .hero::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      background: radial-gradient(circle at 50% 50%, rgba(255, 0, 0, 0.1) 0%, transparent 50%);
-      pointer-events: none;
-    }
-
-    .container {
-      max-width: 1400px;
-      margin: 0 auto;
-      padding: 0 2rem;
-    }
-
-    .hero-content {
-      text-align: center;
-      position: relative;
-      z-index: 1;
-    }
-
-    .hero h1 {
-      font-size: 3.5rem;
-      font-weight: 800;
-      margin-bottom: 1.5rem;
-      background: linear-gradient(135deg, #ffffff 0%, #ff4444 100%);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
-    }
-
-    .hero p {
-      font-size: 1.2rem;
-      color: var(--text-secondary);
-      margin-bottom: 1rem;
-      line-height: 1.6;
-    }
-
-    .hero p:last-child {
-      margin-bottom: 0;
-    }
-
-    .hero strong {
-      color: var(--youtube-red);
-    }
-
-    /* Terms Content */
     .terms-content {
-      padding: 4rem 0;
-      background-color: var(--youtube-bg);
+      padding: 3rem 0;
+      background-color: var(--background);
     }
-
     .terms-section {
       margin-bottom: 2.5rem;
-      background-color: var(--youtube-dark);
-      padding: 2.5rem;
-      border-radius: 15px;
-      border: 1px solid var(--border);
-      transition: var(--transition);
-      position: relative;
-      overflow: hidden;
+      background-color: var(--surface);
+      padding: 2rem;
+      border-radius: var(--radius);
+      box-shadow: 0 2px 4px var(--shadow);
     }
-
-    .terms-section::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      height: 3px;
-      background: var(--gradient-red);
-      transform: scaleX(0);
-      transition: transform 0.3s ease;
-    }
-
-    .terms-section:hover::before {
-      transform: scaleX(1);
-    }
-
-    .terms-section:hover {
-      border-color: rgba(255, 0, 0, 0.3);
-      transform: translateY(-2px);
-      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
-    }
-
     .terms-section h2 {
-      color: var(--text-primary);
-      margin-bottom: 1.5rem;
+      color: var(--primary);
+      margin-bottom: 1rem;
       text-align: left;
-      font-size: 1.8rem;
-      font-weight: 700;
+      font-size: 1.5rem;
     }
-
-    .terms-section h3 {
-      color: var(--text-secondary);
-      margin: 1.5rem 0 1rem 0;
-      font-size: 1.2rem;
-      font-weight: 600;
-    }
-
-    .terms-section p {
-      margin-bottom: 1rem;
-      color: var(--text-secondary);
-      line-height: 1.7;
-    }
-
-    .terms-section a {
-      color: #88c5ff;
-      text-decoration: none;
-      transition: var(--transition);
-      font-weight: 500;
-    }
-
-    .terms-section a:hover {
-      color: var(--youtube-red);
-      text-decoration: underline;
-    }
-
     .terms-list {
-      margin: 1.5rem 0;
-      padding-left: 0;
-      list-style: none;
-    }
-
-    .terms-list li {
-      margin-bottom: 1rem;
-      line-height: 1.7;
+      margin: 1rem 0;
       padding-left: 1.5rem;
-      position: relative;
-      color: var(--text-secondary);
     }
-
-    .terms-list li::before {
-      content: '▶';
-      position: absolute;
-      left: 0;
-      color: var(--text-secondary);
-      font-size: 0.8rem;
-      top: 0.2rem;
-    }
-
-    .terms-list li strong {
-      color: var(--text-primary);
-      font-weight: 600;
-    }
-
-    /* Footer */
-    .footer {
-      background: var(--youtube-bg);
-      border-top: 1px solid var(--border);
-      padding: 4rem 0 2rem;
-    }
-
-    .footer-content {
-      display: grid;
-      grid-template-columns: 1fr 1fr 1fr;
-      gap: 3rem;
-      margin-bottom: 3rem;
-    }
-
-    .footer-brand {
-      display: flex;
-      align-items: center;
-      gap: 0.75rem;
-      margin-bottom: 1rem;
-    }
-
-    .footer-brand img {
-      height: 40px;
-      width: auto;
-    }
-
-    .footer-brand span {
-      font-size: 1.25rem;
-      font-weight: 700;
-    }
-
-    .footer-description {
-      color: var(--text-secondary);
+    .terms-list li {
+      margin-bottom: 0.8rem;
       line-height: 1.6;
+      list-style-type: disc;
     }
-
-    .footer-links h4 {
-      font-size: 1.1rem;
-      font-weight: 700;
-      margin-bottom: 1rem;
-      color: var(--text-primary);
-    }
-
-    .footer-links ul {
-      list-style: none;
-      display: flex;
-      flex-direction: column;
-      gap: 0.5rem;
-    }
-
-    .footer-links a {
-      color: var(--text-secondary);
-      text-decoration: none;
-      transition: var(--transition);
-    }
-
-    .footer-links a:hover {
-      color: var(--youtube-red);
-    }
-
-    .footer-bottom {
-      text-align: center;
-      padding-top: 2rem;
-      border-top: 1px solid var(--border);
-      color: var(--text-muted);
-    }
-
-    .footer-bottom p {
-      margin-bottom: 0.5rem;
-    }
-
-    /* Responsive Design */
-    @media (max-width: 768px) {
-      .nav-menu {
-        display: none;
-      }
-
-      .hero h1 {
-        font-size: 2.5rem;
-      }
-
-      .hero p {
-        font-size: 1.1rem;
-      }
-
-      .terms-section {
-        padding: 1.5rem;
-      }
-
-      .terms-section h2 {
-        font-size: 1.5rem;
-      }
-
-      .footer-content {
-        grid-template-columns: 1fr;
-        gap: 2rem;
-      }
-    }
-
-    @media (max-width: 480px) {
-      .nav-container,
-      .container {
-        padding: 0 1rem;
-      }
-
-      .hero h1 {
-        font-size: 2rem;
-      }
-
-      .terms-section {
-        padding: 1rem;
-        margin-bottom: 1.5rem;
-      }
+    .terms-list li::marker {
+      color: var(--primary);
     }
   </style>
 </head>
 <body>
   <!-- Navigation -->
   <nav class="navbar">
-    <div class="nav-container">
-      <a href="index.html" class="logo">
+    <div class="container">
+      <div class="logo">
         <img src="images/logo.png" alt="YouTube Silence Skipper Logo">
         <span>YouTube Silence Skipper</span>
-      </a>
-      <ul class="nav-menu">
+      </div>
+      <ul class="nav-links">
         <li><a href="index.html">Home</a></li>
         <li><a href="index.html#features">Features</a></li>
         <li><a href="index.html#how-it-works">How It Works</a></li>
+        <li><a href="index.html#installation">Installation</a></li>
         <li><a href="index.html#faq">FAQ</a></li>
       </ul>
     </div>
@@ -412,7 +62,7 @@
   <!-- Terms and Conditions Header -->
   <section class="hero">
     <div class="container">
-      <div class="hero-content">
+      <div class="hero-content" style="text-align: center; width: 100%;">
         <h1>Terms and Conditions</h1>
         <p>Please read these terms and conditions carefully before using YouTube Silence Skipper.</p>
         <p><strong>Last updated:</strong> August 21, 2025</p>
@@ -537,7 +187,7 @@
         <h2>13. Refund Policy</h2>
         <p>Except for legal rights you may have regarding digital products and services that cannot be waived by law, premium services are provided "as is" and "as available".</p>
         
-        <h3>Service Limitations</h3>
+        <h3 style="color: var(--primary); margin: 1.5rem 0 1rem 0; font-size: 1.2rem;">Service Limitations</h3>
         <ul class="terms-list">
           <li>You acknowledge that you may be unable to use the service during maintenance, power outages, or internet service interruptions</li>
           <li>We do not guarantee that the service will meet your requirements or operate without interruption, in a timely, secure, or error-free manner</li>
@@ -545,7 +195,7 @@
           <li>The service depends on external factors including YouTube's caption data and platform changes beyond our control</li>
         </ul>
 
-        <h3>Refund Conditions</h3>
+        <h3 style="color: var(--primary); margin: 1.5rem 0 1rem 0; font-size: 1.2rem;">Refund Conditions</h3>
         <ul class="terms-list">
           <li><strong>Legal Withdrawal Period:</strong> You may cancel within 14 days of purchase confirmation email, provided service performance has not begun with your explicit consent</li>
           <li><strong>Service Performance:</strong> Once you begin using premium features, your right to withdrawal expires as digital content delivery has commenced</li>
@@ -553,7 +203,7 @@
           <li><strong>Platform Changes:</strong> Changes to YouTube's platform or third-party services that affect functionality are not grounds for refunds</li>
         </ul>
 
-        <h3>Refund Limitations</h3>
+        <h3 style="color: var(--primary); margin: 1.5rem 0 1rem 0; font-size: 1.2rem;">Refund Limitations</h3>
         <ul class="terms-list">
           <li>No refunds for partial service periods once the 14-day withdrawal period has expired</li>
           <li>No refunds for dissatisfaction with service performance that falls within normal operational parameters</li>
@@ -561,7 +211,7 @@
           <li>All refund decisions are at our sole discretion within the bounds of applicable law</li>
         </ul>
 
-        <h3>Process</h3>
+        <h3 style="color: var(--primary); margin: 1.5rem 0 1rem 0; font-size: 1.2rem;">Process</h3>
         <p>Refund requests must be submitted directly to <a href="https://paddle.net/" target="_blank">Paddle</a>, our payment processor, as they handle all billing and refund processes. Processing is handled according to Paddle's terms and applicable consumer protection laws.</p>
       </div>
 
@@ -573,69 +223,42 @@
   </section>
 
   <!-- Footer -->
-  <footer class="footer">
+  <footer>
     <div class="container">
       <div class="footer-content">
-        <div>
-          <div class="footer-brand">
-            <img src="images/logo.png" alt="YouTube Silence Skipper">
-            <span>YouTube Silence Skipper</span>
+        <div class="footer-logo">
+          <img src="images/logo.png" alt="YouTube Silence Skipper Logo">
+          <span>YouTube Silence Skipper</span>
+        </div>
+        <div class="footer-links">
+          <div class="footer-column">
+            <h4>Navigation</h4>
+            <ul>
+              <li><a href="index.html#features">Features</a></li>
+              <li><a href="index.html#how-it-works">How It Works</a></li>
+              <li><a href="index.html#installation">Installation</a></li>
+              <li><a href="index.html#faq">FAQ</a></li>
+            </ul>
           </div>
-          <p class="footer-description">
-            The intelligent Chrome extension that automatically skips silent moments in YouTube videos, 
-            saving you time and enhancing your viewing experience.
-          </p>
-        </div>
-        <div class="footer-links">
-          <h4>Quick Links</h4>
-          <ul>
-            <li><a href="index.html#features">Features</a></li>
-            <li><a href="index.html#pricing">Pricing</a></li>
-            <li><a href="index.html#how-it-works">How It Works</a></li>
-            <li><a href="index.html#faq">FAQ</a></li>
-          </ul>
-        </div>
-        <div class="footer-links">
-          <h4>Resources</h4>
-          <ul>
-            <li><a href="https://chromewebstore.google.com/detail/youtube-silence-skipper/ijlnjklmlhhfodgfpidpnccipnodohgl">Chrome Store</a></li>
-            <li><a href="https://github.com/YouTube-Silence-Skipper/YouTube-Silence-Skipper.github.io/issues">Report Issues</a></li>
-            <li><a href="terms-and-conditions.html">Terms</a></li>
-            <li><a href="privacy-policy.html">Privacy</a></li>
-          </ul>
+          <div class="footer-column">
+            <h4>Resources</h4>
+            <ul>
+              <li><a href="https://chromewebstore.google.com/detail/youtube-silence-skipper/ijlnjklmlhhfodgfpidpnccipnodohgl" target="_blank">Chrome Web Store</a></li>
+              <li><a href="https://github.com/YouTube-Silence-Skipper/YouTube-Silence-Skipper.github.io/issues" target="_blank">Report Issues</a></li>
+              <li><a href="https://ko-fi.com/leedonggeon1996" target="_blank">Support Project</a></li>
+              <li><a href="terms-and-conditions.html">Terms & Conditions</a></li>
+              <li><a href="privacy-policy.html">Privacy Policy</a></li>
+            </ul>
+          </div>
         </div>
       </div>
       <div class="footer-bottom">
         <p>&copy; 2025 YouTube Silence Skipper. All rights reserved.</p>
-        <p>Made with ❤️ for efficient YouTube viewing</p>
+        <p>Made with ❤️ for YouTube viewers who value their time</p>
       </div>
     </div>
   </footer>
 
-  <script>
-    // Smooth scrolling for navigation links
-    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-      anchor.addEventListener('click', function (e) {
-        e.preventDefault();
-        const target = document.querySelector(this.getAttribute('href'));
-        if (target) {
-          target.scrollIntoView({
-            behavior: 'smooth',
-            block: 'start'
-          });
-        }
-      });
-    });
-
-    // Add navbar background on scroll
-    window.addEventListener('scroll', function() {
-      const navbar = document.querySelector('.navbar');
-      if (window.scrollY > 50) {
-        navbar.style.background = 'rgba(15, 15, 15, 0.98)';
-      } else {
-        navbar.style.background = 'rgba(15, 15, 15, 0.95)';
-      }
-    });
-  </script>
+  <script src="script.js"></script>
 </body>
 </html>
