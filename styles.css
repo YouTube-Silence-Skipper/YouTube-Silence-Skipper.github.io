@@ -1299,8 +1299,8 @@ html {
   }
 }
 
-/* Large phones and small tablets */
-@media (max-width: 600px) {
+/* Medium screens and below - hamburger menu activation */
+@media (max-width: 950px) {
   .nav-menu {
     display: none;
   }
