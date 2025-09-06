@@ -15,20 +15,23 @@
 
   <style>
     :root {
-      --youtube-red: #ff0000;
-      --youtube-dark-red: #cc0000;
-      --youtube-light-red: #ff4444;
-      --youtube-bg: #0f0f0f;
-      --youtube-dark: #181818;
-      --youtube-medium: #272727;
-      --youtube-light: #3f3f3f;
-      --text-primary: #ffffff;
-      --text-secondary: #aaa;
-      --text-muted: #717171;
-      --border: #3f3f3f;
-      --shadow: rgba(0, 0, 0, 0.3);
-      --gradient-red: linear-gradient(135deg, #ff0000 0%, #ff4444 100%);
-      --gradient-dark: linear-gradient(135deg, #0f0f0f 0%, #181818 100%);
+      --primary-orange: #ff6b35;
+      --primary-dark: #e55a2b;
+      --primary-light: #ff8c5a;
+      --accent-warm: #ffab70;
+      --accent-gold: #ffc947;
+      --accent-red: #ea4335;
+      --bg-primary: #ffffff;
+      --bg-secondary: #fff9f5;
+      --bg-tertiary: #fef7f0;
+      --text-primary: #2d1810;
+      --text-secondary: #6b4423;
+      --text-muted: #a67c52;
+      --border: #f4e6d8;
+      --shadow: rgba(255, 107, 53, 0.15);
+      --shadow-hover: rgba(255, 107, 53, 0.25);
+      --gradient-primary: linear-gradient(135deg, #ff6b35 0%, #ff8c5a 100%);
+      --gradient-light: linear-gradient(135deg, #fff9f5 0%, #ffffff 100%);
       --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     }
 
@@ -40,7 +43,7 @@
 
     body {
       font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-      background: var(--youtube-bg);
+      background: var(--bg-primary);
       color: var(--text-primary);
       line-height: 1.6;
       overflow-x: hidden;
@@ -56,7 +59,7 @@
       top: 0;
       left: 0;
       right: 0;
-      background: rgba(15, 15, 15, 0.95);
+      background: rgba(255, 255, 255, 0.95);
       backdrop-filter: blur(10px);
       border-bottom: 1px solid var(--border);
       z-index: 1000;
@@ -102,7 +105,7 @@
     }
 
     .nav-menu a:hover {
-      color: var(--youtube-red);
+      color: var(--primary-orange);
     }
 
     .nav-menu a::after {
@@ -112,7 +115,7 @@
       left: 0;
       width: 0;
       height: 2px;
-      background: var(--youtube-red);
+      background: var(--primary-orange);
       transition: width 0.3s ease;
     }
 
@@ -123,7 +126,7 @@
     /* Hero Section */
     .hero {
       padding: 120px 0 80px;
-      background: var(--gradient-dark);
+      background: var(--bg-secondary);
       position: relative;
       overflow: hidden;
     }
@@ -135,7 +138,8 @@
       left: 0;
       right: 0;
       bottom: 0;
-      background: radial-gradient(circle at 50% 50%, rgba(255, 0, 0, 0.1) 0%, transparent 50%);
+      background: radial-gradient(circle at 30% 20%, rgba(255, 107, 53, 0.15) 0%, transparent 50%),
+                  radial-gradient(circle at 70% 80%, rgba(255, 140, 90, 0.1) 0%, transparent 50%);
       pointer-events: none;
     }
 
@@ -155,10 +159,7 @@
       font-size: 3.5rem;
       font-weight: 800;
       margin-bottom: 1.5rem;
-      background: linear-gradient(135deg, #ffffff 0%, #ff4444 100%);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
+      color: var(--text-primary);
     }
 
     .hero p {
@@ -173,18 +174,18 @@
     }
 
     .hero strong {
-      color: var(--youtube-red);
+      color: var(--primary-orange);
     }
 
     /* Terms Content */
     .terms-content {
       padding: 4rem 0;
-      background-color: var(--youtube-bg);
+      background-color: var(--bg-primary);
     }
 
     .terms-section {
       margin-bottom: 2.5rem;
-      background-color: var(--youtube-dark);
+      background-color: var(--bg-secondary);
       padding: 2.5rem;
       border-radius: 15px;
       border: 1px solid var(--border);
@@ -200,7 +201,7 @@
       left: 0;
       right: 0;
       height: 3px;
-      background: var(--gradient-red);
+      background: var(--gradient-primary);
       transform: scaleX(0);
       transition: transform 0.3s ease;
     }
@@ -210,9 +211,9 @@
     }
 
     .terms-section:hover {
-      border-color: rgba(255, 0, 0, 0.3);
+      border-color: rgba(255, 107, 53, 0.3);
       transform: translateY(-2px);
-      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+      box-shadow: 0 10px 30px var(--shadow-hover);
     }
 
     .terms-section h2 {
@@ -237,14 +238,14 @@
     }
 
     .terms-section a {
-      color: #88c5ff;
+      color: var(--primary-orange);
       text-decoration: none;
       transition: var(--transition);
       font-weight: 500;
     }
 
     .terms-section a:hover {
-      color: var(--youtube-red);
+      color: var(--primary-dark);
       text-decoration: underline;
     }
 
@@ -266,7 +267,7 @@
       content: '▶';
       position: absolute;
       left: 0;
-      color: var(--text-secondary);
+      color: var(--primary-orange);
       font-size: 0.8rem;
       top: 0.2rem;
     }
@@ -278,7 +279,7 @@
 
     /* Footer */
     .footer {
-      background: var(--youtube-bg);
+      background: var(--bg-secondary);
       border-top: 1px solid var(--border);
       padding: 4rem 0 2rem;
     }
@@ -333,7 +334,7 @@
     }
 
     .footer-links a:hover {
-      color: var(--youtube-red);
+      color: var(--primary-orange);
     }
 
     .footer-bottom {
@@ -600,6 +601,7 @@
           <ul>
             <li><a href="https://chromewebstore.google.com/detail/youtube-silence-skipper/ijlnjklmlhhfodgfpidpnccipnodohgl">Chrome Store</a></li>
             <li><a href="https://github.com/YouTube-Silence-Skipper/YouTube-Silence-Skipper.github.io/issues">Report Issues</a></li>
+            <li><a href="https://customer-portal.paddle.com/login/cpl_01k15nzfq6h90nq755aywz56cv">Manage Subscription</a></li>
             <li><a href="terms-and-conditions.html">Terms</a></li>
             <li><a href="privacy-policy.html">Privacy</a></li>
           </ul>
@@ -607,7 +609,7 @@
       </div>
       <div class="footer-bottom">
         <p>&copy; 2025 YouTube Silence Skipper. All rights reserved.</p>
-        <p>Made with ❤️ for efficient YouTube viewing</p>
+        <p>Made with 💙 for smarter YouTube viewing</p>
       </div>
     </div>
   </footer>
@@ -631,9 +633,11 @@
     window.addEventListener('scroll', function() {
       const navbar = document.querySelector('.navbar');
       if (window.scrollY > 50) {
-        navbar.style.background = 'rgba(15, 15, 15, 0.98)';
+        navbar.style.background = 'rgba(255, 255, 255, 0.98)';
+        navbar.style.boxShadow = '0 2px 20px rgba(0, 0, 0, 0.1)';
       } else {
-        navbar.style.background = 'rgba(15, 15, 15, 0.95)';
+        navbar.style.background = 'rgba(255, 255, 255, 0.95)';
+        navbar.style.boxShadow = 'none';
       }
     });
   </script>

@@ -22,7 +22,7 @@
       min-height: calc(100vh - 80px);
       display: flex;
       align-items: center;
-      background: var(--youtube-bg);
+      background: var(--bg-secondary);
       position: relative;
       overflow: hidden;
       padding: 6rem 0;
@@ -36,8 +36,8 @@
       left: 0;
       right: 0;
       bottom: 0;
-      background: radial-gradient(circle at 30% 20%, rgba(255, 0, 0, 0.15) 0%, transparent 50%),
-                  radial-gradient(circle at 70% 80%, rgba(255, 68, 68, 0.1) 0%, transparent 50%);
+      background: radial-gradient(circle at 30% 20%, rgba(255, 107, 53, 0.15) 0%, transparent 50%),
+                  radial-gradient(circle at 70% 80%, rgba(255, 140, 90, 0.1) 0%, transparent 50%);
       pointer-events: none;
     }
 
@@ -51,14 +51,15 @@
     }
 
     .celebration-icon {
-      font-size: 6rem;
-      background: var(--gradient-red);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
       margin-bottom: 2rem;
       animation: celebrationFloat 3s ease-in-out infinite;
-      filter: drop-shadow(0 0 20px rgba(255, 0, 0, 0.5));
+      display: inline-block;
+    }
+
+    .celebration-icon img {
+      width: 120px;
+      height: 120px;
+      filter: drop-shadow(0 0 30px var(--shadow));
     }
 
     @keyframes celebrationFloat {
@@ -72,7 +73,7 @@
       font-size: 4rem;
       font-weight: 800;
       margin-bottom: 1.5rem;
-      background: linear-gradient(135deg, var(--text-primary) 0%, var(--youtube-red) 50%, var(--youtube-light-red) 100%);
+      background: linear-gradient(135deg, var(--text-primary) 0%, var(--primary-orange) 50%, var(--primary-light) 100%);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
       background-clip: text;
@@ -87,9 +88,9 @@
     }
 
     .success-card {
-      background: rgba(255, 255, 255, 0.03);
+      background: rgba(255, 255, 255, 0.8);
       backdrop-filter: blur(15px);
-      border: 1px solid rgba(255, 0, 0, 0.2);
+      border: 1px solid var(--border);
       border-radius: 25px;
       padding: 3rem;
       margin: 3rem 0;
@@ -104,7 +105,7 @@
       left: 0;
       right: 0;
       height: 3px;
-      background: var(--gradient-red);
+      background: var(--gradient-primary);
     }
 
 
@@ -116,8 +117,8 @@
     }
 
     .feature-highlight {
-      background: rgba(255, 0, 0, 0.05);
-      border: 1px solid rgba(255, 0, 0, 0.1);
+      background: rgba(255, 107, 53, 0.05);
+      border: 1px solid rgba(255, 107, 53, 0.1);
       border-radius: 15px;
       padding: 1.5rem;
       transition: var(--transition);
@@ -125,13 +126,13 @@
 
     .feature-highlight:hover {
       transform: translateY(-5px);
-      border-color: rgba(255, 0, 0, 0.3);
-      box-shadow: 0 10px 30px rgba(255, 0, 0, 0.2);
+      border-color: rgba(255, 107, 53, 0.3);
+      box-shadow: 0 10px 30px rgba(255, 107, 53, 0.2);
     }
 
     .feature-highlight i {
       font-size: 2rem;
-      color: var(--youtube-red);
+      color: var(--primary-orange);
       margin-bottom: 1rem;
       display: block;
     }
@@ -150,7 +151,7 @@
     }
 
     .next-steps {
-      background: var(--youtube-dark);
+      background: var(--bg-secondary);
       border: 1px solid var(--border);
       border-radius: 20px;
       padding: 3rem;
@@ -160,7 +161,7 @@
     }
 
     .next-steps h3 {
-      color: var(--youtube-red);
+      color: var(--primary-orange);
       font-size: 2rem;
       font-weight: 700;
       margin-bottom: 2.5rem;
@@ -181,20 +182,20 @@
       align-items: flex-start;
       gap: 1.25rem;
       padding: 1.5rem;
-      background: rgba(255, 255, 255, 0.02);
+      background: rgba(255, 255, 255, 0.8);
       border-radius: 15px;
-      border: 1px solid rgba(255, 255, 255, 0.05);
+      border: 1px solid var(--border);
       transition: var(--transition);
       text-align: left;
     }
 
     .step-item:hover {
-      background: rgba(255, 0, 0, 0.05);
-      border-color: rgba(255, 0, 0, 0.2);
+      background: rgba(255, 107, 53, 0.05);
+      border-color: rgba(255, 107, 53, 0.2);
     }
 
     .step-number {
-      background: var(--gradient-red);
+      background: var(--gradient-primary);
       color: white;
       width: 40px;
       height: 40px;
@@ -205,7 +206,7 @@
       font-weight: 700;
       font-size: 1.1rem;
       flex-shrink: 0;
-      box-shadow: 0 4px 15px rgba(255, 0, 0, 0.3);
+      box-shadow: 0 4px 15px rgba(255, 107, 53, 0.3);
     }
 
     .step-content h4 {
@@ -232,7 +233,7 @@
     }
 
     .btn-celebration {
-      background: var(--gradient-red);
+      background: var(--gradient-primary);
       color: white;
       padding: 1.2rem 2.5rem;
       border-radius: 50px;
@@ -243,24 +244,24 @@
       display: flex;
       align-items: center;
       gap: 0.75rem;
-      box-shadow: 0 8px 25px rgba(255, 0, 0, 0.4);
+      box-shadow: 0 8px 25px var(--shadow-hover);
       animation: celebrationPulse 2s ease-in-out infinite;
     }
 
     @keyframes celebrationPulse {
       0%, 100% { 
         transform: scale(1);
-        box-shadow: 0 8px 25px rgba(255, 0, 0, 0.4);
+        box-shadow: 0 8px 25px var(--shadow-hover);
       }
       50% { 
         transform: scale(1.05);
-        box-shadow: 0 12px 35px rgba(255, 0, 0, 0.6);
+        box-shadow: 0 12px 35px var(--shadow-hover);
       }
     }
 
     .btn-celebration:hover {
       transform: scale(1.05) translateY(-3px);
-      box-shadow: 0 15px 40px rgba(255, 0, 0, 0.6);
+      box-shadow: 0 15px 40px var(--shadow-hover);
       animation: none;
     }
 
@@ -280,15 +281,15 @@
     }
 
     .btn-home:hover {
-      border-color: var(--youtube-red);
-      color: var(--youtube-red);
+      border-color: var(--primary-orange);
+      color: var(--primary-orange);
       transform: translateY(-3px);
-      background: rgba(255, 0, 0, 0.05);
+      background: rgba(255, 107, 53, 0.05);
     }
 
     .support-section {
       padding: 6rem 0;
-      background: var(--youtube-dark);
+      background: var(--bg-secondary);
       border-top: 1px solid var(--border);
     }
 
@@ -321,7 +322,7 @@
     }
 
     .support-btn {
-      background: var(--youtube-bg);
+      background: var(--bg-secondary);
       border: 2px solid var(--border);
       color: var(--text-primary);
       padding: 1rem 2rem;
@@ -335,10 +336,10 @@
     }
 
     .support-btn:hover {
-      border-color: var(--youtube-red);
-      color: var(--youtube-red);
+      border-color: var(--primary-orange);
+      color: var(--primary-orange);
       transform: translateY(-2px);
-      background: rgba(255, 0, 0, 0.05);
+      background: rgba(255, 107, 53, 0.05);
     }
 
     /* Confetti Animation */
@@ -504,14 +505,9 @@
       <ul class="nav-menu">
         <li><a href="index.html">Home</a></li>
         <li><a href="index.html#features">Features</a></li>
-        <li><a href="index.html#pricing">Pricing</a></li>
         <li><a href="index.html#how-it-works">How It Works</a></li>
         <li><a href="index.html#faq">FAQ</a></li>
       </ul>
-      <a href="https://chromewebstore.google.com/detail/youtube-silence-skipper/ijlnjklmlhhfodgfpidpnccipnodohgl" class="cta-btn">
-        <i class="fab fa-chrome"></i>
-        Get Extension
-      </a>
     </div>
   </nav>
 
@@ -519,14 +515,14 @@
   <section class="success-hero">
     <div class="success-container">
       <div class="celebration-icon">
-        <i class="fas fa-rocket"></i>
+        <img src="images/logo.png" alt="YouTube Silence Skipper Pro">
       </div>
       <h1 class="success-title">🎉 Welcome to Pro!</h1>
       <p class="success-subtitle">Your subscription is now active. Time to experience YouTube like never before!</p>
       
 
       <div class="next-steps">
-        <h3><i class="fas fa-list-check"></i> Next Steps</h3>
+        <h3>📋 Next Steps</h3>
         <div class="steps-list">
           <div class="step-item">
             <div class="step-number">1</div>
@@ -554,11 +550,11 @@
 
       <div class="success-buttons">
         <a href="https://youtube.com" target="_blank" class="btn-celebration">
-          <i class="fab fa-youtube"></i>
+          🎬
           Start Watching on YouTube
         </a>
         <a href="index.html" class="btn-home">
-          <i class="fas fa-home"></i>
+          🏠
           Return to Homepage
         </a>
       </div>
@@ -576,11 +572,15 @@
         </p>
         <div class="support-buttons">
           <a href="https://github.com/YouTube-Silence-Skipper/YouTube-Silence-Skipper.github.io/issues" target="_blank" class="support-btn">
-            <i class="fab fa-github"></i>
+            🛠️
             Technical Support
           </a>
+          <a href="https://customer-portal.paddle.com/login/cpl_01k15nzfq6h90nq755aywz56cv" target="_blank" class="support-btn">
+            ⚙️
+            Manage Subscription
+          </a>
           <a href="https://paddle.net/" target="_blank" class="support-btn">
-            <i class="fas fa-credit-card"></i>
+            💳
             Billing Support
           </a>
         </div>
@@ -616,6 +616,7 @@
           <ul>
             <li><a href="https://chromewebstore.google.com/detail/youtube-silence-skipper/ijlnjklmlhhfodgfpidpnccipnodohgl">Chrome Store</a></li>
             <li><a href="https://github.com/YouTube-Silence-Skipper/YouTube-Silence-Skipper.github.io/issues">Report Issues</a></li>
+            <li><a href="https://customer-portal.paddle.com/login/cpl_01k15nzfq6h90nq755aywz56cv">Manage Subscription</a></li>
             <li><a href="terms-and-conditions.html">Terms</a></li>
             <li><a href="privacy-policy.html">Privacy</a></li>
           </ul>
@@ -623,7 +624,7 @@
       </div>
       <div class="footer-bottom">
         <p>&copy; 2025 YouTube Silence Skipper. All rights reserved.</p>
-        <p>Made with ❤️ for efficient YouTube viewing</p>
+        <p>Made with 💙 for smarter YouTube viewing</p>
       </div>
     </div>
   </footer>
@@ -634,9 +635,9 @@
     // Create confetti effect
     function createConfetti() {
         const colors = [
-          '#ff0000', '#ff4444', '#ff6666', 
-          '#ffffff', '#ffff00', '#00ff00',
-          '#ff69b4', '#00bfff', '#ffa500'
+          '#ff6b35', '#ff8c5a', '#ffab70', 
+          '#ffc947', '#ffffff', '#f4e6d8',
+          '#ff6b35', '#e55a2b', '#ff8c5a'
         ];
         
         for (let i = 0; i < 30; i++) {
@@ -704,12 +705,12 @@
     const celebrationElements = document.querySelectorAll('.btn-celebration, .celebration-icon');
     celebrationElements.forEach(element => {
       element.addEventListener('mouseenter', function() {
-        this.style.filter = 'brightness(1.2) drop-shadow(0 0 20px rgba(255, 0, 0, 0.8))';
+        this.style.filter = 'brightness(1.2) drop-shadow(0 0 20px rgba(255, 107, 53, 0.8))';
       });
       
       element.addEventListener('mouseleave', function() {
         this.style.filter = this.classList.contains('celebration-icon') 
-          ? 'drop-shadow(0 0 20px rgba(255, 0, 0, 0.5))' 
+          ? 'drop-shadow(0 0 20px rgba(255, 107, 53, 0.3))' 
           : '';
       });
     });
