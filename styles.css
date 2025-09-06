@@ -1338,13 +1338,13 @@ html {
     min-width: 0;
   }
 
-  /* Stronger title shadow effect for mobile */
+  /* Longer title shadow trail for mobile */
   .hero h1::before {
-    opacity: 0.25;
+    transform: translateX(-12px);
   }
 
   .hero h1::after {
-    opacity: 0.45;
+    transform: translateX(-6px);
   }
 
   .hero {
@@ -1463,13 +1463,13 @@ html {
     flex-shrink: 0;
   }
 
-  /* Even stronger title shadow effect for small mobile */
+  /* Even longer title shadow trail for small mobile */
   .hero h1::before {
-    opacity: 0.3;
+    transform: translateX(-15px);
   }
 
   .hero h1::after {
-    opacity: 0.5;
+    transform: translateX(-8px);
   }
 
   .hero-container {
