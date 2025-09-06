@@ -293,9 +293,9 @@ html {
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
-  opacity: 0.15;
+  opacity: 0.10;
   z-index: -1;
-  transform: translateX(-8px);
+  transform: translateX(-14px);
   white-space: nowrap;
   overflow: hidden;
 }
@@ -311,9 +311,9 @@ html {
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
-  opacity: 0.3;
+  opacity: 0.20;
   z-index: -1;
-  transform: translateX(-4px);
+  transform: translateX(-8px);
   white-space: nowrap;
   overflow: hidden;
 }
@@ -1180,13 +1180,6 @@ html {
     margin-bottom: 0.75rem;
   }
 
-  .hero h1::before {
-    transform: translateX(-6px);
-  }
-
-  .hero h1::after {
-    transform: translateX(-3px);
-  }
 
   .hero-subtitle {
     font-size: 2.1rem;
@@ -1229,13 +1222,6 @@ html {
     margin-bottom: 0.75rem;
   }
 
-  .hero h1::before {
-    transform: translateX(-5px);
-  }
-
-  .hero h1::after {
-    transform: translateX(-2.5px);
-  }
 
   .hero-subtitle {
     font-size: 2rem;
@@ -1273,13 +1259,6 @@ html {
     margin-bottom: 0.75rem;
   }
 
-  .hero h1::before {
-    transform: translateX(-4px);
-  }
-
-  .hero h1::after {
-    transform: translateX(-2px);
-  }
 
   .hero-subtitle {
     font-size: 1.95rem;
@@ -1339,12 +1318,32 @@ html {
   }
 
   /* Longer title shadow trail for mobile */
+  .hero {
+    overflow-x: visible !important;
+    overflow-y: hidden !important;
+  }
+  
+  .hero .hero-content .hero h1,
+  .hero h1 {
+    overflow: visible !important;
+  }
+  
+  .hero .hero-content .hero h1::before,
   .hero h1::before {
-    transform: translateX(-12px);
+    transform: translateX(-15px) !important;
+    opacity: 0.10 !important;
+    left: -40px !important;
+    width: calc(100% + 80px) !important;
+    overflow: visible !important;
   }
 
+  .hero .hero-content .hero h1::after,
   .hero h1::after {
-    transform: translateX(-6px);
+    transform: translateX(-8px) !important;
+    opacity: 0.20 !important;
+    left: -40px !important;
+    width: calc(100% + 80px) !important;
+    overflow: visible !important;
   }
 
   .hero {
@@ -1367,13 +1366,6 @@ html {
     margin-bottom: 0.75rem;
   }
 
-  .hero h1::before {
-    transform: translateX(-3px);
-  }
-
-  .hero h1::after {
-    transform: translateX(-1.5px);
-  }
 
   .hero-subtitle {
     font-size: 1.8rem;
@@ -1464,12 +1456,32 @@ html {
   }
 
   /* Even longer title shadow trail for small mobile */
+  .hero {
+    overflow-x: visible !important;
+    overflow-y: hidden !important;
+  }
+  
+  .hero .hero-content .hero h1,
+  .hero h1 {
+    overflow: visible !important;
+  }
+  
+  .hero .hero-content .hero h1::before,
   .hero h1::before {
-    transform: translateX(-15px);
+    transform: translateX(-18px) !important;
+    opacity: 0.10 !important;
+    left: -50px !important;
+    width: calc(100% + 100px) !important;
+    overflow: visible !important;
   }
 
+  .hero .hero-content .hero h1::after,
   .hero h1::after {
-    transform: translateX(-8px);
+    transform: translateX(-10px) !important;
+    opacity: 0.20 !important;
+    left: -50px !important;
+    width: calc(100% + 100px) !important;
+    overflow: visible !important;
   }
 
   .hero-container {
