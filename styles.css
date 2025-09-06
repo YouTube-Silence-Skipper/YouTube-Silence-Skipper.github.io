@@ -269,11 +269,20 @@ html {
   font-size: 4rem;
   font-weight: 700;
   line-height: 1.1;
-  margin-bottom: 1.5rem;
+  margin-bottom: 0.5rem;
   background: var(--gradient-primary);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
+}
+
+.hero-subtitle {
+  font-size: 2.5rem;
+  font-weight: 500;
+  line-height: 1.2;
+  margin-bottom: 1.5rem;
+  color: var(--text-secondary);
+  opacity: 0.85;
 }
 
 .hero p {
@@ -1043,6 +1052,10 @@ html {
   .hero h1 {
     font-size: 3rem;
   }
+
+  .hero-subtitle {
+    font-size: 2rem;
+  }
 }
 
 @media (max-width: 768px) {
@@ -1071,6 +1084,10 @@ html {
 
   .hero h1 {
     font-size: 2.5rem;
+  }
+
+  .hero-subtitle {
+    font-size: 1.8rem;
   }
 
   .section-title {
@@ -1121,6 +1138,10 @@ html {
 
   .hero h1 {
     font-size: 2rem;
+  }
+
+  .hero-subtitle {
+    font-size: 1.4rem;
   }
 
   .hero p {
