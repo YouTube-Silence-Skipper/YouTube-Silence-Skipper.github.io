@@ -223,6 +223,50 @@
       margin: 0;
     }
 
+    .activation-step {
+      background: rgba(255, 107, 53, 0.05);
+      border: 2px solid rgba(255, 107, 53, 0.2);
+      position: relative;
+    }
+
+    .activation-step .step-number {
+      background: var(--gradient-primary);
+      animation: activateStepPulse 2s ease-in-out infinite;
+    }
+
+    @keyframes activateStepPulse {
+      0%, 100% {
+        transform: scale(1);
+        box-shadow: 0 4px 15px rgba(255, 107, 53, 0.3);
+      }
+      50% {
+        transform: scale(1.1);
+        box-shadow: 0 6px 20px rgba(255, 107, 53, 0.4);
+      }
+    }
+
+    .step-activate-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      background: var(--gradient-primary);
+      color: white;
+      padding: 0.75rem 1.5rem;
+      border-radius: 25px;
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 0.9rem;
+      margin-top: 1rem;
+      transition: var(--transition);
+      box-shadow: 0 4px 15px rgba(255, 107, 53, 0.3);
+    }
+
+    .step-activate-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 25px rgba(255, 107, 53, 0.4);
+    }
+
+
     .success-buttons {
       display: flex;
       gap: 1.5rem;
@@ -398,6 +442,13 @@
         gap: 1rem;
       }
 
+      .step-activate-btn {
+        padding: 1rem 1.5rem;
+        font-size: 0.85rem;
+        width: 100%;
+        justify-content: center;
+      }
+
       .success-buttons {
         flex-direction: column;
         align-items: stretch;
@@ -518,31 +569,35 @@
         <img src="images/logo.png" alt="YouTube Silence Skipper Pro">
       </div>
       <h1 class="success-title">🎉 Welcome to Pro!</h1>
-      <p class="success-subtitle">Your subscription is now active. Time to experience YouTube like never before!</p>
+      <p class="success-subtitle">Your payment is confirmed!<br>Complete the activation below to start experiencing YouTube like never before!</p>
       
 
       <div class="next-steps">
-        <h3>📋 Next Steps</h3>
+        <h3>🚀 Complete Your Setup</h3>
         <div class="steps-list">
-          <div class="step-item">
+          <div class="step-item activation-step">
             <div class="step-number">1</div>
+            <div class="step-content">
+              <h4>Activate Your Pro Subscription</h4>
+              <p>Complete the activation process to link your payment and unlock all Pro features</p>
+              <a href="manage-subscription.html" class="step-activate-btn">
+                <i class="fas fa-key"></i>
+                Activate Now
+              </a>
+            </div>
+          </div>
+          <div class="step-item">
+            <div class="step-number">2</div>
             <div class="step-content">
               <h4>Refresh YouTube</h4>
               <p>If you have YouTube open, refresh the page to activate Pro features immediately</p>
             </div>
           </div>
           <div class="step-item">
-            <div class="step-number">2</div>
+            <div class="step-number">3</div>
             <div class="step-content">
               <h4>Check Extension Status</h4>
               <p>Click the extension icon in your browser to verify your Pro subscription is active</p>
-            </div>
-          </div>
-          <div class="step-item">
-            <div class="step-number">3</div>
-            <div class="step-content">
-              <h4>Enjoy Enhanced Performance</h4>
-              <p>Pro features work automatically - no additional setup required! Start saving time instantly</p>
             </div>
           </div>
         </div>
@@ -575,7 +630,7 @@
             🛠️
             Technical Support
           </a>
-          <a href="https://customer-portal.paddle.com/login/cpl_01k15nzfq6h90nq755aywz56cv" target="_blank" class="support-btn">
+          <a href="manage-subscription.html" class="support-btn">
             ⚙️
             Manage Subscription
           </a>
@@ -616,7 +671,7 @@
           <ul>
             <li><a href="https://chromewebstore.google.com/detail/youtube-silence-skipper/ijlnjklmlhhfodgfpidpnccipnodohgl">Chrome Store</a></li>
             <li><a href="https://github.com/YouTube-Silence-Skipper/YouTube-Silence-Skipper.github.io/issues">Report Issues</a></li>
-            <li><a href="https://customer-portal.paddle.com/login/cpl_01k15nzfq6h90nq755aywz56cv">Manage Subscription</a></li>
+            <li><a href="manage-subscription.html">Manage Subscription</a></li>
             <li><a href="terms-and-conditions.html">Terms</a></li>
             <li><a href="privacy-policy.html">Privacy</a></li>
           </ul>

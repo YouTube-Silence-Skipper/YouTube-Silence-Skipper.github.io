@@ -1,0 +1,555 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Manage Subscription - YouTube Silence Skipper</title>
+  <meta name="description" content="Manage your YouTube Silence Skipper Pro subscription - activate, update, or get support.">
+  <meta name="robots" content="noindex, nofollow">
+
+  <link rel="icon" href="images/favicon-32x32.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <!-- reCAPTCHA -->
+  <script src="https://www.google.com/recaptcha/enterprise.js" async defer></script>
+
+  <link rel="stylesheet" href="styles.css">
+
+  <style>
+    :root {
+      /* Colors */
+      --primary-orange: #ff6b35;
+      --primary-dark: #e55a2b;
+      --primary-light: #ff8c5a;
+      --accent-warm: #ffab70;
+      --accent-gold: #ffc947;
+      --accent-red: #ea4335;
+      --bg-primary: #ffffff;
+      --bg-secondary: #fff9f5;
+      --bg-tertiary: #fef7f0;
+      --text-primary: #2d1810;
+      --text-secondary: #6b4423;
+      --text-muted: #a67c52;
+      --border: #f4e6d8;
+      --shadow: rgba(255, 107, 53, 0.15);
+      --shadow-hover: rgba(255, 107, 53, 0.25);
+      --gradient-primary: linear-gradient(135deg, #ff6b35 0%, #ff8c5a 100%);
+      --gradient-light: linear-gradient(135deg, #fff9f5 0%, #ffffff 100%);
+
+      /* Border Radius */
+      --radius-sm: 8px;
+      --radius-md: 10px;
+      --radius-lg: 15px;
+      --radius-xl: 20px;
+      --radius-pill: 50px;
+      --radius-circle: 50%;
+
+      /* Transitions */
+      --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      --transition-fast: all 0.2s ease;
+
+      /* Shadows */
+      --shadow-sm: 0 1px 30px rgba(255, 107, 53, 0.08);
+      --shadow-md: 0 4px 20px rgba(255, 107, 53, 0.3);
+      --shadow-lg: 0 20px 60px rgba(255, 107, 53, 0.2);
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      background: var(--bg-primary);
+      color: var(--text-primary);
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    .subscription-management {
+      min-height: 100vh;
+      background: var(--bg-secondary);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 2rem;
+      position: relative;
+    }
+
+    .subscription-management::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: radial-gradient(circle at 30% 20%, rgba(255, 107, 53, 0.1) 0%, transparent 50%),
+                  radial-gradient(circle at 70% 80%, rgba(255, 140, 90, 0.08) 0%, transparent 50%);
+      pointer-events: none;
+    }
+
+    .management-container {
+      background: var(--bg-primary);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-xl);
+      padding: 3rem;
+      box-shadow: var(--shadow-lg);
+      max-width: 900px;
+      width: 100%;
+      position: relative;
+      z-index: 1;
+    }
+
+    .brand-header {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      margin-bottom: 1.5rem;
+      padding-bottom: 1rem;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .brand-logo {
+      width: 24px;
+      height: 24px;
+      filter: drop-shadow(0 1px 4px var(--shadow));
+    }
+
+    .brand-name {
+      color: var(--text-primary);
+      font-size: 1rem;
+      font-weight: 600;
+      margin: 0;
+    }
+
+    .management-header {
+      text-align: center;
+      margin-bottom: 2.5rem;
+    }
+
+    .management-header h2 {
+      color: var(--text-primary);
+      margin-bottom: 0.5rem;
+      font-size: 2rem;
+      font-weight: 600;
+    }
+
+    .management-header p {
+      color: var(--text-secondary);
+      font-size: 1.1rem;
+    }
+
+    .activation-form-main {
+      background: var(--bg-tertiary);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 2.5rem;
+      margin-bottom: 3rem;
+    }
+
+    .alternative-options {
+      margin-top: 3rem;
+      padding-top: 2rem;
+      border-top: 2px solid var(--border);
+    }
+
+    .alternative-options h3 {
+      color: var(--text-primary);
+      font-size: 1.5rem;
+      font-weight: 600;
+      margin-bottom: 1.5rem;
+      text-align: center;
+    }
+
+    .options-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 1.5rem;
+    }
+
+    .option-card {
+      background: var(--bg-tertiary);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      padding: 1.5rem;
+      transition: var(--transition);
+      cursor: pointer;
+      text-decoration: none;
+      color: inherit;
+      display: flex;
+      align-items: flex-start;
+      gap: 1rem;
+    }
+
+    .option-card:hover {
+      border-color: var(--primary-orange);
+      transform: translateY(-2px);
+      box-shadow: var(--shadow-md);
+      background: var(--bg-primary);
+    }
+
+    .option-icon {
+      width: 40px;
+      height: 40px;
+      background: var(--gradient-primary);
+      border-radius: var(--radius-circle);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .option-icon i {
+      color: white;
+      font-size: 1.2rem;
+    }
+
+    .option-content {
+      flex: 1;
+    }
+
+    .option-title {
+      font-size: 1.2rem;
+      font-weight: 600;
+      color: var(--text-primary);
+      margin-bottom: 0.5rem;
+    }
+
+    .option-description {
+      color: var(--text-secondary);
+      line-height: 1.5;
+      font-size: 0.9rem;
+    }
+
+    .message-box {
+      margin-top: 1.5rem;
+      padding: 1.5rem;
+      border-radius: var(--radius-md);
+      border-left: 4px solid;
+      display: none;
+      animation: slideDown 0.3s ease-out;
+    }
+
+    .message-box.warning {
+      background-color: var(--bg-tertiary);
+      border-left-color: var(--accent-gold);
+      color: var(--text-secondary);
+    }
+
+    .message-box.success {
+      background-color: var(--bg-secondary);
+      border-left-color: #10b981;
+      color: var(--text-primary);
+    }
+
+    .message-box.error {
+      background-color: #fef2f2;
+      border-left-color: var(--accent-red);
+      color: #991b1b;
+    }
+
+    .message-box h4 {
+      margin: 0 0 0.5rem 0;
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .message-box p {
+      margin: 0.5rem 0;
+      line-height: 1.6;
+    }
+
+    .message-box .install-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      background: var(--gradient-primary);
+      color: white;
+      padding: 0.75rem 1.5rem;
+      border-radius: var(--radius-sm);
+      text-decoration: none;
+      font-weight: 600;
+      margin-top: 1rem;
+      transition: var(--transition);
+    }
+
+    .message-box .install-link:hover {
+      background: var(--primary-dark);
+      transform: translateY(-1px);
+      box-shadow: var(--shadow-md);
+    }
+
+    @keyframes slideDown {
+      from {
+        opacity: 0;
+        transform: translateY(-10px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .form-group {
+      margin-bottom: 1.5rem;
+    }
+
+    .form-label {
+      display: block;
+      color: var(--text-primary);
+      font-weight: 600;
+      margin-bottom: 0.5rem;
+    }
+
+    .form-input {
+      width: 100%;
+      padding: 0.75rem 1rem;
+      border: 2px solid var(--border);
+      border-radius: var(--radius-sm);
+      font-size: 1rem;
+      transition: border-color 0.3s ease;
+      background: var(--bg-primary);
+    }
+
+    .form-input:focus {
+      outline: none;
+      border-color: var(--primary-orange);
+      box-shadow: 0 0 0 3px var(--shadow);
+    }
+
+    .activate-btn {
+      width: 100%;
+      background: var(--gradient-primary);
+      color: white;
+      border: none;
+      padding: 0.75rem 1.5rem;
+      border-radius: var(--radius-sm);
+      font-size: 1rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: var(--transition);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+    }
+
+    .activate-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: var(--shadow-md);
+    }
+
+    .back-home {
+      text-align: center;
+      margin-top: 2rem;
+      padding-top: 2rem;
+      border-top: 1px solid var(--border);
+    }
+
+    .back-home a {
+      color: var(--primary-orange);
+      text-decoration: none;
+      font-weight: 600;
+      transition: var(--transition);
+    }
+
+    .back-home a:hover {
+      color: var(--primary-dark);
+    }
+
+    @media (max-width: 1024px) {
+      .management-container {
+        max-width: 700px;
+        padding: 2.5rem;
+      }
+
+      .options-grid {
+        grid-template-columns: 1fr;
+        gap: 1.2rem;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .management-container {
+        padding: 2rem;
+        margin: 1rem;
+        max-width: 500px;
+      }
+
+      .brand-logo {
+        width: 20px;
+        height: 20px;
+      }
+
+      .brand-name {
+        font-size: 0.9rem;
+      }
+
+      .management-header h2 {
+        font-size: 1.7rem;
+      }
+
+      .activation-form-main {
+        padding: 2rem;
+        margin-bottom: 2rem;
+      }
+
+      .alternative-options {
+        margin-top: 2rem;
+        padding-top: 1.5rem;
+      }
+
+      .option-card {
+        padding: 1.2rem;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        gap: 0.8rem;
+      }
+
+      .option-content {
+        text-align: center;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .activation-form-main {
+        padding: 1.5rem;
+      }
+
+      .alternative-options h3 {
+        font-size: 1.3rem;
+      }
+
+      .option-card {
+        padding: 1rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="subscription-management">
+    <div class="management-container">
+      <div class="brand-header">
+        <img src="images/logo.png" alt="YouTube Silence Skipper Logo" class="brand-logo">
+        <h1 class="brand-name">YouTube Silence Skipper</h1>
+      </div>
+
+      <div class="management-header">
+        <h2>Activate Your Subscription</h2>
+        <p>Enter your email and order number to activate your Pro subscription</p>
+      </div>
+
+      <div class="activation-form-main">
+        <form onsubmit="handleActivation(event)">
+          <div class="form-group">
+            <label for="email" class="form-label">Email Address</label>
+            <input type="email" id="email" name="email" class="form-input" placeholder="Enter your email address" required>
+          </div>
+
+          <div class="form-group">
+            <label for="order-number" class="form-label">Order Number</label>
+            <input type="text" id="order-number" name="order-number" class="form-input" placeholder="Enter your Paddle order number" required>
+          </div>
+
+          <div class="form-group">
+            <div class="g-recaptcha" data-sitekey="6LcbBskrAAAAALBN1zJkJpKKojxA0uFOvMqUw8Kj" data-action="SUBSCRIPTION_ACTIVATE"></div>
+          </div>
+
+          <button type="submit" class="activate-btn">
+            <i class="fas fa-check"></i> Activate Subscription
+          </button>
+        </form>
+
+        <div id="message-box" class="message-box">
+          <!-- Messages will be displayed here -->
+        </div>
+
+        <div style="margin-top: 2rem; padding: 1.5rem; background-color: #f7fafc; border-radius: 12px; border-left: 4px solid #667eea;">
+          <p style="margin: 0; color: #4a5568; line-height: 1.6;">
+            <strong>💡 Where to find your order number:</strong><br>
+            Check your email receipt from Paddle after purchase. The order number typically starts with "txn_" or similar.
+          </p>
+        </div>
+      </div>
+
+      <div class="alternative-options">
+        <h3>Other Options</h3>
+        <div class="options-grid">
+          <a href="https://customer-portal.paddle.com/login/cpl_01k15nzfq6h90nq755aywz56cv" target="_blank" class="option-card">
+            <div class="option-icon">
+              <i class="fas fa-cog"></i>
+            </div>
+            <div class="option-content">
+              <div class="option-title">Customer Portal</div>
+              <div class="option-description">
+                Access Paddle's customer portal to manage your subscription, billing, and payment methods
+              </div>
+            </div>
+          </a>
+
+          <a href="https://paddle.net/" target="_blank" class="option-card">
+            <div class="option-icon">
+              <i class="fas fa-credit-card"></i>
+            </div>
+            <div class="option-content">
+              <div class="option-title">Billing Support</div>
+              <div class="option-description">
+                Contact Paddle support for payment issues, refunds, and billing questions
+              </div>
+            </div>
+          </a>
+        </div>
+      </div>
+
+      <div class="back-home">
+        <a href="/">← Back to Home</a>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    function showMessage(type, content) {
+      const messageBox = document.getElementById('message-box');
+      messageBox.className = `message-box ${type}`;
+      messageBox.innerHTML = content;
+      messageBox.style.display = 'block';
+      messageBox.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+    }
+
+    function handleActivation(event) {
+      event.preventDefault();
+
+      const email = document.getElementById('email').value;
+      const orderNumber = document.getElementById('order-number').value;
+      const recaptchaResponse = grecaptcha.getResponse();
+
+      if (!email || !orderNumber) {
+        showMessage('error', '<p>⚠️ Please fill in both email address and order number.</p>');
+        return;
+      }
+
+      if (!recaptchaResponse) {
+        showMessage('error', '<p>⚠️ Please complete the reCAPTCHA verification.</p>');
+        return;
+      }
+
+      showMessage('warning', `
+        <p>🔌 Extension not installed. Please install the extension first, then refresh this page and try again.</p>
+        <a href="https://chromewebstore.google.com/detail/youtube-silence-skipper/ijlnjklmlhhfodgfpidpnccipnodohgl"
+           target="_blank" class="install-link">
+          <i class="fab fa-chrome"></i> Install Extension
+        </a>
+      `);
+    }
+  </script>
+</body>
+</html>
