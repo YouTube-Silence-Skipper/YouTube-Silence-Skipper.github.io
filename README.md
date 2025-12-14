@@ -11,7 +11,7 @@
 
 <p align="center">
   <a href="https://chromewebstore.google.com/detail/youtube-silence-skipper/ijlnjklmlhhfodgfpidpnccipnodohgl">
-    <img src="https://img.shields.io/badge/Install%20from%20Chrome%20Web%20Store-blue?style=for-the-badge&logo=google-chrome" alt="Install from Chrome Web Store">
+    <img src="https://img.shields.io/badge/Chrome%20Web%20Store-Install-blue?style=for-the-badge&logo=google-chrome" alt="Install from Chrome Web Store">
   </a>
 </p>
 
