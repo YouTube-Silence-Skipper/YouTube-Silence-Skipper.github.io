@@ -26,7 +26,8 @@ function setupPaddleCheckout() {
       try {
         Paddle.Checkout.open({
           items: [{
-            priceId: 'pri_01k2q4bxj662c46peqbp3f2aap',
+            // priceId: 'pri_01k2q4bxj662c46peqbp3f2aap', -- original price
+            priceId: 'pri_01kch9pkfgcgmaxy18kv63k86t',
             quantity: 1
           }],
           settings: {
