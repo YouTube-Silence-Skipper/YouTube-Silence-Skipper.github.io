@@ -929,7 +929,7 @@ html {
 
 .feature-detail p {
   font-size: 0.85rem;
-  color: var(--text-secondary);
+  color: var(--text-primary); /* Changed to text-primary for better contrast */
   line-height: 1.4;
   margin: 0;
 }
