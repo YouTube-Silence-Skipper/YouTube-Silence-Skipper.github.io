@@ -1,7 +1,7 @@
 # YouTube Silence Skipper
 
 <p align="center">
-  <img src="images/logo.png" alt="YouTube Silence Skipper Logo" width="128" height="128">
+  <img src="https://youtube-silenceskipper.com/images/logo.png" alt="YouTube Silence Skipper Logo" width="128" height="128">
 </p>
 
 <p align="center">
