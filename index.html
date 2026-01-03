@@ -54,8 +54,109 @@
   </script>
 
   <link rel="stylesheet" href="styles.css">
+  <style>
+    /* Christmas Snowfall Animation */
+    .snow {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        pointer-events: none;
+        z-index: 9999;
+    }
+
+    .snow .flake {
+        position: absolute;
+        top: -10%;
+        color: #fff;
+        font-size: 1em;
+        font-family: Arial, sans-serif;
+        text-shadow: 0 0 5px #fff, 0 0 10px #fff, 0 0 15px #fff;
+        animation: fall linear infinite;
+    }
+
+    @keyframes fall {
+        to {
+            transform: translateY(105vh);
+        }
+    }
+
+    /* Bolder Christmas Pricing Card */
+    .christmas-special {
+        background: linear-gradient(145deg, #c82333, #a01c28);
+        border: 3px solid #f8d7da;
+        color: white;
+        box-shadow: 0 0 30px rgba(255, 215, 0, 0.7);
+        position: relative;
+        overflow: visible; /* To allow pseudo-elements to be visible */
+    }
+
+    .christmas-special::before,
+    .christmas-special::after {
+        position: absolute;
+        font-size: 1.5rem;
+    }
+
+    .christmas-special::before {
+        top: 10px;
+        left: 10px;
+    }
+
+    .christmas-special::after {
+        bottom: 10px;
+        right: 10px;
+    }
+
+    .christmas-badge {
+        font-family: 'Mountains of Christmas', cursive; /* A festive font */
+        font-size: 1.8rem;
+        color: #ffd700;
+        text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
+    }
+    
+    .christmas-special .plan-name {
+        color: white;
+    }
+
+    .original-price {
+        text-decoration: line-through;
+        color: #f8d7da;
+        font-size: 1.2rem;
+        margin-right: 10px;
+    }
+    
+    .christmas-special .plan-price {
+        color: #ffd700;
+        font-weight: 700;
+    }
+    
+    .christmas-special .plan-description {
+        color: #f8d7da;
+    }
+    
+    .christmas-special .feature-detail strong {
+        color: white;
+    }
+
+    .christmas-special .plan-pro-btn {
+        background: linear-gradient(45deg, #ffd700, #ffc107);
+        color: #333;
+        font-weight: bold;
+        animation: pulse-gold 1.5s infinite;
+        border: none;
+    }
+
+    @keyframes pulse-gold {
+      0% { box-shadow: 0 0 10px rgba(255, 215, 0, 0.4); }
+      50% { box-shadow: 0 0 25px rgba(255, 215, 0, 0.8); }
+      100% { box-shadow: 0 0 10px rgba(255, 215, 0, 0.4); }
+    }
+  </style>
+  <link href="https://fonts.googleapis.com/css2?family=Mountains+of+Christmas:wght@700&display=swap" rel="stylesheet">
 </head>
 <body>
+  <div class="snow"></div>
   <!-- Navigation -->
   <nav class="navbar">
     <div class="nav-container">
@@ -204,9 +305,12 @@
           <a href="https://chromewebstore.google.com/detail/youtube-silence-skipper/ijlnjklmlhhfodgfpidpnccipnodohgl" class="plan-btn">Get Started Free</a>
         </div>
         
-        <div class="pricing-card featured">
-          <div class="plan-name">Pro</div>
-          <div class="plan-price">$1.99<span>/month</span></div>
+        <div class="pricing-card featured christmas-special">
+          <div class="christmas-badge">🎄 Christmas Sale! 🎄</div>
+          <div class="plan-name"><i class="fas fa-gift"></i> Pro</div>
+          <div class="plan-price">
+            <span class="original-price">$1.99</span> $1<span>/month</span>
+          </div>
           <div class="plan-description">Unlock the full potential & save more time</div>
           <ul class="plan-features">
             <li><i class="fas fa-check check"></i> Everything in Free Plan</li>
@@ -379,5 +483,22 @@
   </footer>
 
   <script src="script.js"></script>
+  <script>
+    // Snowfall effect
+    const snowContainer = document.querySelector('.snow');
+    if (snowContainer) {
+        for (let i = 0; i < 50; i++) {
+            const flake = document.createElement('div');
+            flake.className = 'flake';
+            flake.textContent = '❄️';
+            flake.style.left = Math.random() * 100 + 'vw';
+            flake.style.animationDuration = Math.random() * 3 + 2 + 's'; // 2-5 seconds
+            flake.style.animationDelay = Math.random() * 2 + 's';
+            flake.style.opacity = Math.random();
+            flake.style.fontSize = Math.random() * 1.5 + 0.5 + 'em';
+            snowContainer.appendChild(flake);
+        }
+    }
+  </script>
 </body>
 </html>
