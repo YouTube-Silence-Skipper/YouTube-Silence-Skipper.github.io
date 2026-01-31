@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Activate Pro - YouTube Silence Skipper</title>
+  <meta name="description" content="Activate your Pro subscription for YouTube Silence Skipper">
+  <meta name="robots" content="noindex, nofollow">
+  
+  <!-- Favicons -->
+  <link rel="icon" href="images/favicon.svg" type="image/svg+xml">
+  
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <!-- Styles -->
+  <link rel="stylesheet" href="styles.css">
+  
+  <style>
+    .activate-pro-container {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: var(--container-padding-mobile);
+      background: linear-gradient(135deg, var(--bg-secondary) 0%, var(--bg-tertiary) 100%);
+    }
+    
+    .activate-pro-card {
+      background: var(--bg-primary);
+      border-radius: var(--radius-xl);
+      padding: 3rem;
+      max-width: 600px;
+      width: 100%;
+      box-shadow: var(--shadow-lg);
+    }
+    
+    .activate-pro-header {
+      text-align: center;
+      margin-bottom: 2rem;
+    }
+    
+    .activate-pro-header h1 {
+      color: var(--primary-orange);
+      font-size: 2rem;
+      margin-bottom: 0.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+    }
+    
+    .activate-pro-header p {
+      color: var(--text-secondary);
+      font-size: 1rem;
+    }
+    
+    .form-group {
+      margin-bottom: 1.5rem;
+    }
+    
+    .form-group label {
+      display: block;
+      color: var(--text-primary);
+      font-weight: 600;
+      margin-bottom: 0.5rem;
+      font-size: 0.95rem;
+    }
+    
+    .form-group input {
+      width: 100%;
+      padding: 0.875rem 1rem;
+      border: 2px solid var(--border);
+      border-radius: var(--radius-md);
+      font-size: 1rem;
+      font-family: 'Inter', sans-serif;
+      transition: var(--transition-fast);
+      background: var(--bg-tertiary);
+    }
+    
+    .form-group input:focus {
+      outline: none;
+      border-color: var(--primary-orange);
+      background: var(--bg-primary);
+    }
+    
+    .form-group input:disabled {
+      opacity: 0.6;
+      cursor: not-allowed;
+    }
+    
+    .form-group small {
+      display: block;
+      margin-top: 0.5rem;
+      color: var(--text-muted);
+      font-size: 0.875rem;
+    }
+    
+    .form-group small a {
+      color: var(--primary-orange);
+      text-decoration: none;
+    }
+    
+    .form-group small a:hover {
+      text-decoration: underline;
+    }
+    
+    .btn-activate {
+      width: 100%;
+      padding: 1rem 2rem;
+      background: var(--gradient-primary);
+      color: white;
+      font-weight: 600;
+      font-size: 1.1rem;
+      border: none;
+      border-radius: var(--radius-pill);
+      cursor: pointer;
+      transition: var(--transition);
+      margin-top: 1rem;
+    }
+    
+    .btn-activate:hover:not(:disabled) {
+      transform: translateY(-2px);
+      box-shadow: var(--shadow-hover);
+    }
+    
+    .btn-activate:disabled {
+      opacity: 0.6;
+      cursor: not-allowed;
+    }
+    
+    .status {
+      margin-top: 1.5rem;
+      padding: 1rem;
+      border-radius: var(--radius-md);
+      display: none;
+    }
+    
+    .status.loading {
+      display: block;
+      background: #e3f2fd;
+      color: #1976d2;
+      border-left: 4px solid #1976d2;
+    }
+    
+    .status.success {
+      display: block;
+      background: #e8f5e9;
+      color: #2e7d32;
+      border-left: 4px solid #4caf50;
+    }
+    
+    .status.error {
+      display: block;
+      background: #ffebee;
+      color: #c62828;
+      border-left: 4px solid #f44336;
+    }
+    
+    .status h3 {
+      margin-bottom: 0.5rem;
+      font-size: 1.1rem;
+    }
+    
+    .status p {
+      margin: 0.5rem 0;
+    }
+    
+    .status a {
+      display: inline-block;
+      margin-top: 1rem;
+      padding: 0.75rem 1.5rem;
+      background: var(--primary-orange);
+      color: white;
+      text-decoration: none;
+      border-radius: var(--radius-pill);
+      transition: var(--transition-fast);
+    }
+    
+    .status a:hover {
+      background: var(--primary-dark);
+    }
+    
+    .help-section {
+      margin-top: 2rem;
+      padding-top: 2rem;
+      border-top: 1px solid var(--border);
+    }
+    
+    .help-section h3 {
+      color: var(--text-primary);
+      font-size: 1.1rem;
+      margin-bottom: 1rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    
+    .help-section ol {
+      margin-left: 1.5rem;
+      color: var(--text-secondary);
+    }
+    
+    .help-section li {
+      margin-bottom: 0.5rem;
+    }
+    
+    .help-section a {
+      color: var(--primary-orange);
+      text-decoration: none;
+    }
+    
+    .help-section a:hover {
+      text-decoration: underline;
+    }
+    
+    .btn-secondary {
+      display: inline-block;
+      margin-top: 1rem;
+      padding: 0.75rem 1.5rem;
+      background: var(--bg-tertiary);
+      color: var(--primary-orange);
+      text-decoration: none;
+      border-radius: var(--radius-pill);
+      border: 2px solid var(--primary-orange);
+      transition: var(--transition-fast);
+      font-weight: 600;
+    }
+    
+    .btn-secondary:hover {
+      background: var(--primary-orange);
+      color: white;
+    }
+    
+    @media (max-width: 768px) {
+      .activate-pro-card {
+        padding: 2rem 1.5rem;
+      }
+      
+      .activate-pro-header h1 {
+        font-size: 1.5rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="activate-pro-container">
+    <div class="activate-pro-card">
+      <div class="activate-pro-header">
+        <h1>
+          <i class="fas fa-rocket"></i>
+          Activate Your Pro Subscription
+        </h1>
+        <p>Enter your subscription details to activate Pro features in the extension</p>
+      </div>
+      
+      <form id="activateForm">
+        <div class="form-group">
+          <label for="email">
+            <i class="fas fa-envelope"></i> Email Address
+          </label>
+          <input 
+            type="email" 
+            id="email" 
+            placeholder="user@example.com" 
+            required
+            autocomplete="email"
+          >
+          <small>Use the email you used for Paddle payment</small>
+        </div>
+        
+        <div class="form-group">
+          <label for="subscriptionId">
+            <i class="fas fa-key"></i> Subscription ID
+          </label>
+          <input 
+            type="text" 
+            id="subscriptionId" 
+            placeholder="sub_01abc123..." 
+            required
+            pattern="sub_[a-zA-Z0-9]+"
+          >
+          <small>
+            Find this in your Paddle confirmation email or 
+            <a href="https://customer-portal.paddle.com/login/cpl_01k15nzfq6h90nq755aywz56cv" 
+               target="_blank" rel="noopener">Customer Portal</a>
+          </small>
+        </div>
+        
+        <button type="submit" class="btn-activate" id="activateBtn">
+          <i class="fas fa-check-circle"></i> Activate Pro
+        </button>
+      </form>
+      
+      <div id="status" class="status"></div>
+      
+      <div class="help-section">
+        <h3>
+          <i class="fas fa-question-circle"></i>
+          How to find your Subscription ID?
+        </h3>
+        <ol>
+          <li>Check your Paddle confirmation email (subject: "Payment Received")</li>
+          <li>Or visit <a href="https://customer-portal.paddle.com/login/cpl_01k15nzfq6h90nq755aywz56cv" target="_blank" rel="noopener">Customer Portal</a></li>
+          <li>Copy the Subscription ID (starts with "sub_")</li>
+        </ol>
+        
+        <h3 style="margin-top: 1.5rem;">
+          <i class="fas fa-puzzle-piece"></i>
+          Extension not installed?
+        </h3>
+        <p style="margin-left: 0; color: var(--text-secondary);">
+          <a href="https://chromewebstore.google.com/detail/ijlnjklmlhhfodgfpidpnccipnodohgl" 
+             target="_blank" 
+             rel="noopener"
+             class="btn-secondary">
+            <i class="fas fa-download"></i> Install Extension First
+          </a>
+        </p>
+      </div>
+    </div>
+  </div>
+  
+  <script src="activate-pro.js"></script>
+</body>
+</html>
