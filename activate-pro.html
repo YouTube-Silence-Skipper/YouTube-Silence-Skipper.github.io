@@ -43,14 +43,31 @@
       margin-bottom: 2rem;
     }
     
-    .activate-pro-header h1 {
-      color: var(--primary-orange);
-      font-size: 2rem;
-      margin-bottom: 0.5rem;
+    .app-branding {
       display: flex;
       align-items: center;
       justify-content: center;
-      gap: 0.5rem;
+      gap: 1rem;
+      margin-bottom: 1.5rem;
+    }
+    
+    .app-branding img {
+      width: 48px;
+      height: 48px;
+    }
+    
+    .app-branding h2 {
+      color: var(--text-primary);
+      font-size: 1.5rem;
+      font-weight: 700;
+      margin: 0;
+    }
+    
+    .activate-pro-header h1 {
+      color: var(--primary-orange);
+      font-size: 1.75rem;
+      margin-bottom: 0.5rem;
+      font-weight: 600;
     }
     
     .activate-pro-header p {
@@ -250,11 +267,12 @@
   <div class="activate-pro-container">
     <div class="activate-pro-card">
       <div class="activate-pro-header">
-        <h1>
-          <i class="fas fa-rocket"></i>
-          Activate Your Pro Subscription
-        </h1>
-        <p>Enter your subscription details to activate Pro features in the extension</p>
+        <div class="app-branding">
+          <img src="images/logo.svg" alt="YouTube Silence Skipper Logo">
+          <h2>YouTube Silence Skipper</h2>
+        </div>
+        <h1>Activate Your Pro Subscription</h1>
+        <p>Thank you for upgrading to Pro! Enter your subscription details to activate Pro features in the extension</p>
       </div>
       
       <form id="activateForm">
@@ -303,7 +321,7 @@
           How to find your Subscription ID?
         </h3>
         <ol>
-          <li>Check your Paddle confirmation email (subject: "Payment Received")</li>
+          <li>Check your confirmation email from <strong>help@paddle.com</strong></li>
           <li>Or visit <a href="https://customer-portal.paddle.com/login/cpl_01k15nzfq6h90nq755aywz56cv" target="_blank" rel="noopener">Customer Portal</a></li>
           <li>Copy the Subscription ID (starts with "sub_")</li>
         </ol>

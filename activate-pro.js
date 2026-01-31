@@ -50,7 +50,16 @@ document.getElementById('activateForm').addEventListener('submit', async (e) => 
     console.log('[YSS Activate] Server response:', data);
     
     // Step 2: DOM에 구독 데이터 저장 (Extension이 읽어갈 수 있도록)
-    statusDiv.innerHTML = '<i class="fas fa-check-circle"></i> Activation successful! Waiting for extension...';
+    statusDiv.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Authenticated! Now waiting for extension<span id="loading-dots">.</span>';
+    
+    // "..." 애니메이션 시작
+    startLoadingAnimation();
+    
+    // 기존 컨테이너가 있으면 제거 (중복 방지)
+    const existingContainer = document.getElementById('yss-activation-data');
+    if (existingContainer) {
+      existingContainer.remove();
+    }
     
     const tokenContainer = document.createElement('div');
     tokenContainer.id = 'yss-activation-data';
@@ -117,13 +126,40 @@ document.getElementById('activateForm').addEventListener('submit', async (e) => 
   }
 });
 
+// 로딩 애니메이션 interval ID 저장
+let loadingAnimationInterval = null;
+
+/**
+ * "..." 로딩 애니메이션 시작
+ */
+function startLoadingAnimation() {
+  let dotCount = 1;
+  loadingAnimationInterval = setInterval(() => {
+    const dotsElement = document.getElementById('loading-dots');
+    if (dotsElement) {
+      dotCount = (dotCount % 3) + 1; // 1, 2, 3 반복
+      dotsElement.textContent = '.'.repeat(dotCount);
+    }
+  }, 500); // 500ms마다 업데이트
+}
+
+/**
+ * 로딩 애니메이션 중지
+ */
+function stopLoadingAnimation() {
+  if (loadingAnimationInterval) {
+    clearInterval(loadingAnimationInterval);
+    loadingAnimationInterval = null;
+  }
+}
+
 /**
  * Extension이 토큰을 가져갈 때까지 대기
  */
 function waitForExtensionPickup() {
   let elapsed = 0;
   const checkInterval = 500; // 500ms마다 확인
-  const timeout = 30000; // 30초 타임아웃
+  const timeout = 5000; // 5초 타임아웃
   
   const intervalId = setInterval(() => {
     const container = document.getElementById('yss-activation-data');
@@ -137,6 +173,7 @@ function waitForExtensionPickup() {
     // Extension이 데이터를 읽어갔는지 확인
     if (container.getAttribute('data-picked-up') === 'true') {
       clearInterval(intervalId);
+      stopLoadingAnimation(); // 애니메이션 중지
       showSuccess();
       return;
     }
@@ -146,9 +183,21 @@ function waitForExtensionPickup() {
     // 타임아웃 체크
     if (elapsed >= timeout) {
       clearInterval(intervalId);
+      stopLoadingAnimation(); // 애니메이션 중지
       showTimeout();
     }
   }, checkInterval);
+}
+
+/**
+ * 민감한 구독 데이터를 DOM에서 제거 (보안)
+ */
+function clearSensitiveData() {
+  const container = document.getElementById('yss-activation-data');
+  if (container) {
+    container.removeAttribute('data-subscription');
+    console.log('[YSS Activate] Subscription data cleared from DOM for security');
+  }
 }
 
 /**
@@ -161,17 +210,16 @@ function showSuccess() {
     <h3><i class="fas fa-check-circle"></i> Pro Activated Successfully!</h3>
     <p>Your Pro features are now active in the YouTube Silence Skipper extension.</p>
     <p style="margin-top: 1rem;">
-      <strong><i class="fas fa-star"></i> You can now enjoy:</strong>
+      <strong><i class="fas fa-star"></i> You can now enjoy all Pro features and future updates!</strong>
     </p>
-    <ul style="margin-left: 1.5rem; margin-top: 0.5rem;">
-      <li>Unlimited silence skipping on all videos</li>
-      <li>Priority support</li>
-      <li>Future Pro features</li>
-    </ul>
+
     <a href="https://www.youtube.com" target="_blank">
       <i class="fas fa-play-circle"></i> Start Using Pro on YouTube
     </a>
   `;
+  
+  // 보안: Extension이 데이터를 가져간 후 민감한 데이터 제거
+  clearSensitiveData();
   
   console.log('[YSS Activate] Activation completed successfully!');
 }
@@ -184,7 +232,7 @@ function showTimeout() {
   statusDiv.className = 'status error';
   statusDiv.innerHTML = `
     <h3><i class="fas fa-clock"></i> Extension Not Detected</h3>
-    <p>The activation was successful on the server, but the extension didn't pick up the token.</p>
+    <p>Authentication was successful on the server, but the extension didn't pick up the token.</p>
     <p><strong>Possible reasons:</strong></p>
     <ul style="margin-left: 1.5rem; margin-top: 0.5rem;">
       <li>Extension is not installed or disabled</li>
@@ -206,12 +254,15 @@ function showTimeout() {
     </a>
   `;
   
+  // Clear sensitive subscription data from DOM (security)
+  clearSensitiveData();
+  
   // Re-enable form
   document.getElementById('activateBtn').disabled = false;
   document.getElementById('email').disabled = false;
   document.getElementById('subscriptionId').disabled = false;
   
-  console.warn('[YSS Activate] Extension pickup timed out after 30 seconds');
+  console.warn('[YSS Activate] Extension pickup timed out after 5 seconds');
 }
 
 /**
