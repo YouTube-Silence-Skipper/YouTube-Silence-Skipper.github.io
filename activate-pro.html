@@ -252,6 +252,76 @@
       color: white;
     }
     
+    .step {
+      display: none;
+    }
+    
+    .step.active {
+      display: block;
+    }
+    
+    .step.hidden {
+      display: none;
+    }
+    
+    .step-instruction {
+      text-align: center;
+      color: var(--text-secondary);
+      margin-bottom: 1.5rem;
+      font-size: 0.95rem;
+    }
+    
+    .step-instruction strong {
+      color: var(--primary-orange);
+      font-weight: 600;
+    }
+    
+    .code-input {
+      font-size: 1.5rem !important;
+      letter-spacing: 0.5rem;
+      text-align: center;
+      font-weight: 600;
+      font-family: 'Courier New', monospace !important;
+    }
+    
+    .resend-section {
+      margin-top: 1.5rem;
+      padding-top: 1.5rem;
+      border-top: 1px solid var(--border);
+      text-align: center;
+    }
+    
+    .resend-section p {
+      color: var(--text-secondary);
+      margin-bottom: 1rem;
+      font-size: 0.9rem;
+    }
+    
+    .resend-section .btn-secondary {
+      margin-top: 0;
+      margin-bottom: 0.5rem;
+    }
+    
+    .btn-text {
+      background: none;
+      border: none;
+      color: var(--primary-orange);
+      cursor: pointer;
+      font-size: 0.9rem;
+      text-decoration: underline;
+      padding: 0.5rem;
+      margin-top: 0.5rem;
+      transition: var(--transition-fast);
+    }
+    
+    .btn-text:hover {
+      color: var(--primary-dark);
+    }
+    
+    .btn-text i {
+      margin-right: 0.25rem;
+    }
+    
     @media (max-width: 768px) {
       .activate-pro-card {
         padding: 2rem 1.5rem;
@@ -259,6 +329,11 @@
       
       .activate-pro-header h1 {
         font-size: 1.5rem;
+      }
+      
+      .code-input {
+        font-size: 1.25rem !important;
+        letter-spacing: 0.4rem;
       }
     }
   </style>
@@ -272,61 +347,77 @@
           <h2>YouTube Silence Skipper</h2>
         </div>
         <h1>Activate Your Pro Subscription</h1>
-        <p>Thank you for upgrading to Pro! Enter your subscription details to activate Pro features in the extension</p>
+        <p>Thank you for upgrading to Pro! Enter your email to receive a verification code</p>
       </div>
       
-      <form id="activateForm">
-        <div class="form-group">
-          <label for="email">
-            <i class="fas fa-envelope"></i> Email Address
-          </label>
-          <input 
-            type="email" 
-            id="email" 
-            placeholder="user@example.com" 
-            required
-            autocomplete="email"
-          >
-          <small>Use the email you used for Paddle payment</small>
-        </div>
+      <!-- Step 1: 이메일 입력 -->
+      <div id="step1" class="step active">
+        <form id="emailForm">
+          <div class="form-group">
+            <label for="email">
+              <i class="fas fa-envelope"></i> Email Address
+            </label>
+            <input 
+              type="email" 
+              id="email" 
+              placeholder="user@example.com" 
+              required
+              autocomplete="email"
+            >
+            <small>Use the email you used for Paddle payment</small>
+          </div>
+          
+          <button type="submit" class="btn-activate" id="sendCodeBtn">
+            <i class="fas fa-paper-plane"></i> Send Verification Code
+          </button>
+        </form>
+      </div>
+      
+      <!-- Step 2: 코드 입력 -->
+      <div id="step2" class="step hidden">
+        <p class="step-instruction">
+          We sent a 6-digit code to <strong id="userEmail"></strong>
+        </p>
         
-        <div class="form-group">
-          <label for="subscriptionId">
-            <i class="fas fa-key"></i> Subscription ID
-          </label>
-          <input 
-            type="text" 
-            id="subscriptionId" 
-            placeholder="sub_01abc123..." 
-            required
-            pattern="sub_[a-zA-Z0-9]+"
-          >
-          <small>
-            Find this in your Paddle confirmation email or 
-            <a href="https://customer-portal.paddle.com/login/cpl_01k15nzfq6h90nq755aywz56cv" 
-               target="_blank" rel="noopener">Customer Portal</a>
-          </small>
-        </div>
+        <form id="codeForm">
+          <div class="form-group">
+            <label for="code">
+              <i class="fas fa-key"></i> Verification Code
+            </label>
+            <input 
+              type="text" 
+              id="code" 
+              maxlength="6" 
+              inputmode="numeric" 
+              pattern="[0-9]{6}"
+              placeholder="000000"
+              required
+              class="code-input"
+              autocomplete="off"
+            >
+            <small id="attemptsFeedback"></small>
+          </div>
+          
+          <button type="submit" class="btn-activate" id="verifyCodeBtn">
+            <i class="fas fa-check-circle"></i> Verify Code
+          </button>
+        </form>
         
-        <button type="submit" class="btn-activate" id="activateBtn">
-          <i class="fas fa-check-circle"></i> Activate Pro
-        </button>
-      </form>
+        <div class="resend-section">
+          <p>Didn't receive the code?</p>
+          <button type="button" id="resendBtn" class="btn-secondary" disabled>
+            Resend (<span id="timer">60</span>s)
+          </button>
+          <button type="button" id="changeEmailBtn" class="btn-text">
+            <i class="fas fa-edit"></i> Change Email
+          </button>
+        </div>
+      </div>
       
       <div id="status" class="status"></div>
       
       <div class="help-section">
         <h3>
-          <i class="fas fa-question-circle"></i>
-          How to find your Subscription ID?
-        </h3>
-        <ol>
-          <li>Check your confirmation email from <strong>help@paddle.com</strong></li>
-          <li>Or visit <a href="https://customer-portal.paddle.com/login/cpl_01k15nzfq6h90nq755aywz56cv" target="_blank" rel="noopener">Customer Portal</a></li>
-          <li>Copy the Subscription ID (starts with "sub_")</li>
-        </ol>
-        
-        <h3 style="margin-top: 1.5rem;">
           <i class="fas fa-puzzle-piece"></i>
           Extension not installed?
         </h3>
