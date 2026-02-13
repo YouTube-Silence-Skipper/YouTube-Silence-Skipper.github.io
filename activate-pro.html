@@ -98,6 +98,7 @@
     .activate-pro-container {
       min-height: calc(100vh - 120px);
       display: flex;
+      flex-direction: column;
       align-items: center;
       justify-content: center;
       padding: 3rem 1rem;
@@ -139,6 +140,15 @@
       font-size: 0.9375rem;
       margin: 0;
       line-height: 1.5;
+    }
+    
+    .thank-you-message {
+      color: var(--activate-primary);
+      font-weight: 700;
+      font-size: 2rem;
+      text-align: center;
+      margin: 0 0 2rem 0;
+      letter-spacing: -0.03em;
     }
     
     /* Form Styles */
@@ -479,6 +489,8 @@
   
   <!-- Main Content -->
   <div class="activate-pro-container">
+    <p class="thank-you-message">Thank you for upgrading to Pro! 🎉</p>
+    
     <div class="activate-pro-card">
       <div class="activate-pro-header">
         <h1><span class="highlight">Activate Your Pro Subscription</span></h1>
