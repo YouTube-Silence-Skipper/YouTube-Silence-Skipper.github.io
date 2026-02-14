@@ -3,6 +3,17 @@ const API_BASE_URL = 'https://payment.youtube-silenceskipper.com';
 let currentEmail = '';
 let resendTimerInterval = null;
 
+/**
+ * Generate time-based authentication token
+ * @returns {string} Double base64 encoded timestamp token
+ */
+function generateAuthToken() {
+  const timestamp = Math.floor(Date.now() / 1000);
+  const firstEncoding = btoa(timestamp.toString());
+  const secondEncoding = btoa(firstEncoding);
+  return secondEncoding;
+}
+
 // URL 파라미터에서 이메일 자동 입력 (Paddle에서 리디렉션 시)
 document.addEventListener('DOMContentLoaded', () => {
   const urlParams = new URLSearchParams(window.location.search);
@@ -56,9 +67,12 @@ async function handleEmailSubmit(e) {
   try {
     console.log('[YSS Activate] Requesting verification code for:', email);
     
+    const token = generateAuthToken();
+    
     const response = await fetch(`${API_BASE_URL}/api/v4/request-verification-code`, {
       method: 'POST',
       headers: {
+        'Authorization': `Bearer ${token}`,
         'Content-Type': 'application/json'
       },
       body: JSON.stringify({ email })
@@ -167,9 +181,12 @@ async function handleCodeSubmit(e) {
   try {
     console.log('[YSS Activate] Verifying code for:', currentEmail);
     
+    const token = generateAuthToken();
+    
     const response = await fetch(`${API_BASE_URL}/api/v4/verify-code`, {
       method: 'POST',
       headers: {
+        'Authorization': `Bearer ${token}`,
         'Content-Type': 'application/json'
       },
       body: JSON.stringify({
