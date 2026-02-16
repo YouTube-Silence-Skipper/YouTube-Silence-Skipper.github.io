@@ -33,7 +33,7 @@ function setupPaddleCheckout() {
           settings: {
             // variant: 'one-page',
             displayMode: 'overlay',
-            successUrl: 'https://youtube-silenceskipper.com/pro-success.html',
+            successUrl: 'https://youtube-silenceskipper.com/activate-pro.html?email={customer.email}',
           }
         })
       } catch (error) {

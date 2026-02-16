@@ -963,6 +963,44 @@ html {
   box-shadow: 0 10px 25px rgba(255, 107, 53, 0.25);
 }
 
+.activation-notice {
+  text-align: center;
+  margin-top: 3rem;
+  padding: 1.5rem;
+  background: var(--bg-secondary);
+  border: 1px dashed var(--primary-orange);
+  border-radius: var(--radius-lg);
+  max-width: 800px;
+  margin-left: auto;
+  margin-right: auto;
+  position: relative;
+  z-index: 1;
+}
+
+.activation-notice p {
+  color: var(--text-secondary);
+  font-size: 1.1rem;
+  white-space: nowrap;
+}
+
+@media (max-width: 768px) {
+  .activation-notice p {
+    white-space: normal;
+  }
+}
+
+.activation-notice a {
+  color: var(--primary-orange);
+  font-weight: 700;
+  text-decoration: none;
+  transition: var(--transition);
+}
+
+.activation-notice a:hover {
+  color: var(--primary-dark);
+  text-decoration: underline;
+}
+
 /* How it works */
 .how-it-works {
   padding: 8rem 0;
