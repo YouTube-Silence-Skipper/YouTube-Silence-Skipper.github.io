@@ -96,6 +96,9 @@ window.addEventListener('scroll', function() {
 
 // Mobile menu toggle
 document.addEventListener('DOMContentLoaded', function() {
+  // 브라우저 감지 및 버튼 문구 변경
+  updateHeroButtonText();
+
   const mobileMenuToggle = document.querySelector('.mobile-menu-toggle');
   const mobileMenu = document.querySelector('.mobile-menu');
   
@@ -121,3 +124,44 @@ document.addEventListener('DOMContentLoaded', function() {
     });
   }
 });
+
+function updateHeroButtonText() {
+  const heroButton = document.querySelector('.hero-buttons .btn-primary');
+  if (!heroButton) return;
+
+  const userAgent = navigator.userAgent.toLowerCase();
+  let browserName = '';
+
+  // 브라우저 감지 로직
+  if (userAgent.includes('whale')) {
+    browserName = 'Whale';
+  } else if (userAgent.includes('edg/')) {
+    browserName = 'Edge';
+  } else if (userAgent.includes('opr/') || userAgent.includes('opera')) {
+    browserName = 'Opera';
+  } else if (userAgent.includes('firefox')) {
+    browserName = 'Firefox';
+  } else if (userAgent.includes('duckduckgo')) {
+    browserName = 'DuckDuckGo';
+  } else if (userAgent.includes('chrome')) {
+    // Brave는 userAgent만으로 구분이 어려울 수 있으나, 
+    // navigator.brave가 존재하는지 확인하는 방법이 있음
+    if (navigator.brave && typeof navigator.brave.isBrave === 'function') {
+      browserName = 'Brave';
+    } else {
+      browserName = 'Chrome';
+    }
+  }
+
+  if (browserName) {
+    // 기존 아이콘 유지하면서 텍스트만 변경
+    const icon = heroButton.querySelector('i');
+    heroButton.innerHTML = '';
+    if (icon) {
+      heroButton.appendChild(icon);
+      heroButton.innerHTML += ` Add to ${browserName} Free`;
+    } else {
+      heroButton.textContent = `Add to ${browserName} Free`;
+    }
+  }
+}
