@@ -127,16 +127,27 @@ document.addEventListener('DOMContentLoaded', function() {
 
 function updateHeroButtonText() {
   const heroButton = document.querySelector('.hero-buttons .btn-primary');
-  if (!heroButton) return;
-
+  const pricingBtn = document.querySelector('.pricing-card .plan-btn');
+  const footerStoreLink = document.querySelector('.footer-links a[href*="chromewebstore"]');
+  
   const userAgent = navigator.userAgent.toLowerCase();
   let browserName = '';
+  
+  const STORES = {
+    chrome: 'https://chromewebstore.google.com/detail/youtube-silence-skipper/ijlnjklmlhhfodgfpidpnccipnodohgl',
+    edge: 'https://microsoftedge.microsoft.com/addons/detail/youtube-silence-skipper/mapnepjdljlbflbbejcioffofefdcdbl',
+    whale: 'https://store.whale.naver.com/detail/epkmhiejgnefgegggoneipgmlnbbgdji'
+  };
+
+  let storeUrl = STORES.chrome;
 
   // 브라우저 감지 로직
   if (userAgent.includes('whale')) {
     browserName = 'Whale';
+    storeUrl = STORES.whale;
   } else if (userAgent.includes('edg/')) {
     browserName = 'Edge';
+    storeUrl = STORES.edge;
   } else if (userAgent.includes('opr/') || userAgent.includes('opera')) {
     browserName = 'Opera';
   } else if (userAgent.includes('firefox')) {
@@ -144,8 +155,6 @@ function updateHeroButtonText() {
   } else if (userAgent.includes('duckduckgo')) {
     browserName = 'DuckDuckGo';
   } else if (userAgent.includes('chrome')) {
-    // Brave는 userAgent만으로 구분이 어려울 수 있으나, 
-    // navigator.brave가 존재하는지 확인하는 방법이 있음
     if (navigator.brave && typeof navigator.brave.isBrave === 'function') {
       browserName = 'Brave';
     } else {
@@ -153,8 +162,8 @@ function updateHeroButtonText() {
     }
   }
 
-  if (browserName) {
-    // 기존 아이콘 유지하면서 텍스트만 변경
+  // Hero 버튼 텍스트 변경
+  if (heroButton && browserName) {
     const icon = heroButton.querySelector('i');
     heroButton.innerHTML = '';
     if (icon) {
@@ -163,5 +172,15 @@ function updateHeroButtonText() {
     } else {
       heroButton.textContent = `Add to ${browserName} Free`;
     }
+  }
+
+  // Pricing 버튼 링크 변경
+  if (pricingBtn) {
+    pricingBtn.href = storeUrl;
+  }
+
+  // Footer 링크 변경
+  if (footerStoreLink) {
+    footerStoreLink.href = storeUrl;
   }
 }
