@@ -1424,6 +1424,15 @@ html {
     justify-content: center;
   }
 
+  .supported-browsers {
+    justify-content: center;
+    text-align: center;
+  }
+
+  .browser-logos {
+    justify-content: center;
+  }
+
   .hero h1 {
     font-size: 3.2rem;
     line-height: 1.15;
