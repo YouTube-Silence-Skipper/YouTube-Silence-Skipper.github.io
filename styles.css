@@ -470,6 +470,25 @@ html {
   transform: translateY(-2px);
 }
 
+.award-badge {
+  margin-top: 2rem;
+  display: flex;
+  justify-content: flex-start;
+  opacity: 0;
+  animation: fadeInUp 0.8s ease-out 0.2s forwards;
+}
+
+.award-badge img {
+  width: 180px;
+  transition: var(--transition);
+  filter: drop-shadow(0 4px 10px rgba(0,0,0,0.1));
+}
+
+.award-badge img:hover {
+  transform: scale(1.05);
+  filter: drop-shadow(0 6px 15px rgba(0,0,0,0.15));
+}
+
 .hero-visual {
   display: flex;
   justify-content: center;
@@ -1421,6 +1440,10 @@ html {
   }
 
   .hero-buttons {
+    justify-content: center;
+  }
+
+  .award-badge {
     justify-content: center;
   }
 
