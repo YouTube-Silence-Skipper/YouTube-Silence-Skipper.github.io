@@ -562,11 +562,15 @@ function showSuccess() {
   statusDiv.style.borderLeft = 'none';
   statusDiv.style.background = 'transparent';
   statusDiv.innerHTML = `
-    <h3 style="font-size: 1.5rem; margin-bottom: 1rem;">Pro Activated Successfully!</h3>
-    <p style="font-size: 1.05rem; color: var(--activate-text-secondary);">Your Pro features are now active in the extension.</p>
-    <p style="margin: 1.5rem 0 2rem 0; color: var(--activate-text-primary);">
-      <strong><i class="fas fa-star" style="color: #f59e0b;"></i> You can now enjoy all Pro features!</strong>
-    </p>
+    <div style="display: flex; align-items: center; justify-content: center; gap: 0.75rem; margin-bottom: 2rem;">
+      <img src="images/logo.png" alt="YouTube Silence Skipper Logo" style="width: 32px; height: 32px;">
+      <div style="display: flex; align-items: center; gap: 0.5rem; font-weight: 600; font-size: 1.125rem; color: var(--activate-primary); letter-spacing: -0.02em;">
+        YouTube Silence Skipper
+        <span style="background: var(--activate-primary); color: white; padding: 0.15rem 0.5rem; border-radius: 4px; font-size: 0.75rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; line-height: 1;">PRO</span>
+      </div>
+    </div>
+    <h3 style="font-size: 2rem; margin-bottom: 0.5rem; color: var(--activate-primary); font-weight: 700; letter-spacing: -0.03em;">Activated Successfully!</h3>
+    <p style="font-size: 1.05rem; color: var(--activate-text-secondary); margin-bottom: 2.5rem;">Your Pro features are now active in the extension.</p>
 
     <a href="https://www.youtube.com" target="_blank" class="btn-activate" style="display: inline-block; width: auto; padding: 1rem 2.5rem; text-decoration: none;">
       <i class="fas fa-play-circle"></i> Start Using Pro on YouTube
