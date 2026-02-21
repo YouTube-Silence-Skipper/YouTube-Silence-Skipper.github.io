@@ -96,9 +96,6 @@ window.addEventListener('scroll', function() {
 
 // Mobile menu toggle
 document.addEventListener('DOMContentLoaded', function() {
-  // 브라우저 감지 및 버튼 문구 변경
-  updateHeroButtonText();
-
   const mobileMenuToggle = document.querySelector('.mobile-menu-toggle');
   const mobileMenu = document.querySelector('.mobile-menu');
   
@@ -124,63 +121,3 @@ document.addEventListener('DOMContentLoaded', function() {
     });
   }
 });
-
-function updateHeroButtonText() {
-  const heroButton = document.querySelector('.hero-buttons .btn-primary');
-  const pricingBtn = document.querySelector('.pricing-card .plan-btn');
-  const footerStoreLink = document.querySelector('.footer-links a[href*="chromewebstore"]');
-  
-  const userAgent = navigator.userAgent.toLowerCase();
-  let browserName = '';
-  
-  const STORES = {
-    chrome: 'https://chromewebstore.google.com/detail/youtube-silence-skipper/ijlnjklmlhhfodgfpidpnccipnodohgl',
-    edge: 'https://microsoftedge.microsoft.com/addons/detail/youtube-silence-skipper/mapnepjdljlbflbbejcioffofefdcdbl',
-    whale: 'https://store.whale.naver.com/detail/epkmhiejgnefgegggoneipgmlnbbgdji'
-  };
-
-  let storeUrl = STORES.chrome;
-
-  // 브라우저 감지 로직
-  if (userAgent.includes('whale')) {
-    browserName = 'Whale';
-    storeUrl = STORES.whale;
-  } else if (userAgent.includes('edg/')) {
-    browserName = 'Edge';
-    storeUrl = STORES.edge;
-  } else if (userAgent.includes('opr/') || userAgent.includes('opera')) {
-    browserName = 'Opera';
-  } else if (userAgent.includes('firefox')) {
-    browserName = 'Firefox';
-  } else if (userAgent.includes('duckduckgo')) {
-    browserName = 'DuckDuckGo';
-  } else if (userAgent.includes('chrome')) {
-    if (navigator.brave && typeof navigator.brave.isBrave === 'function') {
-      browserName = 'Brave';
-    } else {
-      browserName = 'Chrome';
-    }
-  }
-
-  // Hero 버튼 텍스트 변경
-  if (heroButton && browserName) {
-    const icon = heroButton.querySelector('i');
-    heroButton.innerHTML = '';
-    if (icon) {
-      heroButton.appendChild(icon);
-      heroButton.innerHTML += ` Add to ${browserName} Free`;
-    } else {
-      heroButton.textContent = `Add to ${browserName} Free`;
-    }
-  }
-
-  // Pricing 버튼 링크 변경
-  if (pricingBtn) {
-    pricingBtn.href = storeUrl;
-  }
-
-  // Footer 링크 변경
-  if (footerStoreLink) {
-    footerStoreLink.href = storeUrl;
-  }
-}
