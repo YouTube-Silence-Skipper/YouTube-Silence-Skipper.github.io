@@ -65,8 +65,6 @@ async function handleEmailSubmit(e) {
   emailInput.disabled = true;
   
   try {
-    console.log('[YSS Activate] Requesting verification code for:', email);
-    
     const token = generateAuthToken();
     
     const response = await fetch(`${API_BASE_URL}/api/v4/request-verification-code`, {
@@ -84,8 +82,6 @@ async function handleEmailSubmit(e) {
       throw new Error(data.error || 'Failed to send verification code');
     }
     
-    console.log('[YSS Activate] Code sent successfully');
-    
     // Step 2로 전환
     currentEmail = email;
     showStep2(email);
@@ -96,7 +92,7 @@ async function handleEmailSubmit(e) {
     statusDiv.innerHTML = '';
     
   } catch (error) {
-    console.error('[YSS Activate] Error:', error);
+    console.error('[YSS Activate] Request Error:', error.message);
     
     statusDiv.className = 'status error';
     
@@ -179,8 +175,6 @@ async function handleCodeSubmit(e) {
   resendBtn.disabled = true;
   
   try {
-    console.log('[YSS Activate] Verifying code for:', currentEmail);
-    
     const token = generateAuthToken();
     
     const response = await fetch(`${API_BASE_URL}/api/v4/verify-code`, {
@@ -208,8 +202,6 @@ async function handleCodeSubmit(e) {
       throw new Error(data.error || 'Code verification failed');
     }
     
-    console.log('[YSS Activate] Code verified successfully:', data);
-    
     // DOM에 구독 데이터 저장 (Extension이 읽어갈 수 있도록)
     statusDiv.className = 'status loading';
     statusDiv.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Authenticated! Now waiting for extension<span id="loading-dots">.</span>';
@@ -231,13 +223,11 @@ async function handleCodeSubmit(e) {
     tokenContainer.style.display = 'none';
     document.body.appendChild(tokenContainer);
     
-    console.log('[YSS Activate] Subscription data stored in DOM');
-    
     // Extension이 데이터를 가져갈 때까지 대기 (polling)
     waitForExtensionPickup();
     
   } catch (error) {
-    console.error('[YSS Activate] Error:', error);
+    console.error('[YSS Activate] Verification Error:', error.message);
     
     statusDiv.className = 'status error';
     
@@ -326,8 +316,6 @@ async function handleResend() {
       throw new Error(data.error || 'Failed to resend code');
     }
     
-    console.log('[YSS Activate] Code resent successfully');
-    
     // 타이머 재시작
     startResendTimer();
     
@@ -349,7 +337,7 @@ async function handleResend() {
     document.getElementById('code').focus();
     
   } catch (error) {
-    console.error('[YSS Activate] Resend error:', error);
+    console.error('[YSS Activate] Resend Error:', error.message);
     
     statusDiv.className = 'status error';
     
@@ -410,8 +398,6 @@ function handleChangeEmail() {
   emailInput.select();
   
   currentEmail = '';
-  
-  console.log('[YSS Activate] Returned to Step 1');
 }
 
 /**
@@ -434,8 +420,6 @@ function showStep2(email) {
   codeInput.focus();
   
   document.getElementById('verifyCodeBtn').disabled = false;
-  
-  console.log('[YSS Activate] Switched to Step 2');
 }
 
 /**
@@ -548,7 +532,6 @@ function clearSensitiveData() {
   const container = document.getElementById('yss-activation-data');
   if (container) {
     container.removeAttribute('data-subscription');
-    console.log('[YSS Activate] Subscription data cleared from DOM for security');
   }
 }
 
@@ -592,8 +575,6 @@ function showSuccess() {
   
   // 보안: Extension이 데이터를 가져간 후 민감한 데이터 제거
   clearSensitiveData();
-  
-  console.log('[YSS Activate] Activation completed successfully!');
 }
 
 /**
@@ -628,8 +609,6 @@ function showTimeout() {
   
   // Clear sensitive subscription data from DOM (security)
   clearSensitiveData();
-  
-  console.warn('[YSS Activate] Extension pickup timed out after 5 seconds');
 }
 
 /**
