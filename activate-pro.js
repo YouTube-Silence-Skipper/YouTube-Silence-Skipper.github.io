@@ -557,24 +557,38 @@ function clearSensitiveData() {
  */
 function showSuccess() {
   const statusDiv = document.getElementById('status');
+  const successAnim = document.getElementById('successAnimation');
+  const header = document.querySelector('.activate-pro-header');
+  const steps = document.querySelectorAll('.step');
+  const helpSection = document.querySelector('.help-section');
+  const resendSection = document.querySelector('.resend-section');
+
+  // 인증 관련 요소 숨기기
+  if (header) header.style.display = 'none';
+  steps.forEach(step => step.style.display = 'none');
+  if (helpSection) helpSection.style.display = 'none';
+  if (resendSection) resendSection.style.display = 'none';
+
+  // 체크 애니메이션 표시
+  if (successAnim) {
+    successAnim.style.display = 'flex';
+  }
+
   statusDiv.className = 'status success';
+  statusDiv.style.textAlign = 'center';
+  statusDiv.style.borderLeft = 'none';
+  statusDiv.style.background = 'transparent';
   statusDiv.innerHTML = `
-    <h3><i class="fas fa-check-circle"></i> Pro Activated Successfully!</h3>
-    <p>Your Pro features are now active in the YouTube Silence Skipper extension.</p>
-    <p style="margin-top: 1rem;">
-      <strong><i class="fas fa-star"></i> You can now enjoy all Pro features and future updates!</strong>
+    <h3 style="font-size: 1.5rem; margin-bottom: 1rem;">Pro Activated Successfully!</h3>
+    <p style="font-size: 1.05rem; color: var(--activate-text-secondary);">Your Pro features are now active in the extension.</p>
+    <p style="margin: 1.5rem 0 2rem 0; color: var(--activate-text-primary);">
+      <strong><i class="fas fa-star" style="color: #f59e0b;"></i> You can now enjoy all Pro features!</strong>
     </p>
 
-    <a href="https://www.youtube.com" target="_blank">
+    <a href="https://www.youtube.com" target="_blank" class="btn-activate" style="display: inline-block; width: auto; padding: 1rem 2.5rem; text-decoration: none;">
       <i class="fas fa-play-circle"></i> Start Using Pro on YouTube
     </a>
   `;
-  
-  // Resend 섹션 숨기기 (activation 성공 시 불필요)
-  const resendSection = document.querySelector('.resend-section');
-  if (resendSection) {
-    resendSection.style.display = 'none';
-  }
   
   // 보안: Extension이 데이터를 가져간 후 민감한 데이터 제거
   clearSensitiveData();

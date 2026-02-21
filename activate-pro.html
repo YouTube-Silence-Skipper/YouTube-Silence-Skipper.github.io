@@ -443,6 +443,77 @@
       margin: 0.5rem 0 0 0;
     }
     
+    /* Success Animation */
+    .success-animation {
+      display: none;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 1rem 0 2rem 0;
+      animation: fadeIn 0.5s ease forwards;
+    }
+    
+    .checkmark-circle {
+      width: 80px;
+      height: 80px;
+      position: relative;
+      display: block;
+      margin: 0 auto 1.5rem;
+    }
+    
+    .checkmark-circle .background {
+      width: 80px;
+      height: 80px;
+      border-radius: 50%;
+      background: var(--activate-success);
+      position: absolute;
+    }
+    
+    .checkmark-circle .check {
+      width: 45px;
+      height: 22px;
+      position: absolute;
+      opacity: 0;
+      left: 17px;
+      top: 26px;
+      border-left: 5px solid white;
+      border-bottom: 5px solid white;
+      transform: rotate(-45deg);
+      animation: checkmark 0.5s cubic-bezier(0.65, 0, 0.45, 1) 0.5s forwards;
+    }
+    
+    @keyframes checkmark {
+      0% {
+        height: 0;
+        width: 0;
+        opacity: 1;
+      }
+      20% {
+        height: 0;
+        width: 22px;
+        opacity: 1;
+      }
+      100% {
+        height: 22px;
+        width: 45px;
+        opacity: 1;
+      }
+    }
+    
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .fade-out {
+      animation: fadeOut 0.4s ease forwards;
+    }
+
+    @keyframes fadeOut {
+      from { opacity: 1; transform: translateY(0); }
+      to { opacity: 0; transform: translateY(-10px); }
+    }
+    
     /* Responsive */
     @media (max-width: 768px) {
       .activate-header-content {
@@ -558,6 +629,14 @@
           <button type="button" id="changeEmailBtn" class="btn-text">
             <i class="fas fa-edit"></i> Change Email
           </button>
+        </div>
+      </div>
+      
+      <!-- Success Animation -->
+      <div id="successAnimation" class="success-animation">
+        <div class="checkmark-circle">
+          <div class="background"></div>
+          <div class="check"></div>
         </div>
       </div>
       
