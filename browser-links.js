@@ -18,7 +18,8 @@ function updateBrowserLinks() {
   const STORES = {
     chrome: 'https://chromewebstore.google.com/detail/youtube-silence-skipper/ijlnjklmlhhfodgfpidpnccipnodohgl',
     edge: 'https://microsoftedge.microsoft.com/addons/detail/youtube-silence-skipper/mapnepjdljlbflbbejcioffofefdcdbl',
-    whale: 'https://store.whale.naver.com/detail/epkmhiejgnefgegggoneipgmlnbbgdji'
+    whale: 'https://store.whale.naver.com/detail/epkmhiejgnefgegggoneipgmlnbbgdji',
+    firefox: 'https://addons.mozilla.org/ko/firefox/addon/youtube-silence-skipper',
   };
 
   let storeUrl = STORES.chrome;
@@ -34,6 +35,7 @@ function updateBrowserLinks() {
     browserName = 'Opera';
   } else if (userAgent.includes('firefox')) {
     browserName = 'Firefox';
+    storeUrl = STORES.firefox;
   } else if (userAgent.includes('duckduckgo')) {
     browserName = 'DuckDuckGo';
   } else if (userAgent.includes('chrome')) {
