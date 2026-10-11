@@ -973,6 +973,7 @@ html {
 
 .pricing-card.featured {
   border-color: var(--primary-orange);
+  transform: scale(1.05);
   box-shadow: 0 20px 50px rgba(255, 107, 53, 0.15);
 }
 
@@ -980,18 +981,14 @@ html {
   content: 'MOST POPULAR';
   position: absolute;
   top: -15px;
-  left: 0;
-  right: 0;
-  margin-left: auto;
-  margin-right: auto;
-  width: fit-content;
+  left: 50%;
+  transform: translateX(-50%);
   background: var(--gradient-primary);
   color: white;
   padding: 0.5rem 1.5rem;
   border-radius: 20px;
   font-size: 0.8rem;
   font-weight: 700;
-  z-index: 1;
 }
 
 .pricing-card:hover {
@@ -1066,7 +1063,7 @@ html {
 
 .feature-detail p {
   font-size: 0.85rem;
-  color: var(--text-primary); /* Changed to text-primary for better contrast */
+  color: var(--text-secondary);
   line-height: 1.4;
   margin: 0;
 }
