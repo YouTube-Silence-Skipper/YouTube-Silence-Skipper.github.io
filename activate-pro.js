@@ -57,7 +57,18 @@ async function handleEmailSubmit(e) {
   const statusDiv = document.getElementById('status');
   const sendCodeBtn = document.getElementById('sendCodeBtn');
   const emailInput = document.getElementById('email');
-  
+
+  // Turnstile(봇 방지) 토큰 확인
+  const turnstileToken = (typeof turnstile !== 'undefined') ? turnstile.getResponse() : '';
+  if (!turnstileToken) {
+    statusDiv.className = 'status error';
+    statusDiv.innerHTML = `
+      <h3><i class="fas fa-exclamation-circle"></i> Verification Required</h3>
+      <p>Please complete the verification challenge above and try again.</p>
+    `;
+    return;
+  }
+
   // UI 업데이트 - 로딩 상태
   statusDiv.className = 'status loading';
   statusDiv.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Sending verification code...';
@@ -73,7 +84,7 @@ async function handleEmailSubmit(e) {
         'Authorization': `Bearer ${token}`,
         'Content-Type': 'application/json'
       },
-      body: JSON.stringify({ email })
+      body: JSON.stringify({ email, turnstileToken })
     });
     
     const data = await response.json();
@@ -124,6 +135,11 @@ async function handleEmailSubmit(e) {
         <p>A verification code was already sent to this email.</p>
         <p>Please wait 1 minute before requesting a new code.</p>
       `;
+    } else if (error.message.includes('TURNSTILE_FAILED')) {
+      errorMessage = `
+        <h3><i class="fas fa-shield-alt"></i> Verification Failed</h3>
+        <p>Bot verification failed. Please complete the challenge again.</p>
+      `;
     } else if (error.message.includes('fetch')) {
       errorMessage = `
         <h3><i class="fas fa-wifi"></i> Network Error</h3>
@@ -136,12 +152,17 @@ async function handleEmailSubmit(e) {
         <p>Please try again or contact support if the problem persists.</p>
       `;
     }
-    
+
     statusDiv.innerHTML = errorMessage;
-    
+
     // Re-enable form
     sendCodeBtn.disabled = false;
     emailInput.disabled = false;
+
+    // Turnstile 토큰은 1회용 → 재시도 위해 위젯 리셋
+    if (typeof turnstile !== 'undefined') {
+      turnstile.reset();
+    }
   }
 }
 
@@ -294,6 +315,11 @@ async function handleCodeSubmit(e) {
 function handleChangeEmail() {
   // 타이머 중지
   stopResendTimer();
+
+  // Turnstile 위젯 리셋 (새 토큰 준비)
+  if (typeof turnstile !== 'undefined') {
+    turnstile.reset();
+  }
   
   // Step 1 표시, Step 2 숨김
   document.getElementById('step1').classList.add('active');
