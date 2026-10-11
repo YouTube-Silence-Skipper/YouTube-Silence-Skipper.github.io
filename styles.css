@@ -470,6 +470,25 @@ html {
   transform: translateY(-2px);
 }
 
+.award-badge {
+  margin-top: 2rem;
+  display: flex;
+  justify-content: flex-start;
+  opacity: 0;
+  animation: fadeInUp 0.8s ease-out 0.2s forwards;
+}
+
+.award-badge img {
+  width: 180px;
+  transition: var(--transition);
+  filter: drop-shadow(0 4px 10px rgba(0,0,0,0.1));
+}
+
+.award-badge img:hover {
+  transform: scale(1.05);
+  filter: drop-shadow(0 6px 15px rgba(0,0,0,0.15));
+}
+
 .hero-visual {
   display: flex;
   justify-content: center;
@@ -507,6 +526,124 @@ html {
   width: 100%;
   height: 100%;
   border-radius: 15px;
+}
+
+/* Supported Browsers Section */
+.supported-browsers {
+  margin-top: 2rem;
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  flex-wrap: wrap;
+  opacity: 0;
+  animation: fadeInUp 0.8s ease-out 0.4s forwards;
+}
+
+.browsers-label {
+  font-size: 0.9rem;
+  font-weight: 400;
+  color: var(--text-muted);
+  white-space: nowrap;
+}
+
+.browser-logos {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.browser-logo {
+  height: 24px;
+  width: auto;
+  transition: var(--transition);
+  opacity: 1;
+}
+
+.browser-logo:hover {
+  transform: translateY(-2px);
+  filter: drop-shadow(0 2px 5px rgba(0,0,0,0.1));
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Tooltips for Browser Logos */
+.logo-wrapper {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+[data-tooltip]:hover::after {
+  content: attr(data-tooltip);
+  position: absolute;
+  bottom: 100%;
+  left: 50%;
+  transform: translateX(-50%) translateY(-8px);
+  background: rgba(45, 24, 16, 0.9);
+  color: white;
+  padding: 6px 12px;
+  border-radius: 6px;
+  font-size: 0.75rem;
+  font-weight: 500;
+  white-space: nowrap;
+  opacity: 0;
+  pointer-events: none;
+  animation: tooltipFadeIn 0.2s ease forwards;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+  z-index: 10;
+}
+
+/* Tooltip Arrow */
+[data-tooltip]:hover::before {
+  content: '';
+  position: absolute;
+  bottom: 100%;
+  left: 50%;
+  transform: translateX(-50%) translateY(-2px);
+  border-width: 6px;
+  border-style: solid;
+  border-color: rgba(45, 24, 16, 0.9) transparent transparent transparent;
+  opacity: 0;
+  animation: tooltipFadeIn 0.2s ease forwards;
+  z-index: 10;
+}
+
+@keyframes tooltipFadeIn {
+  from {
+    opacity: 0;
+    transform: translateX(-50%) translateY(0px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(-50%) translateY(-8px);
+  }
+}
+
+/* Adjust animation for arrow to match tooltip body */
+[data-tooltip]:hover::before {
+  animation: arrowFadeIn 0.2s ease forwards;
+}
+
+@keyframes arrowFadeIn {
+  from {
+    opacity: 0;
+    transform: translateX(-50%) translateY(4px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(-50%) translateY(-2px);
+  }
 }
 
 /* Main Logo Container */
@@ -836,7 +973,6 @@ html {
 
 .pricing-card.featured {
   border-color: var(--primary-orange);
-  transform: scale(1.05);
   box-shadow: 0 20px 50px rgba(255, 107, 53, 0.15);
 }
 
@@ -844,14 +980,18 @@ html {
   content: 'MOST POPULAR';
   position: absolute;
   top: -15px;
-  left: 50%;
-  transform: translateX(-50%);
+  left: 0;
+  right: 0;
+  margin-left: auto;
+  margin-right: auto;
+  width: fit-content;
   background: var(--gradient-primary);
   color: white;
   padding: 0.5rem 1.5rem;
   border-radius: 20px;
   font-size: 0.8rem;
   font-weight: 700;
+  z-index: 1;
 }
 
 .pricing-card:hover {
@@ -926,7 +1066,7 @@ html {
 
 .feature-detail p {
   font-size: 0.85rem;
-  color: var(--text-secondary);
+  color: var(--text-primary); /* Changed to text-primary for better contrast */
   line-height: 1.4;
   margin: 0;
 }
@@ -958,6 +1098,44 @@ html {
 .pricing-card.featured .plan-btn:hover {
   transform: translateY(-2px);
   box-shadow: 0 10px 25px rgba(255, 107, 53, 0.25);
+}
+
+.activation-notice {
+  text-align: center;
+  margin-top: 3rem;
+  padding: 1.5rem;
+  background: var(--bg-secondary);
+  border: 1px dashed var(--primary-orange);
+  border-radius: var(--radius-lg);
+  max-width: 800px;
+  margin-left: auto;
+  margin-right: auto;
+  position: relative;
+  z-index: 1;
+}
+
+.activation-notice p {
+  color: var(--text-secondary);
+  font-size: 1.1rem;
+  white-space: nowrap;
+}
+
+@media (max-width: 768px) {
+  .activation-notice p {
+    white-space: normal;
+  }
+}
+
+.activation-notice a {
+  color: var(--primary-orange);
+  font-weight: 700;
+  text-decoration: none;
+  transition: var(--transition);
+}
+
+.activation-notice a:hover {
+  color: var(--primary-dark);
+  text-decoration: underline;
 }
 
 /* How it works */
@@ -1262,6 +1440,19 @@ html {
   }
 
   .hero-buttons {
+    justify-content: center;
+  }
+
+  .award-badge {
+    justify-content: center;
+  }
+
+  .supported-browsers {
+    justify-content: center;
+    text-align: center;
+  }
+
+  .browser-logos {
     justify-content: center;
   }
 

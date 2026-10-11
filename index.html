@@ -4,8 +4,8 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>YouTube Silence Skipper - Skip Silent Moments in YouTube Videos</title>
-  <meta name="description" content="A Chrome extension that automatically skips silent periods in YouTube videos for a smoother viewing experience.">
-  <meta name="keywords" content="YouTube, silence skipper, Chrome extension, video, skip silence, productivity, YouTube tools, browser extension">
+  <meta name="description" content="A browser extension that automatically skips silent periods in YouTube videos for a smoother viewing experience.">
+  <meta name="keywords" content="YouTube, silence skipper, browser extension, video, skip silence, productivity, YouTube tools, Chrome extension">
   <meta name="author" content="YouTube Silence Skipper">
   <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1">
   <meta name="theme-color" content="#ffffff">
@@ -16,7 +16,7 @@
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://youtube-silenceskipper.com/">
   <meta property="og:title" content="YouTube Silence Skipper - Skip Silent Moments in YouTube Videos">
-  <meta property="og:description" content="A Chrome extension that automatically skips silent periods in YouTube videos for a smoother viewing experience. Save time and enhance your YouTube experience.">
+  <meta property="og:description" content="A browser extension that automatically skips silent periods in YouTube videos for a smoother viewing experience. Save time and enhance your YouTube experience.">
   <meta property="og:image" content="https://youtube-silenceskipper.com/images/social_title_image.png">
   <meta property="og:image:width" content="1200">
   <meta property="og:image:height" content="630">
@@ -27,7 +27,7 @@
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:url" content="https://youtube-silenceskipper.com/">
   <meta name="twitter:title" content="YouTube Silence Skipper - Skip Silent Moments in YouTube Videos">
-  <meta name="twitter:description" content="A Chrome extension that automatically skips silent periods in YouTube videos for a smoother viewing experience. Save time and enhance your YouTube experience.">
+  <meta name="twitter:description" content="A browser extension that automatically skips silent periods in YouTube videos for a smoother viewing experience. Save time and enhance your YouTube experience.">
   <meta name="twitter:image" content="https://youtube-silenceskipper.com/images/social_title_image.png">
   
   <!-- Favicons -->
@@ -54,8 +54,125 @@
   </script>
 
   <link rel="stylesheet" href="styles.css">
+  <style>
+    /* Christmas Snowfall Animation */
+    .snow {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        pointer-events: none;
+        z-index: 9999;
+    }
+
+    .snow .flake {
+        position: absolute;
+        top: -10%;
+        color: #fff;
+        font-size: 1em;
+        font-family: Arial, sans-serif;
+        text-shadow: 0 0 5px #fff, 0 0 10px #fff, 0 0 15px #fff;
+        animation: fall linear infinite;
+    }
+
+    @keyframes fall {
+        to {
+            transform: translateY(105vh);
+        }
+    }
+
+    /* Bolder Christmas Pricing Card */
+    .christmas-special {
+        background: linear-gradient(145deg, #c82333, #a01c28);
+        border: 3px solid #f8d7da;
+        color: white;
+        box-shadow: 0 0 30px rgba(255, 215, 0, 0.7);
+        position: relative;
+        overflow: visible; /* To allow pseudo-elements to be visible */
+    }
+
+    .christmas-special::before,
+    .christmas-special::after {
+        position: absolute;
+        font-size: 1.5rem;
+    }
+
+    .christmas-special::before {
+        top: 10px;
+        left: 10px;
+    }
+
+    .christmas-special::after {
+        bottom: 10px;
+        right: 10px;
+    }
+
+    .christmas-badge {
+        font-family: 'Mountains of Christmas', cursive; /* A festive font */
+        font-size: 1.8rem;
+        color: #ffd700;
+        text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
+    }
+    
+    .christmas-special .plan-name {
+        color: white;
+    }
+
+    .original-price {
+        text-decoration: line-through;
+        color: #f8d7da;
+        font-size: 1.2rem;
+        margin-right: 10px;
+    }
+    
+    .christmas-special .plan-price {
+        color: #ffd700;
+        font-weight: 700;
+    }
+    
+    .christmas-special .plan-description {
+        color: #f8d7da;
+    }
+    
+    .christmas-special .feature-detail strong {
+        color: white;
+    }
+
+    .christmas-special .plan-pro-btn {
+        background: linear-gradient(45deg, #ffd700, #ffc107);
+        color: #333;
+        font-weight: bold;
+        animation: pulse-gold 1.5s infinite;
+        border: none;
+    }
+
+    @keyframes pulse-gold {
+      0% { box-shadow: 0 0 10px rgba(255, 215, 0, 0.4); }
+      50% { box-shadow: 0 0 25px rgba(255, 215, 0, 0.8); }
+      100% { box-shadow: 0 0 10px rgba(255, 215, 0, 0.4); }
+    }
+  </style>
+  <link href="https://fonts.googleapis.com/css2?family=Mountains+of+Christmas:wght@700&display=swap" rel="stylesheet">
+  <link rel="canonical" href="https://youtube-silenceskipper.com">
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": "YouTube Silence Skipper",
+    "operatingSystem": "Browser",
+    "applicationCategory": "BrowserApplication",
+    "offers": {
+      "@type": "Offer",
+      "price": "0",
+      "priceCurrency": "USD"
+    },
+    "description": "Automatically skip silent moments in YouTube videos and save time."
+  }
+  </script>
 </head>
 <body>
+  <div class="snow"></div>
   <!-- Navigation -->
   <nav class="navbar">
     <div class="nav-container">
@@ -70,7 +187,7 @@
         <li><a href="#faq">FAQ</a></li>
       </ul>
       <a href="#pricing" class="cta-btn">
-        <i class="fab fa-chrome"></i>
+        <i class="fas fa-download"></i>
         Get Extension
       </a>
       <button class="mobile-menu-toggle">
@@ -99,15 +216,60 @@
         </div>
         <h1>Skip Silence</h1>
         <h2 class="hero-subtitle">Save Time, Enjoy More</h2>
-        <p>Never wait through awkward pauses again. Our Chrome extension automatically jumps over silent moments in YouTube videos, letting you watch more content in less time.</p>
+        <p>Never wait through awkward pauses again. Our browser extension automatically jumps over silent moments in YouTube videos, letting you watch more content in less time.</p>
         <div class="hero-buttons">
           <a href="#pricing" class="btn-primary">
-            <i class="fab fa-chrome"></i>
-            Add to Chrome Free
+            <i class="fas fa-download"></i>
+            Add to Browser Free
           </a>
           <a href="#features" class="btn-secondary">
             Learn More
           </a>
+        </div>
+        <div class="award-badge">
+          <a href="https://www.uneed.best/tool/youtube-silence-skipper" target="_blank" rel="noopener">
+            <img src="https://www.uneed.best/POTD2.png" alt="Uneed POTD2 Badge" />
+          </a>
+        </div>
+        <div class="supported-browsers">
+          <span class="browsers-label">Available on</span>
+                    <div class="browser-logos">
+                      <!-- Chrome -->
+                      <a href="https://chromewebstore.google.com/detail/youtube-silence-skipper/ijlnjklmlhhfodgfpidpnccipnodohgl" target="_blank" rel="noopener" class="logo-wrapper" data-tooltip="Google Chrome">
+                        <img src="images/support/chrome-logo.svg" alt="Google Chrome" class="browser-logo" width="24" height="24">
+                      </a>
+                      
+                      <!-- Edge -->
+                      <a href="https://microsoftedge.microsoft.com/addons/detail/youtube-silence-skipper/mapnepjdljlbflbbejcioffofefdcdbl" target="_blank" rel="noopener" class="logo-wrapper" data-tooltip="Microsoft Edge">
+                        <img src="images/support/edge-logo.svg" alt="Microsoft Edge" class="browser-logo" width="24" height="24">
+                      </a>
+                      
+                      <!-- Firefox -->
+                      
+                      <a href="https://addons.mozilla.org/ko/firefox/addon/youtube-silence-skipper" target="_blank" rel="noopener" class="logo-wrapper" data-tooltip="Firefox">
+                        <img src="images/support/firefox-logo.svg" alt="Firefox" class="browser-logo" width="24" height="24">
+                      </a>
+                      
+                      <!-- Opera -->
+                      <a href="https://chromewebstore.google.com/detail/youtube-silence-skipper/ijlnjklmlhhfodgfpidpnccipnodohgl" target="_blank" rel="noopener" class="logo-wrapper" data-tooltip="Opera">
+                        <img src="images/support/opera-logo.svg" alt="Opera" class="browser-logo" width="24" height="24">
+                      </a>
+                      
+                      <!-- Whale -->
+                      <a href="https://store.whale.naver.com/detail/epkmhiejgnefgegggoneipgmlnbbgdji" target="_blank" rel="noopener" class="logo-wrapper" data-tooltip="Naver Whale">
+                        <img src="images/support/whale-logo.svg" alt="Naver Whale" class="browser-logo" width="24" height="24">
+                      </a>
+                      
+                      <!-- Brave -->
+                      <a href="https://chromewebstore.google.com/detail/youtube-silence-skipper/ijlnjklmlhhfodgfpidpnccipnodohgl" target="_blank" rel="noopener" class="logo-wrapper" data-tooltip="Brave Browser">
+                        <img src="images/support/brave-logo.svg" alt="Brave Browser" class="browser-logo" width="24" height="24">
+                      </a>
+                      
+                      <!-- DuckDuckGo -->
+                      <a href="https://chromewebstore.google.com/detail/youtube-silence-skipper/ijlnjklmlhhfodgfpidpnccipnodohgl" target="_blank" rel="noopener" class="logo-wrapper" data-tooltip="DuckDuckGo">
+                        <img src="images/support/duckduckgo-logo.svg" alt="DuckDuckGo" class="browser-logo" width="24" height="24">
+                      </a>
+                    </div>
         </div>
       </div>
       <div class="hero-visual">
@@ -204,9 +366,12 @@
           <a href="https://chromewebstore.google.com/detail/youtube-silence-skipper/ijlnjklmlhhfodgfpidpnccipnodohgl" class="plan-btn">Get Started Free</a>
         </div>
         
-        <div class="pricing-card featured">
-          <div class="plan-name">Pro</div>
-          <div class="plan-price">$1.99<span>/month</span></div>
+        <div class="pricing-card featured christmas-special">
+          <div class="christmas-badge">🎄 Christmas Sale! 🎄</div>
+          <div class="plan-name"><i class="fas fa-gift"></i> Pro</div>
+          <div class="plan-price">
+            <span class="original-price">$1.99</span> $1<span>/month</span>
+          </div>
           <div class="plan-description">Unlock the full potential & save more time</div>
           <ul class="plan-features">
             <li><i class="fas fa-check check"></i> Everything in Free Plan</li>
@@ -241,6 +406,9 @@
           </ul>
           <a href="#" class="plan-btn plan-pro-btn">Start 14-Day Free Trial</a>
         </div>
+      </div>
+      <div class="activation-notice">
+        <p>Already purchased Pro? <a href="activate-pro.html">Activate your license here</a> to unlock all features.</p>
       </div>
     </div>
   </section>
@@ -347,7 +515,7 @@
             <span>YouTube Silence Skipper</span>
           </div>
           <p class="footer-description">
-            The intelligent Chrome extension that automatically skips silent moments in YouTube videos, 
+            The intelligent browser extension that automatically skips silent moments in YouTube videos, 
             saving you time and enhancing your viewing experience.
           </p>
         </div>
@@ -363,8 +531,9 @@
         <div class="footer-links">
           <h4>Resources</h4>
           <ul>
-            <li><a href="https://chromewebstore.google.com/detail/youtube-silence-skipper/ijlnjklmlhhfodgfpidpnccipnodohgl">Chrome Store</a></li>
+            <li><a href="https://chromewebstore.google.com/detail/youtube-silence-skipper/ijlnjklmlhhfodgfpidpnccipnodohgl">Web Store</a></li>
             <li><a href="https://github.com/YouTube-Silence-Skipper/YouTube-Silence-Skipper.github.io/issues">Report Issues</a></li>
+            <li><a href="activate-pro.html">Activate Pro</a></li>
             <li><a href="https://customer-portal.paddle.com/login/cpl_01k15nzfq6h90nq755aywz56cv">Manage Subscription</a></li>
             <li><a href="terms-and-conditions.html">Terms and Conditions</a></li>
             <li><a href="privacy-policy.html">Privacy Policy</a></li>
@@ -372,12 +541,30 @@
         </div>
       </div>
       <div class="footer-bottom">
-        <p>&copy; 2025 YouTube Silence Skipper. All rights reserved.</p>
+        <p>&copy; 2026 YouTube Silence Skipper. All rights reserved.</p>
         <p>Made with 💙 for smarter YouTube viewing</p>
       </div>
     </div>
   </footer>
 
+  <script src="browser-links.js"></script>
   <script src="script.js"></script>
+  <script>
+    // Snowfall effect
+    const snowContainer = document.querySelector('.snow');
+    if (snowContainer) {
+        for (let i = 0; i < 50; i++) {
+            const flake = document.createElement('div');
+            flake.className = 'flake';
+            flake.textContent = '❄️';
+            flake.style.left = Math.random() * 100 + 'vw';
+            flake.style.animationDuration = Math.random() * 3 + 2 + 's'; // 2-5 seconds
+            flake.style.animationDelay = Math.random() * 2 + 's';
+            flake.style.opacity = Math.random();
+            flake.style.fontSize = Math.random() * 1.5 + 0.5 + 'em';
+            snowContainer.appendChild(flake);
+        }
+    }
+  </script>
 </body>
 </html>
