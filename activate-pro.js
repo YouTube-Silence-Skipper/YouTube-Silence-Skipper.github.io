@@ -35,8 +35,8 @@ function setupEventListeners() {
   // Step 2: 코드 검증
   document.getElementById('codeForm').addEventListener('submit', handleCodeSubmit);
   
-  // 재발송 버튼
-  document.getElementById('resendBtn').addEventListener('click', handleResend);
+  // 재발송 버튼: 초기 화면(Step 1)으로 돌아가 코드를 다시 요청
+  document.getElementById('resendBtn').addEventListener('click', handleChangeEmail);
   
   // 이메일 변경 버튼
   document.getElementById('changeEmailBtn').addEventListener('click', handleChangeEmail);
@@ -289,87 +289,7 @@ async function handleCodeSubmit(e) {
 }
 
 /**
- * 재발송 버튼 처리
- */
-async function handleResend() {
-  const resendBtn = document.getElementById('resendBtn');
-  const statusDiv = document.getElementById('status');
-  
-  // 버튼 비활성화
-  resendBtn.disabled = true;
-  
-  statusDiv.className = 'status loading';
-  statusDiv.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Resending code...';
-  
-  try {
-    const response = await fetch(`${API_BASE_URL}/api/v4/request-verification-code`, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({ email: currentEmail })
-    });
-    
-    const data = await response.json();
-    
-    if (!response.ok) {
-      throw new Error(data.error || 'Failed to resend code');
-    }
-    
-    // 타이머 재시작
-    startResendTimer();
-    
-    // 성공 메시지
-    statusDiv.className = 'status success';
-    statusDiv.innerHTML = `
-      <h3><i class="fas fa-check-circle"></i> Code Resent</h3>
-      <p>A new verification code has been sent to your email.</p>
-    `;
-    
-    // 3초 후 메시지 제거
-    setTimeout(() => {
-      statusDiv.className = 'status';
-      statusDiv.innerHTML = '';
-    }, 3000);
-    
-    // 코드 입력 필드 초기화 및 포커스
-    document.getElementById('code').value = '';
-    document.getElementById('code').focus();
-    
-  } catch (error) {
-    console.error('[YSS Activate] Resend Error:', error.message);
-    
-    statusDiv.className = 'status error';
-    
-    let errorMessage = '';
-    if (error.message.includes('CODE_ALREADY_SENT')) {
-      errorMessage = `
-        <h3><i class="fas fa-info-circle"></i> Please Wait</h3>
-        <p>A code was already sent recently. Please wait 1 minute before requesting a new code.</p>
-      `;
-    } else if (error.message.includes('EMAIL_BLOCKED')) {
-      errorMessage = `
-        <h3><i class="fas fa-clock"></i> Temporarily Blocked</h3>
-        <p>Too many attempts. Please try again in 10 minutes.</p>
-      `;
-    } else {
-      errorMessage = `
-        <h3><i class="fas fa-times-circle"></i> Failed to Resend</h3>
-        <p>${error.message}</p>
-      `;
-    }
-    
-    statusDiv.innerHTML = errorMessage;
-    
-    // 에러가 아닌 경우만 재발송 버튼 다시 활성화
-    if (!error.message.includes('EMAIL_BLOCKED')) {
-      resendBtn.disabled = false;
-    }
-  }
-}
-
-/**
- * 이메일 변경 버튼 처리 (Step 1으로 돌아가기)
+ * 이메일 변경 / 재발송 버튼 처리 (Step 1으로 돌아가기)
  */
 function handleChangeEmail() {
   // 타이머 중지
