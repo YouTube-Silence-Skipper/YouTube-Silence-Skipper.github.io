@@ -1,0 +1,73 @@
+/* Halloween seasonal theme — loaded only when built with THEME=halloween.
+   Keeps all base styles (styles.css) and overlays a spooky skin + floating bats.
+   Visual-only: no base layout/content changes and no price change. */
+
+/* Bats flying across the night sky — rising from the lower-left toward the
+   top-right with a flapping sway, not a straight top-to-bottom fall.
+   The shared generator (theme-body.njk) sets each bat's starting `left`
+   (biased to the left via theme.fall.spread) + animation timing; this
+   keyframe carries it up-and-right while swaying its wings. */
+.bats {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 9999;
+}
+.bats .bat {
+  position: absolute;
+  bottom: -10%;            /* start just below the viewport */
+  animation: bat-fly linear infinite;
+  will-change: transform;
+}
+@keyframes bat-fly {
+  /* scale(-1, …) mirrors the glyph so it faces its travel direction;
+     the shallow rise (+85vw / -52vh) keeps it gliding across, not climbing. */
+  0%   { transform: translate(0,     0)    scale(-1, 1)       rotate(6deg);  }
+  25%  { transform: translate(21vw, -13vh) scale(-1.08, 1.08) rotate(-6deg); }
+  50%  { transform: translate(43vw, -26vh) scale(-1, 1)       rotate(6deg);  }
+  75%  { transform: translate(64vw, -39vh) scale(-1.08, 1.08) rotate(-6deg); }
+  100% { transform: translate(85vw, -52vh) scale(-1, 1)       rotate(6deg);  }
+}
+
+/* Spooky Pro pricing card */
+.halloween-special {
+  background: linear-gradient(160deg, #2a0e3f, #160522);
+  border: 3px solid #ff7518;
+  color: #ffffff;
+  box-shadow: 0 0 30px rgba(255, 117, 24, 0.5);
+}
+
+.halloween-badge {
+  font-family: 'Creepster', cursive;
+  font-size: 1.9rem;
+  letter-spacing: 1px;
+  color: #ff7518;
+  text-shadow: 0 0 10px rgba(255, 117, 24, 0.6);
+}
+
+.halloween-special .plan-name { color: #ffffff; }
+.halloween-special .plan-price { color: #ff7518; font-weight: 700; }
+.halloween-special .plan-price span { color: #e4d2f2; }
+.halloween-special .plan-description { color: #e4d2f2; }
+.halloween-special .plan-features li { color: #f0e6f7; }
+.halloween-special .feature-detail strong { color: #ffffff; }
+.halloween-special .feature-detail p { color: #c9b3dd; }
+
+/* Higher specificity than base `.pricing-card.featured .plan-btn` so the pumpkin
+   CTA reliably wins the cascade. */
+.pricing-card.featured.halloween-special .plan-pro-btn {
+  background: linear-gradient(45deg, #ff7518, #ff9a3c);
+  color: #160522;
+  font-weight: 800;
+  border: none;
+  animation: pulse-orange-hw 1.5s infinite;
+}
+
+@keyframes pulse-orange-hw {
+  0%   { box-shadow: 0 0 10px rgba(255, 117, 24, 0.4); }
+  50%  { box-shadow: 0 0 26px rgba(255, 117, 24, 0.85); }
+  100% { box-shadow: 0 0 10px rgba(255, 117, 24, 0.4); }
+}

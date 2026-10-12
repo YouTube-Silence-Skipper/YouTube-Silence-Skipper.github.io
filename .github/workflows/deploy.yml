@@ -8,7 +8,7 @@ on:
       theme:
         description: "Site theme to build and deploy"
         type: choice
-        options: [default, christmas]
+        options: [default, christmas, black-friday, halloween]
         default: default
 
 permissions:

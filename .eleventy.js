@@ -3,6 +3,8 @@ module.exports = function (eleventyConfig) {
   const passthrough = [
     "src/styles.css",
     "src/christmas.css",
+    "src/black-friday.css",
+    "src/halloween.css",
     "src/script.js",
     "src/activate-pro.js",
     "src/browser-links.js",

@@ -1,21 +1,23 @@
-{%- if theme.isChristmas %}
-  <div class="snow"></div>
+{%- if not theme.isDefault %}
   <script>window.YSS_PRICE_ID = '{{ theme.priceId }}';</script>
+{%- if theme.fall %}
+  <div class="{{ theme.fall.container }}"></div>
   <script>
     (function () {
-      var snow = document.querySelector('.snow');
-      if (!snow) return;
-      for (var i = 0; i < 50; i++) {
+      var layer = document.querySelector('.{{ theme.fall.container }}');
+      if (!layer) return;
+      for (var i = 0; i < {{ theme.fall.count }}; i++) {
         var f = document.createElement('div');
-        f.className = 'flake';
-        f.textContent = '❄️';
-        f.style.left = (Math.random() * 100) + 'vw';
+        f.className = '{{ theme.fall.item }}';
+        f.textContent = '{{ theme.fall.glyph }}';
+        f.style.left = (Math.random() * {{ theme.fall.spread or 100 }}) + 'vw';
         f.style.animationDuration = (Math.random() * 3 + 2) + 's';
         f.style.animationDelay = (Math.random() * 2) + 's';
         f.style.opacity = Math.random();
         f.style.fontSize = (Math.random() * 1.5 + 0.5) + 'em';
-        snow.appendChild(f);
+        layer.appendChild(f);
       }
     })();
   </script>
+{%- endif %}
 {%- endif %}

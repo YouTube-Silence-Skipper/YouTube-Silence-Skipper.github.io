@@ -1,4 +1,6 @@
-{%- if theme.isChristmas %}
-  <link href="https://fonts.googleapis.com/css2?family=Mountains+of+Christmas:wght@700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="christmas.css">
+{%- if theme.css %}
+{%- if theme.fontUrl %}
+  <link href="{{ theme.fontUrl }}" rel="stylesheet">
+{%- endif %}
+  <link rel="stylesheet" href="{{ theme.css }}">
 {%- endif %}
