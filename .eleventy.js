@@ -2,6 +2,7 @@ module.exports = function (eleventyConfig) {
   // Static assets are copied through byte-for-byte (no transformation).
   const passthrough = [
     "src/styles.css",
+    "src/christmas.css",
     "src/script.js",
     "src/activate-pro.js",
     "src/browser-links.js",

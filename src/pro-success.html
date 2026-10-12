@@ -91,6 +91,7 @@ showActivatePro: false
       .ps-stepper::before { display: none; }
     }
   </style>
+  {% include "partials/theme-head.njk" %}
 </head>
 <body>
   <!-- Navigation -->
@@ -99,7 +100,7 @@ showActivatePro: false
   <main class="ps-main">
     <section class="ps-hero">
       <span class="ps-badge"><i class="fas fa-circle-check"></i> Payment Successful</span>
-      <div><img src="images/logo.png" alt="YouTube Silence Skipper Pro" class="ps-logo"></div>
+      <div><img src="{{ theme.logo }}" alt="YouTube Silence Skipper Pro" class="ps-logo"></div>
       <h1 class="ps-title">Welcome to Pro! 🎉</h1>
       <p class="ps-subtitle">Thank you for upgrading! Just one quick step left to activate Pro in your browser.</p>
       <a href="activate-pro.html" class="ps-cta"><i class="fas fa-rocket"></i> Activate Pro Now</a>
@@ -136,5 +137,6 @@ showActivatePro: false
   {% include "partials/footer.njk" %}
 
   <script src="script.js"></script>
+  {% include "partials/theme-body.njk" %}
 </body>
 </html>

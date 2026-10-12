@@ -4,6 +4,12 @@ on:
   push:
     branches: [main]
   workflow_dispatch:
+    inputs:
+      theme:
+        description: "Site theme to build and deploy"
+        type: choice
+        options: [default, christmas]
+        default: default
 
 permissions:
   contents: read
@@ -23,7 +29,11 @@ jobs:
         with:
           node-version: "22"
       - run: npm ci
-      - run: npm run build
+      - name: Build site
+        run: npm run build
+        env:
+          # push events build the default theme; a manual run can pick a season.
+          THEME: ${{ github.event.inputs.theme || 'default' }}
       - uses: actions/configure-pages@v5
       - uses: actions/upload-pages-artifact@v3
         with:

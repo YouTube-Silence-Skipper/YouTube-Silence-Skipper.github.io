@@ -1,0 +1,21 @@
+{%- if theme.isChristmas %}
+  <div class="snow"></div>
+  <script>window.YSS_PRICE_ID = '{{ theme.priceId }}';</script>
+  <script>
+    (function () {
+      var snow = document.querySelector('.snow');
+      if (!snow) return;
+      for (var i = 0; i < 50; i++) {
+        var f = document.createElement('div');
+        f.className = 'flake';
+        f.textContent = '❄️';
+        f.style.left = (Math.random() * 100) + 'vw';
+        f.style.animationDuration = (Math.random() * 3 + 2) + 's';
+        f.style.animationDelay = (Math.random() * 2) + 's';
+        f.style.opacity = Math.random();
+        f.style.fontSize = (Math.random() * 1.5 + 0.5) + 'em';
+        snow.appendChild(f);
+      }
+    })();
+  </script>
+{%- endif %}

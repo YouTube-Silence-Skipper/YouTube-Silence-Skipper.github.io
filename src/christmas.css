@@ -1,0 +1,71 @@
+/* Christmas seasonal theme — loaded only when built with THEME=christmas.
+   Keeps all base styles (styles.css) and overlays festive bits + the sale card. */
+
+/* Snowfall */
+.snow {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 9999;
+}
+.snow .flake {
+  position: absolute;
+  top: -10%;
+  color: #fff;
+  font-size: 1em;
+  font-family: Arial, sans-serif;
+  text-shadow: 0 0 5px #fff, 0 0 10px #fff, 0 0 15px #fff;
+  animation: fall linear infinite;
+}
+@keyframes fall {
+  to { transform: translateY(105vh); }
+}
+
+/* Festive Pro pricing card */
+.christmas-special {
+  background: linear-gradient(145deg, #c82333, #a01c28);
+  border: 3px solid #f8d7da;
+  color: white;
+  box-shadow: 0 0 30px rgba(255, 215, 0, 0.7);
+  position: relative;
+  overflow: visible;
+}
+.christmas-special::before,
+.christmas-special::after {
+  position: absolute;
+  font-size: 1.5rem;
+}
+.christmas-special::before { top: 10px; left: 10px; }
+.christmas-special::after { bottom: 10px; right: 10px; }
+
+.christmas-badge {
+  font-family: 'Mountains of Christmas', cursive;
+  font-size: 1.8rem;
+  color: #ffd700;
+  text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
+}
+.christmas-special .plan-name { color: white; }
+.original-price {
+  text-decoration: line-through;
+  color: #f8d7da;
+  font-size: 1.2rem;
+  margin-right: 10px;
+}
+.christmas-special .plan-price { color: #ffd700; font-weight: 700; }
+.christmas-special .plan-description { color: #f8d7da; }
+.christmas-special .feature-detail strong { color: white; }
+.christmas-special .plan-pro-btn {
+  background: linear-gradient(45deg, #ffd700, #ffc107);
+  color: #333;
+  font-weight: bold;
+  animation: pulse-gold 1.5s infinite;
+  border: none;
+}
+@keyframes pulse-gold {
+  0% { box-shadow: 0 0 10px rgba(255, 215, 0, 0.4); }
+  50% { box-shadow: 0 0 25px rgba(255, 215, 0, 0.8); }
+  100% { box-shadow: 0 0 10px rgba(255, 215, 0, 0.4); }
+}

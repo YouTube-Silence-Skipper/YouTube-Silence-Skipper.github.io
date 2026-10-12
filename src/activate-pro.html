@@ -563,6 +563,7 @@
   </style>
   <!-- Cloudflare Turnstile (bot protection for code requests) -->
   <script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
+  {% include "partials/theme-head.njk" %}
 </head>
 <body>
   <!-- Header -->
@@ -684,5 +685,6 @@
   </footer>
   
   <script src="activate-pro.js"></script>
+  {% include "partials/theme-body.njk" %}
 </body>
 </html>

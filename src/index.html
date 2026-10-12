@@ -75,6 +75,7 @@ showActivatePro: true
     "description": "Automatically skip silent moments in YouTube videos and save time."
   }
   </script>
+  {% include "partials/theme-head.njk" %}
 </head>
 <body>
   <!-- Navigation -->
@@ -250,9 +251,12 @@ showActivatePro: true
           <a href="{{ site.webStoreUrl }}" class="plan-btn">Get Started Free</a>
         </div>
         
-        <div class="pricing-card featured">
-          <div class="plan-name">Pro</div>
-          <div class="plan-price">$1.99<span>/month</span></div>
+        <div class="pricing-card featured{% if theme.isChristmas %} christmas-special{% endif %}">
+          {%- if theme.isChristmas %}
+          <div class="christmas-badge">🎄 Christmas Sale! 🎄</div>
+          {%- endif %}
+          <div class="plan-name">{% if theme.isChristmas %}<i class="fas fa-gift"></i> {% endif %}Pro</div>
+          <div class="plan-price">{% if theme.isChristmas %}<span class="original-price">$1.99</span> $1{% else %}$1.99{% endif %}<span>/month</span></div>
           <div class="plan-description">Unlock the full potential & save more time</div>
           <ul class="plan-features">
             <li><i class="fas fa-check check"></i> Everything in Free Plan</li>
@@ -391,5 +395,6 @@ showActivatePro: true
 
   <script src="browser-links.js"></script>
   <script src="script.js"></script>
+  {% include "partials/theme-body.njk" %}
 </body>
 </html>
