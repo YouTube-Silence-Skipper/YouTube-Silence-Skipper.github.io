@@ -15,12 +15,27 @@ function generateAuthToken() {
 }
 
 // URL 파라미터에서 이메일 자동 입력 (Paddle에서 리디렉션 시)
-document.addEventListener('DOMContentLoaded', () => {
-  const urlParams = new URLSearchParams(window.location.search);
-  if (urlParams.has('email')) {
-    document.getElementById('email').value = decodeURIComponent(urlParams.get('email'));
+// 주의: URLSearchParams는 '+'를 공백으로 디코딩해 plus-aliasing(user+tag@…) 이메일을 손상시키고,
+//       .get() 결과에 decodeURIComponent를 또 걸면 '이중 디코딩'이 된다.
+//       → 원본 쿼리에서 직접 추출 후 정확히 1회만 decode 한다(decodeURIComponent는 '+'를 보존).
+function getEmailParamFromQuery() {
+  const match = window.location.search.match(/[?&]email=([^&]*)/);
+  if (!match) {
+    return null;
   }
-  
+  try {
+    return decodeURIComponent(match[1]);
+  } catch (_) {
+    return match[1]; // 깨진 %시퀀스 등 decode 실패 시 원문 사용(프리필 중단 방지)
+  }
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+  const prefillEmail = getEmailParamFromQuery();
+  if (prefillEmail) {
+    document.getElementById('email').value = prefillEmail;
+  }
+
   // 이벤트 리스너 등록
   setupEventListeners();
 });
@@ -53,7 +68,7 @@ function setupEventListeners() {
 async function handleEmailSubmit(e) {
   e.preventDefault();
   
-  const email = document.getElementById('email').value.trim();
+  const email = document.getElementById('email').value.trim().toLowerCase(); // RISK-01: 백엔드 정규화와 일치(소문자+trim). '+'는 보존됨
   const statusDiv = document.getElementById('status');
   const sendCodeBtn = document.getElementById('sendCodeBtn');
   const emailInput = document.getElementById('email');
