@@ -255,17 +255,7 @@
 </head>
 <body>
   <!-- Header -->
-  <header class="activate-header">
-    <div class="activate-header-content">
-      <a href="index.html" class="activate-logo">
-        <img src="images/logo.png" alt="YouTube Silence Skipper Logo">
-        <span>YouTube Silence Skipper</span>
-      </a>
-      <a href="index.html" class="activate-header-link">
-        <i class="fas fa-arrow-left"></i> Back to Home
-      </a>
-    </div>
-  </header>
+  {% include "partials/activate-header.njk" %}
 
   <!-- Main Content -->
   <div class="activate-pro-container">
@@ -287,7 +277,7 @@
         </a>
 
         <!-- Customer Portal -->
-        <a href="https://customer-portal.paddle.com/login/cpl_01k15nzfq6h90nq755aywz56cv" target="_blank" rel="noopener" class="manage-card">
+        <a href="{{ site.paddlePortalUrl }}" target="_blank" rel="noopener" class="manage-card">
           <div class="manage-card-icon"><i class="fas fa-gear"></i></div>
           <div class="manage-card-body">
             <h2>Customer Portal</h2>
@@ -297,7 +287,7 @@
         </a>
 
         <!-- Billing Support -->
-        <a href="https://paddle.net/" target="_blank" rel="noopener" class="manage-card">
+        <a href="{{ site.paddleSupportUrl }}" target="_blank" rel="noopener" class="manage-card">
           <div class="manage-card-icon"><i class="fas fa-headset"></i></div>
           <div class="manage-card-body">
             <h2>Billing Support</h2>

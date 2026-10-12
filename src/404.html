@@ -1,3 +1,8 @@
+---
+navVariant: subpage
+quickBase: "index.html"
+showActivatePro: false
+---
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -225,20 +230,7 @@
 </head>
 <body>
     <!-- Navigation -->
-    <nav class="navbar">
-        <div class="nav-container">
-            <a href="index.html" class="logo">
-                <img src="images/logo.png" alt="YouTube Silence Skipper Logo">
-                <span>YouTube Silence Skipper</span>
-            </a>
-            <ul class="nav-menu">
-                <li><a href="index.html">Home</a></li>
-                <li><a href="index.html#features">Features</a></li>
-                <li><a href="index.html#how-it-works">How It Works</a></li>
-                <li><a href="index.html#faq">FAQ</a></li>
-            </ul>
-        </div>
-    </nav>
+  {% include "partials/navbar.njk" %}
 
     <div class="error-container">
         <img src="./images/logo.png" alt="YouTube Silence Skipper Logo" class="error-logo">
@@ -252,44 +244,7 @@
     </div>
     
     <!-- Footer -->
-    <footer class="footer">
-        <div class="container">
-            <div class="footer-content">
-                <div>
-                              <div class="footer-brand">
-                                <img src="images/logo.png" alt="YouTube Silence Skipper">
-                                <span>YouTube Silence Skipper</span>
-                              </div>
-                              <p class="footer-description">
-                                The intelligent browser extension that automatically skips silent moments in YouTube videos, 
-                                saving you time and enhancing your viewing experience.
-                              </p>
-                            </div>
-                            <div class="footer-links">
-                              <h4>Quick Links</h4>
-                              <ul>
-                                <li><a href="index.html#features">Features</a></li>
-                                <li><a href="index.html#pricing">Pricing</a></li>
-                                <li><a href="index.html#how-it-works">How It Works</a></li>
-                                <li><a href="index.html#faq">FAQ</a></li>
-                              </ul>
-                            </div>
-                            <div class="footer-links">
-                              <h4>Resources</h4>
-                              <ul>
-                                <li><a href="https://chromewebstore.google.com/detail/youtube-silence-skipper/ijlnjklmlhhfodgfpidpnccipnodohgl">Web Store</a></li>                        <li><a href="https://github.com/YouTube-Silence-Skipper/YouTube-Silence-Skipper.github.io/issues">Report Issues</a></li>
-                        <li><a href="manage-subscription.html">Manage Subscription</a></li>
-                        <li><a href="terms-and-conditions.html">Terms and Conditions</a></li>
-                        <li><a href="privacy-policy.html">Privacy Policy</a></li>
-                    </ul>
-                </div>
-            </div>
-            <div class="footer-bottom">
-                <p>&copy; 2026 YouTube Silence Skipper. All rights reserved.</p>
-                <p>Made with 💙 for smarter YouTube viewing</p>
-            </div>
-        </div>
-    </footer>
+  {% include "partials/footer.njk" %}
 
     <script src="script.js"></script>
     <script>

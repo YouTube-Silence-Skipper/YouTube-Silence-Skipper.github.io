@@ -1,3 +1,8 @@
+---
+navVariant: home
+quickBase: ""
+showActivatePro: true
+---
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -73,27 +78,7 @@
 </head>
 <body>
   <!-- Navigation -->
-  <nav class="navbar">
-    <div class="nav-container">
-      <a href="#" class="logo">
-        <img src="images/logo.png" alt="YouTube Silence Skipper Logo">
-        <span>YouTube Silence Skipper</span>
-      </a>
-      <ul class="nav-menu">
-        <li><a href="#features">Features</a></li>
-        <li><a href="#pricing">Pricing</a></li>
-        <li><a href="#how-it-works">How It Works</a></li>
-        <li><a href="#faq">FAQ</a></li>
-      </ul>
-      <a href="#pricing" class="cta-btn">
-        <i class="fas fa-download"></i>
-        Get Extension
-      </a>
-      <button class="mobile-menu-toggle">
-        <i class="fas fa-bars"></i>
-      </button>
-    </div>
-  </nav>
+  {% include "partials/navbar.njk" %}
 
   <!-- Mobile Menu -->
   <div class="mobile-menu">
@@ -134,7 +119,7 @@
           <span class="browsers-label">Available on</span>
                     <div class="browser-logos">
                       <!-- Chrome -->
-                      <a href="https://chromewebstore.google.com/detail/youtube-silence-skipper/ijlnjklmlhhfodgfpidpnccipnodohgl" target="_blank" rel="noopener" class="logo-wrapper" data-tooltip="Google Chrome">
+                      <a href="{{ site.webStoreUrl }}" target="_blank" rel="noopener" class="logo-wrapper" data-tooltip="Google Chrome">
                         <img src="images/support/chrome-logo.svg" alt="Google Chrome" class="browser-logo" width="24" height="24">
                       </a>
                       
@@ -150,7 +135,7 @@
                       </a>
                       
                       <!-- Opera -->
-                      <a href="https://chromewebstore.google.com/detail/youtube-silence-skipper/ijlnjklmlhhfodgfpidpnccipnodohgl" target="_blank" rel="noopener" class="logo-wrapper" data-tooltip="Opera">
+                      <a href="{{ site.webStoreUrl }}" target="_blank" rel="noopener" class="logo-wrapper" data-tooltip="Opera">
                         <img src="images/support/opera-logo.svg" alt="Opera" class="browser-logo" width="24" height="24">
                       </a>
                       
@@ -160,12 +145,12 @@
                       </a>
                       
                       <!-- Brave -->
-                      <a href="https://chromewebstore.google.com/detail/youtube-silence-skipper/ijlnjklmlhhfodgfpidpnccipnodohgl" target="_blank" rel="noopener" class="logo-wrapper" data-tooltip="Brave Browser">
+                      <a href="{{ site.webStoreUrl }}" target="_blank" rel="noopener" class="logo-wrapper" data-tooltip="Brave Browser">
                         <img src="images/support/brave-logo.svg" alt="Brave Browser" class="browser-logo" width="24" height="24">
                       </a>
                       
                       <!-- DuckDuckGo -->
-                      <a href="https://chromewebstore.google.com/detail/youtube-silence-skipper/ijlnjklmlhhfodgfpidpnccipnodohgl" target="_blank" rel="noopener" class="logo-wrapper" data-tooltip="DuckDuckGo">
+                      <a href="{{ site.webStoreUrl }}" target="_blank" rel="noopener" class="logo-wrapper" data-tooltip="DuckDuckGo">
                         <img src="images/support/duckduckgo-logo.svg" alt="DuckDuckGo" class="browser-logo" width="24" height="24">
                       </a>
                     </div>
@@ -262,7 +247,7 @@
             <li><i class="fas fa-check check"></i> Privacy focused</li>
             <li><i class="fas fa-times cross"></i> Auto-generated captions</li>
           </ul>
-          <a href="https://chromewebstore.google.com/detail/youtube-silence-skipper/ijlnjklmlhhfodgfpidpnccipnodohgl" class="plan-btn">Get Started Free</a>
+          <a href="{{ site.webStoreUrl }}" class="plan-btn">Get Started Free</a>
         </div>
         
         <div class="pricing-card featured">
@@ -402,46 +387,7 @@
   </section>
 
   <!-- Footer -->
-  <footer class="footer">
-    <div class="container">
-      <div class="footer-content">
-        <div>
-          <div class="footer-brand">
-            <img src="images/logo.png" alt="YouTube Silence Skipper">
-            <span>YouTube Silence Skipper</span>
-          </div>
-          <p class="footer-description">
-            The intelligent browser extension that automatically skips silent moments in YouTube videos, 
-            saving you time and enhancing your viewing experience.
-          </p>
-        </div>
-        <div class="footer-links">
-          <h4>Quick Links</h4>
-          <ul>
-            <li><a href="#features">Features</a></li>
-            <li><a href="#pricing">Pricing</a></li>
-            <li><a href="#how-it-works">How It Works</a></li>
-            <li><a href="#faq">FAQ</a></li>
-          </ul>
-        </div>
-        <div class="footer-links">
-          <h4>Resources</h4>
-          <ul>
-            <li><a href="https://chromewebstore.google.com/detail/youtube-silence-skipper/ijlnjklmlhhfodgfpidpnccipnodohgl">Web Store</a></li>
-            <li><a href="https://github.com/YouTube-Silence-Skipper/YouTube-Silence-Skipper.github.io/issues">Report Issues</a></li>
-            <li><a href="activate-pro.html">Activate Pro</a></li>
-            <li><a href="manage-subscription.html">Manage Subscription</a></li>
-            <li><a href="terms-and-conditions.html">Terms and Conditions</a></li>
-            <li><a href="privacy-policy.html">Privacy Policy</a></li>
-          </ul>
-        </div>
-      </div>
-      <div class="footer-bottom">
-        <p>&copy; 2026 YouTube Silence Skipper. All rights reserved.</p>
-        <p>Made with 💙 for smarter YouTube viewing</p>
-      </div>
-    </div>
-  </footer>
+  {% include "partials/footer.njk" %}
 
   <script src="browser-links.js"></script>
   <script src="script.js"></script>

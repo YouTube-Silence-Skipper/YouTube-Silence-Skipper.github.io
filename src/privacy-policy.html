@@ -1,3 +1,8 @@
+---
+navVariant: subpage
+quickBase: "index.html"
+showActivatePro: true
+---
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -495,20 +500,7 @@
 </head>
 <body>
   <!-- Navigation -->
-  <nav class="navbar">
-    <div class="nav-container">
-      <a href="index.html" class="logo">
-        <img src="images/logo.png" alt="YouTube Silence Skipper Logo">
-        <span>YouTube Silence Skipper</span>
-      </a>
-      <ul class="nav-menu">
-        <li><a href="index.html">Home</a></li>
-        <li><a href="index.html#features">Features</a></li>
-        <li><a href="index.html#how-it-works">How It Works</a></li>
-        <li><a href="index.html#faq">FAQ</a></li>
-      </ul>
-    </div>
-  </nav>
+  {% include "partials/navbar.njk" %}
 
   <!-- Privacy Policy Header -->
   <section class="hero">
@@ -609,7 +601,7 @@
           <li><strong>Data portability:</strong> Request a copy of your personal data in a machine-readable format</li>
           <li><strong>Withdrawal of consent:</strong> Cancel your subscription at any time through Paddle's billing system</li>
         </ul>
-        <p>To exercise these rights, please contact <a href="https://paddle.net/" target="_blank">Paddle</a> for all privacy-related requests and subscription management.</p>
+        <p>To exercise these rights, please contact <a href="{{ site.paddleSupportUrl }}" target="_blank">Paddle</a> for all privacy-related requests and subscription management.</p>
       </div>
 
       <div class="privacy-section">
@@ -652,7 +644,7 @@
         <p>If you have any questions about this Privacy Policy or our privacy practices, please contact us:</p>
         <ul class="privacy-list">
           <li><strong>Technical support:</strong> <a href="https://github.com/YouTube-Silence-Skipper/YouTube-Silence-Skipper.github.io/issues" target="_blank">GitHub Issues</a> for extension-related technical issues</li>
-          <li><strong>Privacy and billing inquiries:</strong> <a href="https://paddle.net/" target="_blank">Contact Paddle</a> for all privacy-related questions and subscription management</li>
+          <li><strong>Privacy and billing inquiries:</strong> <a href="{{ site.paddleSupportUrl }}" target="_blank">Contact Paddle</a> for all privacy-related questions and subscription management</li>
         </ul>
         <p>For subscription and privacy matters, Paddle will respond to your inquiry within a reasonable timeframe.</p>
       </div>
@@ -661,46 +653,7 @@
   </section>
 
   <!-- Footer -->
-  <footer class="footer">
-    <div class="container">
-      <div class="footer-content">
-        <div>
-          <div class="footer-brand">
-            <img src="images/logo.png" alt="YouTube Silence Skipper">
-            <span>YouTube Silence Skipper</span>
-          </div>
-          <p class="footer-description">
-            The intelligent browser extension that automatically skips silent moments in YouTube videos, 
-            saving you time and enhancing your viewing experience.
-          </p>
-        </div>
-        <div class="footer-links">
-          <h4>Quick Links</h4>
-          <ul>
-            <li><a href="index.html#features">Features</a></li>
-            <li><a href="index.html#pricing">Pricing</a></li>
-            <li><a href="index.html#how-it-works">How It Works</a></li>
-            <li><a href="index.html#faq">FAQ</a></li>
-          </ul>
-        </div>
-        <div class="footer-links">
-          <h4>Resources</h4>
-          <ul>
-            <li><a href="https://chromewebstore.google.com/detail/youtube-silence-skipper/ijlnjklmlhhfodgfpidpnccipnodohgl">Web Store</a></li>
-            <li><a href="https://github.com/YouTube-Silence-Skipper/YouTube-Silence-Skipper.github.io/issues">Report Issues</a></li>
-            <li><a href="activate-pro.html">Activate Pro</a></li>
-            <li><a href="manage-subscription.html">Manage Subscription</a></li>
-            <li><a href="terms-and-conditions.html">Terms and Conditions</a></li>
-            <li><a href="privacy-policy.html">Privacy Policy</a></li>
-          </ul>
-        </div>
-      </div>
-      <div class="footer-bottom">
-        <p>&copy; 2026 YouTube Silence Skipper. All rights reserved.</p>
-        <p>Made with 💙 for smarter YouTube viewing</p>
-      </div>
-    </div>
-  </footer>
+  {% include "partials/footer.njk" %}
 
   <script src="browser-links.js"></script>
   <script>
