@@ -47,7 +47,7 @@ const THEMES = {
     sale: { originalPrice: "$1.99", price: "$1" },
   },
   halloween: {
-    logo: "images/logo.png",
+    logo: "images/logo-halloween.png",
     css: "halloween.css",
     fontUrl: "https://fonts.googleapis.com/css2?family=Creepster&display=swap",
     cardClass: "halloween-special",
