@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg width="140" height="80" viewBox="0 0 140 80" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Cute front-facing bat that flies in the Halloween theme (replaces the 🦇 emoji).
+       Sticker style to match logo-halloween.png: thick dark outline, transparent background. -->
+  <style>
+    /* Wing flap: each wing swings around its shoulder (where it meets the body).
+       Runs inside the image, so the page only moves the bat along its path. */
+    .wing { transform-box: view-box; animation-duration: 0.32s; animation-timing-function: ease-in-out;
+            animation-iteration-count: infinite; animation-direction: alternate; }
+    .wing-l { transform-origin: 60px 40px; animation-name: flap-l; }
+    .wing-r { transform-origin: 80px 40px; animation-name: flap-r; }
+    @keyframes flap-l { from { transform: rotate(18deg); } to { transform: rotate(-22deg) scaleY(0.8); } }
+    @keyframes flap-r { from { transform: rotate(-18deg); } to { transform: rotate(22deg) scaleY(0.8); } }
+  </style>
+  <defs>
+    <linearGradient id="wing" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#4A3A63"/>
+      <stop offset="1" stop-color="#2A2038"/>
+    </linearGradient>
+  </defs>
+  <g stroke="#1A1222" stroke-width="3.5" stroke-linejoin="round" stroke-linecap="round">
+    <!-- Wings: scalloped lower edges -->
+    <g class="wing wing-l">
+      <path d="M58 34 C 46 18, 26 12, 6 20 C 14 26, 16 34, 14 42
+               C 22 38, 28 42, 30 50 C 36 44, 44 46, 46 54 C 50 46, 56 44, 60 46 Z" fill="url(#wing)"/>
+    </g>
+    <g class="wing wing-r">
+      <path d="M82 34 C 94 18, 114 12, 134 20 C 126 26, 124 34, 126 42
+               C 118 38, 112 42, 110 50 C 104 44, 96 46, 94 54 C 90 46, 84 44, 80 46 Z" fill="url(#wing)"/>
+    </g>
+    <!-- Ears -->
+    <path d="M56 26 L58 10 L66 22 Z" fill="#3A2D4F"/>
+    <path d="M84 26 L82 10 L74 22 Z" fill="#3A2D4F"/>
+    <!-- Round body/head -->
+    <ellipse cx="70" cy="40" rx="18" ry="20" fill="#3A2D4F"/>
+  </g>
+  <!-- Face -->
+  <circle cx="63" cy="36" r="4" fill="#FFC928"/>
+  <circle cx="77" cy="36" r="4" fill="#FFC928"/>
+  <circle cx="64" cy="35" r="1.4" fill="#1A1222"/>
+  <circle cx="78" cy="35" r="1.4" fill="#1A1222"/>
+  <path d="M65 46 Q 70 50 75 46" stroke="#1A1222" stroke-width="2" stroke-linecap="round"/>
+  <path d="M67 47 L68 50 L69 47.5 Z M71 47.5 L72 50 L73 47 Z" fill="#FFFFFF"/>
+  <ellipse cx="58" cy="44" rx="3" ry="1.8" fill="#FF7FA0" opacity="0.55"/>
+  <ellipse cx="82" cy="44" rx="3" ry="1.8" fill="#FF7FA0" opacity="0.55"/>
+  <ellipse cx="62" cy="26" rx="4" ry="2" fill="#FFFFFF" opacity="0.25" transform="rotate(-25 62 26)"/>
+</svg>

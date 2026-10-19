@@ -9,12 +9,54 @@
       for (var i = 0; i < {{ theme.fall.count }}; i++) {
         var f = document.createElement('div');
         f.className = '{{ theme.fall.item }}';
+{%- if theme.fall.src %}
+        f.innerHTML = '<img src="{{ theme.fall.src }}" alt="">';
+{%- else %}
         f.textContent = '{{ theme.fall.glyph }}';
+{%- endif %}
+        var duration = Math.random() * {{ theme.fall.durationRange or 3 }} + {{ theme.fall.durationMin or 2 }};
+{%- if theme.fall.fromEdges %}
+        // Start on the left or bottom edge (uniformly along both) and let the CSS
+        // path carry it diagonally across, so the paths together cover the whole
+        // screen. Negative delay: already mid-flight on page load.
+        var edge = Math.random() * 2;
+        if (edge < 1) { f.style.left = '-10vw'; f.style.top = (edge * 110) + 'vh'; }
+        else { f.style.left = ((edge - 1) * 110 - 10) + 'vw'; f.style.top = '110vh'; }
+        f.style.animationDelay = (-Math.random() * duration) + 's';
+{%- else %}
         f.style.left = (Math.random() * {{ theme.fall.spread or 100 }}) + 'vw';
-        f.style.animationDuration = (Math.random() * 3 + 2) + 's';
-        f.style.animationDelay = (Math.random() * 2) + 's';
-        f.style.opacity = Math.random();
+        f.style.animationDelay = (Math.random() * {{ theme.fall.delayMax or 2 }}) + 's';
+{%- endif %}
+        f.style.animationDuration = duration + 's';
+        f.style.opacity = {{ theme.fall.opacityMin or 0 }} + Math.random() * ({{ theme.fall.opacityMax or 1 }} - {{ theme.fall.opacityMin or 0 }});
         f.style.fontSize = (Math.random() * 1.5 + 0.5) + 'em';
+        layer.appendChild(f);
+      }
+    })();
+  </script>
+{%- endif %}
+{%- if theme.float %}
+  <div class="{{ theme.float.container }}" aria-hidden="true"></div>
+  <script>
+    (function () {
+      var layer = document.querySelector('.{{ theme.float.container }}');
+      if (!layer) return;
+      var n = {{ theme.float.count }};
+      for (var i = 0; i < n; i++) {
+        var f = document.createElement('img');
+        var duration = Math.random() * 10 + 16;
+        f.className = '{{ theme.float.item }}';
+        f.src = '{{ theme.float.src }}';
+        f.alt = '';
+        // Same diagonal as the bats: launch from the left/bottom edges, one per
+        // equal slice of that edge so the few pumpkins still cover the screen.
+        var edge = (i + Math.random()) * 2 / n;
+        if (edge < 1) { f.style.left = '-10vw'; f.style.top = (edge * 110) + 'vh'; }
+        else { f.style.left = ((edge - 1) * 110 - 10) + 'vw'; f.style.top = '110vh'; }
+        f.style.width = (Math.random() * 28 + 32) + 'px';
+        f.style.animationDuration = duration + 's';
+        // Negative delay: already mid-flight on page load.
+        f.style.animationDelay = (-Math.random() * duration) + 's';
         layer.appendChild(f);
       }
     })();

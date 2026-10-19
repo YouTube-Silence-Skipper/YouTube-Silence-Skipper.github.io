@@ -22,7 +22,11 @@ const PRICE_ID = {
 
 // Per-theme overlay. Every field is optional; a missing field means "same as the
 // base site". Falling-particle effect is a shared mechanism (theme-body.njk)
-// parameterized by { container, item, glyph, count }.
+// parameterized by { container, item, glyph | src, count } (src = an image
+// instead of a text glyph; optional durationMin/durationRange/delayMax in
+// seconds, opacityMin/opacityMax, and fromEdges to launch from the left/bottom
+// edges instead of along the bottom). The optional "float" layer drifts images ({ container, item, src,
+// count }) behind the content.
 const THEMES = {
   default: {
     logo: "images/logo.png",
@@ -53,7 +57,15 @@ const THEMES = {
     cardClass: "halloween-special",
     badge: "🎃 Happy Halloween 🎃",
     badgeClass: "halloween-badge",
-    fall: { container: "bats", item: "bat", glyph: "🦇", count: 12, spread: 60 },
+    // Bats launch from anywhere along the left/bottom edges and cross the whole
+    // screen diagonally in 10–16s, kept faint (35–60% opacity).
+    fall: {
+      container: "bats", item: "bat", src: "images/bat.svg", count: 7, fromEdges: true,
+      durationMin: 10, durationRange: 6, opacityMin: 0.35, opacityMax: 0.6,
+    },
+    // Cute jack-o'-lanterns drifting the same way as the bats, behind the page
+    // content (theme-body.njk "float" layer).
+    float: { container: "pumpkins", item: "pumpkin", src: "images/jack-o-lantern.svg", count: 4 },
   },
 };
 

@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg width="120" height="120" viewBox="0 0 120 120" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Cute jack-o'-lantern that flies with the bats in the Halloween theme.
+       Sticker style to match logo-halloween.png: thick dark outline, transparent background. -->
+  <defs>
+    <radialGradient id="skin" cx="40%" cy="35%" r="70%">
+      <stop offset="0" stop-color="#FFB347"/>
+      <stop offset="0.6" stop-color="#FF8A1F"/>
+      <stop offset="1" stop-color="#E8650A"/>
+    </radialGradient>
+  </defs>
+  <g stroke="#2E1A16" stroke-width="4.5" stroke-linejoin="round" stroke-linecap="round">
+    <!-- Curly stem + leaf -->
+    <path d="M57 34 C 56 26, 58 19, 64 14 C 67 12, 71 15, 69 18 C 65 22, 64 28, 66 34 Z" fill="#6DB33F"/>
+    <path d="M68 26 C 76 18, 88 18, 92 24 C 86 30, 76 31, 68 26 Z" fill="#8BC34A"/>
+
+    <!-- Lobed body: two side lobes behind the middle one -->
+    <ellipse cx="36" cy="70" rx="26" ry="30" fill="url(#skin)"/>
+    <ellipse cx="84" cy="70" rx="26" ry="30" fill="url(#skin)"/>
+    <ellipse cx="60" cy="68" rx="31" ry="34" fill="url(#skin)"/>
+
+    <!-- Face -->
+    <g fill="#3A1A10" stroke-width="2.5">
+      <path d="M44 64 L55 64 L49.5 53 Z"/>
+      <path d="M65 64 L76 64 L70.5 53 Z"/>
+      <path d="M42 75 Q 60 87 78 75 Q 75 92 60 93 Q 45 92 42 75 Z"/>
+    </g>
+    <!-- Tooth -->
+    <path d="M55.5 80.5 L64.5 80.5 L62.5 87 L57.5 87 Z" fill="#FF8A1F" stroke-width="2"/>
+  </g>
+  <!-- Highlight + blush -->
+  <ellipse cx="41" cy="48" rx="7" ry="4" fill="#FFFFFF" opacity="0.55" transform="rotate(-30 41 48)"/>
+  <ellipse cx="22" cy="76" rx="5" ry="3" fill="#FF5E7E" opacity="0.5"/>
+  <ellipse cx="98" cy="76" rx="5" ry="3" fill="#FF5E7E" opacity="0.5"/>
+</svg>

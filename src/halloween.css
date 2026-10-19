@@ -2,11 +2,13 @@
    Keeps all base styles (styles.css) and overlays a spooky skin + floating bats.
    Visual-only: no base layout/content changes and no price change. */
 
-/* Bats flying across the night sky — rising from the lower-left toward the
-   top-right with a flapping sway, not a straight top-to-bottom fall.
-   The shared generator (theme-body.njk) sets each bat's starting `left`
-   (biased to the left via theme.fall.spread) + animation timing; this
-   keyframe carries it up-and-right while swaying its wings. */
+/* Bats flying across the night sky — from the left/bottom edges diagonally
+   toward the top-right, not a straight top-to-bottom fall.
+   The shared generator (theme-body.njk, theme.fall.fromEdges) puts each bat at
+   a random point on the left or bottom edge and sets its timing; together the
+   diagonal paths cover the whole screen. The wing
+   flap lives inside images/bat.svg; here the bat glides along its path,
+   banked toward the top-right, and bobs gently with each wingbeat. */
 .bats {
   position: fixed;
   top: 0;
@@ -15,21 +17,64 @@
   height: 100%;
   pointer-events: none;
   z-index: 9999;
+  overflow: hidden;        /* bats start just off-screen */
 }
 .bats .bat {
-  position: absolute;
-  bottom: -10%;            /* start just below the viewport */
+  position: absolute;      /* top/left set per bat by theme-body.njk */
   animation: bat-fly linear infinite;
   will-change: transform;
 }
+/* Bat image (theme.fall.src); sized in em so the generator's random
+   font-size still varies each bat's size. */
+.bats .bat img {
+  display: block;
+  width: 1.8em;
+  height: auto;
+  animation: bat-bob 0.64s ease-in-out infinite alternate;
+}
+@keyframes bat-bob {
+  from { transform: translateY(-0.12em); }
+  to   { transform: translateY(0.12em); }
+}
 @keyframes bat-fly {
-  /* scale(-1, …) mirrors the glyph so it faces its travel direction;
-     the shallow rise (+85vw / -52vh) keeps it gliding across, not climbing. */
-  0%   { transform: translate(0,     0)    scale(-1, 1)       rotate(6deg);  }
-  25%  { transform: translate(21vw, -13vh) scale(-1.08, 1.08) rotate(-6deg); }
-  50%  { transform: translate(43vw, -26vh) scale(-1, 1)       rotate(6deg);  }
-  75%  { transform: translate(64vw, -39vh) scale(-1.08, 1.08) rotate(-6deg); }
-  100% { transform: translate(85vw, -52vh) scale(-1, 1)       rotate(6deg);  }
+  /* Corner-to-corner diagonal (+120vw / -120vh) so a bat from any edge point
+     leaves the screen; the fixed 10deg bank tilts the front-facing bat toward
+     where it's heading. */
+  from { transform: translate(0, 0)          rotate(10deg); }
+  to   { transform: translate(120vw, -120vh) rotate(10deg); }
+}
+
+/* Jack-o'-lanterns drifting behind the page content along the same diagonal
+   as the bats, but slower. z-index -1 keeps the layer under every section
+   (body creates no stacking context), so it never covers text or buttons;
+   sections with their own background hide it. Each pumpkin's start point,
+   size and timing come from theme-body.njk. */
+.pumpkins {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: -1;
+  overflow: hidden;
+}
+.pumpkins .pumpkin {
+  position: absolute;      /* top/left set per pumpkin by theme-body.njk */
+  opacity: 0.45;
+  animation: pumpkin-float linear infinite;
+  will-change: transform;
+}
+@keyframes pumpkin-float {
+  /* Same +120vw / -120vh diagonal as bat-fly, with a gentle rocking. */
+  0%   { transform: translate(0, 0)            rotate(-10deg); }
+  25%  { transform: translate(30vw, -30vh)     rotate(8deg);   }
+  50%  { transform: translate(60vw, -60vh)     rotate(-8deg);  }
+  75%  { transform: translate(90vw, -90vh)     rotate(8deg);   }
+  100% { transform: translate(120vw, -120vh)   rotate(-10deg); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .pumpkins { display: none; }
 }
 
 /* Spooky Pro pricing card */
