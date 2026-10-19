@@ -60,6 +60,12 @@ function setupEventListeners() {
   document.getElementById('code').addEventListener('input', (e) => {
     e.target.value = e.target.value.replace(/[^0-9]/g, '');
   });
+
+  // 제출 버튼은 HTML에서 disabled로 시작한다. 이 스크립트가 늦게 로드되는 동안 제출되면
+  // 폼이 기본 GET 제출로 새로고침되어 URL이 "activate-pro.html?"가 되고, 익스텐션의
+  // 활성화 content script 매칭에서 빠질 수 있다. 핸들러를 붙인 뒤에만 활성화한다.
+  document.getElementById('sendCodeBtn').disabled = false;
+  document.getElementById('verifyCodeBtn').disabled = false;
 }
 
 /**

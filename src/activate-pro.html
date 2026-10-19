@@ -600,7 +600,8 @@
             <div class="cf-turnstile" data-sitekey="0x4AAAAAAFTpVBh9862sc77g" data-theme="light"></div>
           </div>
 
-          <button type="submit" class="btn-activate" id="sendCodeBtn">
+          <!-- disabled until activate-pro.js attaches its submit handler (see setupEventListeners) -->
+          <button type="submit" class="btn-activate" id="sendCodeBtn" disabled>
             <i class="fas fa-paper-plane"></i> Send Verification Code
           </button>
         </form>
@@ -631,7 +632,7 @@
             <small id="attemptsFeedback"></small>
           </div>
           
-          <button type="submit" class="btn-activate" id="verifyCodeBtn">
+          <button type="submit" class="btn-activate" id="verifyCodeBtn" disabled>
             <i class="fas fa-check-circle"></i> Verify Code
           </button>
         </form>
