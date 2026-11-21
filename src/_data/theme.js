@@ -7,8 +7,9 @@
 //   runs from LEAD days before its day to the end of the day + PROMO_EXTEND_DAYS; when two
 //   overlap, the one whose day comes first wins. Outside every season the page is the plain
 //   site. (src/promo.js has the date logic, src/theme-runtime.js applies the theme.)
-// fixed: that theme's look all the time; its sale (promo card + sale price) still only runs
-//   inside its season.
+// fixed: that theme's look all the time, and its sale (promo card + sale price) from the
+//   deploy until the end of the theme's next day + PROMO_EXTEND_DAYS (never restarting for
+//   the next year's day).
 // plain: no seasonal scripts at all -- the normal site.
 //
 // All content, features, layout and copy are SHARED across themes (single source → no
@@ -97,5 +98,11 @@ module.exports = {
   // Built into every page's <img> logos; theme-runtime.js swaps them in season.
   logo: STANDARD.logo,
   // window.YSS_SEASON for theme-runtime.js (not emitted for plain builds).
-  client: { force: mode === "fixed" ? requested : null, standard: STANDARD, themes: THEMES },
+  client: {
+    force: mode === "fixed" ? requested : null,
+    // Deploy time: a pinned theme's sale starts here (promo.js pinnedState).
+    builtAt: Date.now(),
+    standard: STANDARD,
+    themes: THEMES,
+  },
 };

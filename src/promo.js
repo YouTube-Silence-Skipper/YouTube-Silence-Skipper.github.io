@@ -75,6 +75,25 @@
   }
 
   /**
+   * Sale window of a build pinned to one theme: from the deploy (`from`) to the end of the
+   * first day + extendDays after it -- so a pinned theme's sale starts as soon as it is
+   * deployed and never restarts for the next year's day.
+   * @returns {{ phase: 'before'|'live'|'off', dayStart: number, end: number }}
+   */
+  function pinnedState(cfg, from, now) {
+    var extend = cfg.extendDays == null ? 3 : cfg.extendDays;
+    var y = ptParts(from).year;
+    var windowFor = function (year) {
+      var day = dayOf(cfg.day, year);
+      return { dayStart: ptMidnight(year, day.m, day.d), end: ptMidnight(year, day.m, day.d + extend + 1) };
+    };
+    var w = windowFor(y);
+    if (from >= w.end) w = windowFor(y + 1);
+    w.phase = now < from || now >= w.end ? 'off' : now >= w.dayStart ? 'live' : 'before';
+    return w;
+  }
+
+  /**
    * The seasonal theme in season at `now`, or null. Overlapping seasons: the one whose day
    * comes first wins (e.g. Halloween over Black Friday until Halloween's season ends).
    * @param {Object<string, { promo: object }>} seasons - theme name → config with `promo`
@@ -93,7 +112,7 @@
     return { d: Math.floor(s / 86400), h: Math.floor(s / 3600) % 24, m: Math.floor(s / 60) % 60, s: s % 60 };
   }
 
-  var api = { ptMidnight: ptMidnight, dayOf: dayOf, promoState: promoState, pickSeason: pickSeason, splitDuration: splitDuration };
+  var api = { ptMidnight: ptMidnight, dayOf: dayOf, promoState: promoState, pinnedState: pinnedState, pickSeason: pickSeason, splitDuration: splitDuration };
   if (typeof module !== 'undefined' && module.exports) { module.exports = api; return; }
 
   // ---- Browser ----------------------------------------------------------------------
@@ -125,8 +144,11 @@
    * @param {string} name - theme name (styling class promo-<name>)
    * @param {object} promo - the theme's promo config (day, labels, prices, ...)
    * @param {{ priceId: string, price: string }} std - standard price to fall back to
+   * @param {function(number): {phase, dayStart, end}} [stateAt] - sale state at a time
+   *   (default: the theme's season, promoState)
    */
-  api.startCard = function (name, promo, std) {
+  api.startCard = function (name, promo, std, stateAt) {
+    stateAt = stateAt || function (t) { return promoState(promo, t); };
     var card = document.getElementById('promo-card');
     if (!card) return;
     var hero = document.querySelector('.hero');
@@ -145,7 +167,7 @@
 
     function tick() {
       var t = api.now();
-      var st = promoState(promo, t);
+      var st = stateAt(t);
       if (st.phase === 'off') { clearInterval(timer); api.endSale(std); return; }
       var target = st.phase === 'before' ? st.dayStart : st.end;
       label.textContent = st.phase === 'before' ? promo.beforeLabel : promo.liveLabel;
@@ -158,7 +180,7 @@
     }
     timer = setInterval(tick, 1000);
     tick();
-    if (promoState(promo, api.now()).phase === 'off') return;
+    if (stateAt(api.now()).phase === 'off') return;
     card.hidden = false;
 
     // On small screens the card is a bar fixed to the bottom (promo.css); slide it away once

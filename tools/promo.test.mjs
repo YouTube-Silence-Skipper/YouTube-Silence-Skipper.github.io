@@ -3,7 +3,7 @@ import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import promo from '../src/promo.js';
 
-const { ptMidnight, dayOf, promoState, pickSeason, splitDuration } = promo;
+const { ptMidnight, dayOf, promoState, pinnedState, pickSeason, splitDuration } = promo;
 const at = (iso) => Date.parse(iso);
 const iso = (ms) => new Date(ms).toISOString();
 
@@ -116,4 +116,34 @@ test('pickSeason: overlapping seasons → the one whose day comes first wins', (
   assert.equal(p('2026-11-04T12:00:00-08:00'), 'black-friday');  // BF and Christmas in season
   assert.equal(p('2026-11-30T12:00:00-08:00'), 'black-friday');
   assert.equal(p('2026-12-01T12:00:00-08:00'), 'christmas');
+});
+
+test('pinnedState: a pinned theme\'s sale runs from the deploy to the end of the next day + 3', () => {
+  const xmas = { day: '12-25', extendDays: 3 };
+  const deployed = at('2026-11-21T10:00:00-08:00');
+  assert.equal(pinnedState(xmas, deployed, at('2026-11-21T09:59:59-08:00')).phase, 'off'); // before the deploy
+  const s = pinnedState(xmas, deployed, at('2026-11-21T10:00:00-08:00'));
+  assert.equal(s.phase, 'before');
+  assert.equal(iso(s.dayStart), '2026-12-25T08:00:00.000Z');
+  assert.equal(pinnedState(xmas, deployed, at('2026-12-26T12:00:00-08:00')).phase, 'live');
+  assert.equal(pinnedState(xmas, deployed, at('2026-12-29T00:00:00-08:00')).phase, 'off');
+  // left deployed into the new year: does not restart for next Christmas
+  assert.equal(pinnedState(xmas, deployed, at('2027-01-10T12:00:00-08:00')).phase, 'off');
+  assert.equal(pinnedState(xmas, deployed, at('2027-12-20T12:00:00-08:00')).phase, 'off');
+});
+
+test('pinnedState: deployed after this year\'s window → aims at next year\'s day', () => {
+  const halloween = { day: '10-31', extendDays: 3 };
+  const deployed = at('2026-11-10T12:00:00-08:00'); // after Nov 3
+  const s = pinnedState(halloween, deployed, at('2026-11-10T12:00:00-08:00'));
+  assert.equal(s.phase, 'before');
+  assert.equal(iso(s.dayStart), '2027-10-31T07:00:00.000Z');
+  assert.equal(pinnedState(halloween, deployed, at('2027-11-04T00:00:00-08:00')).phase, 'off');
+});
+
+test('pinnedState: Black Friday deployed early in the year counts down to this year\'s', () => {
+  const bf = { day: 'black-friday', extendDays: 3 };
+  const s = pinnedState(bf, at('2026-03-01T12:00:00-08:00'), at('2026-03-01T12:00:00-08:00'));
+  assert.equal(s.phase, 'before');
+  assert.equal(iso(s.dayStart), '2026-11-27T08:00:00.000Z');
 });

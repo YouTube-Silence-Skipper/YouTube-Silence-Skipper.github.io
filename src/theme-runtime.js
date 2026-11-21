@@ -7,8 +7,9 @@
  *     whichever season is on at the visitor's clock (YSSPromo.pickSeason). None → the plain
  *     site; nothing else happens.
  *   - In <head>: writes the theme's font + stylesheets (parser-inserted, so the first paint
- *     is already themed) and sets the checkout price id (sale price only while the season's
- *     sale is on -- a pinned theme outside its season sells at the standard price).
+ *     is already themed) and sets the checkout price id (sale price only while the sale is
+ *     on: the theme's season on the automatic build; from the deploy to the end of the
+ *     theme's next day + extendDays on a pinned build).
  *   - Logos: each themed <img data-theme-logo> calls YSSTheme.logo(img) right after itself,
  *     so the seasonal logo replaces the default one before it is painted.
  *   - After DOMContentLoaded: the Pro pricing card (class, badge, icon, sale price), the
@@ -28,7 +29,11 @@
 
   var t = cfg.themes[name];
   var std = cfg.standard;
-  var saleOn = P.promoState(t.promo, now).phase !== 'off';
+  // Sale state over time: the season (automatic build) or the deploy-based window (pinned).
+  var stateAt = cfg.force
+    ? function (when) { return P.pinnedState(t.promo, cfg.builtAt, when); }
+    : function (when) { return P.promoState(t.promo, when); };
+  var saleOn = stateAt(now).phase !== 'off';
 
   document.documentElement.setAttribute('data-theme', name);
   if (t.fontUrl) document.write('<link rel="stylesheet" href="' + t.fontUrl + '">');
@@ -124,7 +129,7 @@
 
   function applyPage() {
     decoratePricing();
-    if (saleOn) P.startCard(name, t.promo, std);
+    if (saleOn) P.startCard(name, t.promo, std, stateAt);
     if (t.fall) fallLayer(t.fall);
     if (t.float) floatLayer(t.float);
   }
