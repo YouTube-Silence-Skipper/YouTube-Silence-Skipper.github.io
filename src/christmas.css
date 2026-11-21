@@ -1,4 +1,4 @@
-/* Christmas seasonal theme — loaded only when built with THEME=christmas.
+/* Christmas seasonal theme — loaded by theme-runtime.js while Christmas is the active theme.
    Keeps all base styles (styles.css) and overlays festive bits + the sale card. */
 
 /* Snowfall */

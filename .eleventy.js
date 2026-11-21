@@ -9,6 +9,7 @@ module.exports = function (eleventyConfig) {
     "src/activate-pro.js",
     "src/browser-links.js",
     "src/promo.js",
+    "src/theme-runtime.js",
     "src/promo.css",
     "src/images",
     "src/CNAME",

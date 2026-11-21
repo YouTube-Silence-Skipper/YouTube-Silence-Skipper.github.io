@@ -1,6 +1,6 @@
-/* Seasonal promotion card at the bottom-center of the hero (special themes only).
-   Loaded only when the theme has a `promo` (theme-head.njk); promo.js fills the countdown
-   and hides the card once the sale has ended. */
+/* Seasonal promotion card at the bottom-center of the hero.
+   Loaded by theme-runtime.js only while a season's sale is on; promo.js fills the
+   countdown and hides the card once the sale has ended. */
 
 /* Stack the hero's two-column content and the card vertically. */
 .hero.has-promo {

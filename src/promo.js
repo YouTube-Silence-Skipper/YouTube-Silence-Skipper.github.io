@@ -1,15 +1,14 @@
 /**
- * Seasonal promotion window + hero countdown card (special themes only).
+ * Seasonal dates, theme selection and the hero promotion card.
  *
- * A themed build sells Pro at the sale price. The promotion runs until the end of the
- * theme's day + extendDays, in US Pacific time (DST-aware), and is judged against the
- * visitor's clock at page load -- no redeploy is needed to end it. Before the day the
- * card counts down to the day; from the day on it counts down to the end of the sale;
- * after that the card is hidden and the Pro card falls back to the standard price and
- * price id. (A visitor who tampers with their clock or this script is ignored on purpose.)
+ * Every seasonal theme has a day (Halloween Oct 31, Black Friday, Christmas Dec 25). A theme
+ * is in season from leadDays before its day until the end of day + extendDays, in US Pacific
+ * time (DST-aware), judged on the visitor's clock -- so the auto build switches themes, and a
+ * sale ends, without a redeploy. When two seasons overlap, the one whose day comes first wins.
+ * (A visitor who tampers with their clock or this script is ignored on purpose.)
  *
- * Config comes from window.YSS_PROMO (theme-body.njk, from theme.js `promo`).
- * The pure date helpers are exported for tests (tools/promo.test.mjs).
+ * Loaded in <head> before theme-runtime.js, which picks the theme and calls startCard().
+ * The pure helpers are exported for tests (tools/promo.test.mjs).
  */
 (function (root) {
   'use strict';
@@ -53,13 +52,13 @@
   }
 
   /**
-   * Promotion state at `now` (ms).
+   * Season state at `now` (ms).
    * @param {{ day: string, extendDays?: number, leadDays?: number }} cfg
-   *   day: "MM-DD" or "black-friday"; extendDays: whole days after the day the sale
-   *   still runs (it ends at the end of day + extendDays); leadDays: how long before
-   *   the day a deployed theme counts as "in season" (so a theme left up past its
-   *   season doesn't start counting down to next year's day).
+   *   day: "MM-DD" or "black-friday"; leadDays: how many days before the day the season
+   *   starts; extendDays: whole days after the day it still runs (it ends at the end of
+   *   day + extendDays).
    * @returns {{ phase: 'before'|'live'|'off', dayStart: number, end: number }}
+   *   before = in season, counting down to the day; live = from the day to the end.
    */
   function promoState(cfg, now) {
     var extend = cfg.extendDays == null ? 3 : cfg.extendDays;
@@ -70,9 +69,23 @@
     var end = ptMidnight(y, day.m, day.d + extend + 1); // end of day + extend
     var phase = now >= end ? 'off'
       : now >= dayStart ? 'live'
-      : dayStart - now <= lead * DAY_MS ? 'before'
+      : now >= ptMidnight(y, day.m, day.d - lead) ? 'before'
       : 'off';
     return { phase: phase, dayStart: dayStart, end: end };
+  }
+
+  /**
+   * The seasonal theme in season at `now`, or null. Overlapping seasons: the one whose day
+   * comes first wins (e.g. Halloween over Black Friday until Halloween's season ends).
+   * @param {Object<string, { promo: object }>} seasons - theme name → config with `promo`
+   */
+  function pickSeason(seasons, now) {
+    var best = null, bestDay = Infinity;
+    Object.keys(seasons).forEach(function (name) {
+      var st = promoState(seasons[name].promo, now);
+      if (st.phase !== 'off' && st.dayStart < bestDay) { best = name; bestDay = st.dayStart; }
+    });
+    return best;
   }
 
   function splitDuration(ms) {
@@ -80,54 +93,62 @@
     return { d: Math.floor(s / 86400), h: Math.floor(s / 3600) % 24, m: Math.floor(s / 60) % 60, s: s % 60 };
   }
 
-  var api = { ptMidnight: ptMidnight, dayOf: dayOf, promoState: promoState, splitDuration: splitDuration };
+  var api = { ptMidnight: ptMidnight, dayOf: dayOf, promoState: promoState, pickSeason: pickSeason, splitDuration: splitDuration };
   if (typeof module !== 'undefined' && module.exports) { module.exports = api; return; }
-  root.YSSPromo = api;
 
-  // ---- Page behavior --------------------------------------------------------------
-  var cfg = root.YSS_PROMO;
-  if (!cfg) return;
+  // ---- Browser ----------------------------------------------------------------------
 
   // Local previews can pin the clock: ?promoNow=2026-12-27T10:00:00-08:00
-  function clockOffset() {
-    if (!/^(localhost|127\.0\.0\.1)$/.test(location.hostname)) return 0;
-    var pinned = new URLSearchParams(location.search).get('promoNow');
-    var t = pinned ? Date.parse(pinned) : NaN;
-    return isNaN(t) ? 0 : t - Date.now();
+  var offset = 0;
+  if (/^(localhost|127\.0\.0\.1)$/.test(location.hostname)) {
+    var pinned = Date.parse(new URLSearchParams(location.search).get('promoNow') || '');
+    if (!isNaN(pinned)) offset = pinned - Date.now();
   }
-  var offset = clockOffset();
-  function now() { return Date.now() + offset; }
+  api.now = function () { return Date.now() + offset; };
 
-  // Back to the standard price: checkout price id, the Pro card's price and sale badge.
-  function endSale() {
-    root.YSS_PRICE_ID = cfg.standardPriceId;
-    document.querySelectorAll('[data-promo-price]').forEach(function (el) {
-      el.innerHTML = cfg.standardPrice + '<span>/month</span>';
+  // Back to the standard price: checkout price id, the Pro card's price, the sale badge and
+  // the promotion card. (The theme's decorations stay until the next page load.)
+  api.endSale = function (std) {
+    root.YSS_PRICE_ID = std.priceId;
+    document.querySelectorAll('[data-theme-price]').forEach(function (el) {
+      el.innerHTML = std.price + '<span>/month</span>';
     });
-    document.querySelectorAll('[data-promo-badge]').forEach(function (el) { el.hidden = true; });
+    document.querySelectorAll('[data-theme-badge]').forEach(function (el) { el.hidden = true; });
     var card = document.getElementById('promo-card');
     if (card) card.hidden = true;
     var hero = document.querySelector('.hero.has-promo');
     if (hero) hero.classList.remove('has-promo');
-  }
+  };
 
-  function start() {
-    var state = promoState(cfg, now());
-    if (state.phase === 'off') { endSale(); return; }
-
+  /**
+   * Run the hero promotion card (index page) for theme `name` while its season lasts.
+   * @param {string} name - theme name (styling class promo-<name>)
+   * @param {object} promo - the theme's promo config (day, labels, prices, ...)
+   * @param {{ priceId: string, price: string }} std - standard price to fall back to
+   */
+  api.startCard = function (name, promo, std) {
     var card = document.getElementById('promo-card');
-    if (!card) return; // pages without the hero card still sell at the sale price
+    if (!card) return;
+    var hero = document.querySelector('.hero');
+    var fill = function (sel, text) { var el = card.querySelector(sel); if (el) el.textContent = text; };
+    fill('[data-promo-name]', promo.emoji + ' ' + promo.name);
+    fill('[data-promo-original]', promo.originalPrice);
+    fill('[data-promo-sale]', promo.salePrice);
+    card.classList.add('promo-' + name);
+    if (hero) hero.classList.add('has-promo');
+
     var label = card.querySelector('[data-promo-label]');
     var units = { d: card.querySelector('[data-unit="d"]'), h: card.querySelector('[data-unit="h"]'),
                   m: card.querySelector('[data-unit="m"]'), s: card.querySelector('[data-unit="s"]') };
     var pad = function (n) { return (n < 10 ? '0' : '') + n; };
+    var timer;
 
     function tick() {
-      var t = now();
-      var st = promoState(cfg, t);
-      if (st.phase === 'off') { clearInterval(timer); endSale(); return; }
+      var t = api.now();
+      var st = promoState(promo, t);
+      if (st.phase === 'off') { clearInterval(timer); api.endSale(std); return; }
       var target = st.phase === 'before' ? st.dayStart : st.end;
-      label.textContent = st.phase === 'before' ? cfg.beforeLabel : cfg.liveLabel;
+      label.textContent = st.phase === 'before' ? promo.beforeLabel : promo.liveLabel;
       card.setAttribute('data-phase', st.phase);
       var left = splitDuration(target - t);
       units.d.textContent = left.d;
@@ -135,8 +156,9 @@
       units.m.textContent = pad(left.m);
       units.s.textContent = pad(left.s);
     }
-    var timer = setInterval(tick, 1000);
+    timer = setInterval(tick, 1000);
     tick();
+    if (promoState(promo, api.now()).phase === 'off') return;
     card.hidden = false;
 
     // On small screens the card is a bar fixed to the bottom (promo.css); slide it away once
@@ -150,8 +172,7 @@
       window.addEventListener('resize', onScroll);
       onScroll();
     }
-  }
+  };
 
-  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', start);
-  else start();
+  root.YSSPromo = api;
 })(typeof window !== 'undefined' ? window : this);

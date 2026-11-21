@@ -6,9 +6,9 @@ on:
   workflow_dispatch:
     inputs:
       theme:
-        description: "Site theme to build and deploy"
+        description: "default = seasonal theme picked automatically by date; plain = never seasonal; or pin one theme"
         type: choice
-        options: [default, christmas, black-friday, halloween]
+        options: [default, plain, christmas, black-friday, halloween]
         default: default
 
 permissions:
@@ -32,7 +32,8 @@ jobs:
       - name: Build site
         run: npm run build
         env:
-          # push events build the default theme; a manual run can pick a season.
+          # push events build "default" (automatic seasonal theme); a manual run can pick
+          # plain or pin one theme.
           THEME: ${{ github.event.inputs.theme || 'default' }}
       - uses: actions/configure-pages@v6
       - uses: actions/upload-pages-artifact@v5

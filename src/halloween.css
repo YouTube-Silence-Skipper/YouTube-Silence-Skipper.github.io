@@ -1,10 +1,10 @@
-/* Halloween seasonal theme — loaded only when built with THEME=halloween.
+/* Halloween seasonal theme — loaded by theme-runtime.js while Halloween is the active theme.
    Keeps all base styles (styles.css) and overlays a spooky skin + floating bats.
    Visual-only: no base layout/content changes and no price change. */
 
 /* Bats flying across the night sky — from the left/bottom edges diagonally
    toward the top-right, not a straight top-to-bottom fall.
-   The shared generator (theme-body.njk, theme.fall.fromEdges) puts each bat at
+   The shared generator (theme-runtime.js, fall.fromEdges) puts each bat at
    a random point on the left or bottom edge and sets its timing; together the
    diagonal paths cover the whole screen. The wing
    flap lives inside images/bat.svg; here the bat glides along its path,
@@ -20,11 +20,11 @@
   overflow: hidden;        /* bats start just off-screen */
 }
 .bats .bat {
-  position: absolute;      /* top/left set per bat by theme-body.njk */
+  position: absolute;      /* top/left set per bat by theme-runtime.js */
   animation: bat-fly linear infinite;
   will-change: transform;
 }
-/* Bat image (theme.fall.src); sized in em so the generator's random
+/* Bat image (fall.src); sized in em so the generator's random
    font-size still varies each bat's size. */
 .bats .bat img {
   display: block;
@@ -48,7 +48,7 @@
    as the bats, but slower. z-index -1 keeps the layer under every section
    (body creates no stacking context), so it never covers text or buttons;
    sections with their own background hide it. Each pumpkin's start point,
-   size and timing come from theme-body.njk. */
+   size and timing come from theme-runtime.js. */
 .pumpkins {
   position: fixed;
   top: 0;
@@ -60,7 +60,7 @@
   overflow: hidden;
 }
 .pumpkins .pumpkin {
-  position: absolute;      /* top/left set per pumpkin by theme-body.njk */
+  position: absolute;      /* top/left set per pumpkin by theme-runtime.js */
   opacity: 0.45;
   animation: pumpkin-float linear infinite;
   will-change: transform;

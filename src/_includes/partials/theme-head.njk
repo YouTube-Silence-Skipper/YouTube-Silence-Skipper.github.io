@@ -1,9 +1,6 @@
-{%- if theme.css %}
-{%- if theme.fontUrl %}
-  <link href="{{ theme.fontUrl }}" rel="stylesheet">
-{%- endif %}
-  <link rel="stylesheet" href="{{ theme.css }}">
-{%- endif %}
-{%- if theme.promo %}
-  <link rel="stylesheet" href="promo.css">
+{%- if not theme.isPlain %}
+  {#- Seasonal theme: promo.js (dates) + theme-runtime.js pick and apply it on the visitor's clock. #}
+  <script src="promo.js"></script>
+  <script>window.YSS_SEASON = {{ theme.client | dump | safe }};</script>
+  <script src="theme-runtime.js"></script>
 {%- endif %}

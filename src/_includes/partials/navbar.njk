@@ -1,7 +1,7 @@
 <nav class="navbar">
     <div class="nav-container">
       <a href="{% if navVariant == 'home' %}#{% else %}index.html{% endif %}" class="logo">
-        <img src="{{ theme.logo }}" alt="YouTube Silence Skipper Logo">
+        <img src="{{ theme.logo }}" alt="YouTube Silence Skipper Logo">{% include "partials/theme-logo.njk" %}
         <span>YouTube Silence Skipper</span>
       </a>
       <ul class="nav-menu">

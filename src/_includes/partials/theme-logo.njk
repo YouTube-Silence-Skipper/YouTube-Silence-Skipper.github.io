@@ -1,0 +1,2 @@
+{#- Put right after a logo <img>: swaps in the seasonal logo before it is painted (theme-runtime.js). -#}
+{%- if not theme.isPlain %}<script>YSSTheme.logo(document.currentScript.previousElementSibling)</script>{% endif -%}

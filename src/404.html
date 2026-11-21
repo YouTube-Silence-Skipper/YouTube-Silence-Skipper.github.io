@@ -234,7 +234,7 @@ showActivatePro: false
   {% include "partials/navbar.njk" %}
 
     <div class="error-container">
-        <img src="./{{ theme.logo }}" alt="YouTube Silence Skipper Logo" class="error-logo">
+        <img src="./{{ theme.logo }}" alt="YouTube Silence Skipper Logo" class="error-logo">{% include "partials/theme-logo.njk" %}
         <div class="error-code">404</div>
         <h1 class="error-title">Page Not Found</h1>
         <p class="error-text">The page you are looking for might have been removed, had its name changed, or is temporarily unavailable.</p>
@@ -261,6 +261,5 @@ showActivatePro: false
             }
         });
     </script>
-  {% include "partials/theme-body.njk" %}
 </body>
 </html>

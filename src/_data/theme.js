@@ -1,14 +1,19 @@
-// Seasonal theme selected at BUILD TIME via the THEME env var.
-//   default (normal site):   npm run build
-//   christmas (festive):     THEME=christmas    npm run build
-//   black-friday (sale):     THEME=black-friday npm run build
-//   halloween (spooky):      THEME=halloween    npm run build
+// Seasonal themes. The build mode comes from the THEME env var:
+//   default (push to main):  npm run build                     → automatic seasonal theme
+//   plain:                   THEME=plain npm run build         → never seasonal
+//   fixed:                   THEME=christmas|black-friday|halloween npm run build
 //
-// All content, features, layout and copy are SHARED across themes (single
-// source → no drift). Only the per-theme overlay values below differ, and the
-// "default" theme adds nothing, so the default build stays byte-for-byte
-// identical to the normal live site. Edit seasonal pricing here if an offer
-// changes — keep these values out of public commit messages.
+// automatic: the page picks the theme on the visitor's clock (US Pacific time): each season
+//   runs from LEAD days before its day to the end of the day + PROMO_EXTEND_DAYS; when two
+//   overlap, the one whose day comes first wins. Outside every season the page is the plain
+//   site. (src/promo.js has the date logic, src/theme-runtime.js applies the theme.)
+// fixed: that theme's look all the time; its sale (promo card + sale price) still only runs
+//   inside its season.
+// plain: no seasonal scripts at all -- the normal site.
+//
+// All content, features, layout and copy are SHARED across themes (single source → no
+// drift); only the per-theme overlay values below differ. Edit seasonal pricing here if an
+// offer changes — keep these values out of public commit messages.
 
 // Paddle price id used by the checkout (read by script.js via window.YSS_PRICE_ID).
 const PRICE_ID = {
@@ -16,21 +21,19 @@ const PRICE_ID = {
   christmas: "pri_01kch9pkfgcgmaxy18kv63k86t",
   // Black Friday sale. Reuses the $1 sale price id until a dedicated one is set.
   "black-friday": "pri_01kch9pkfgcgmaxy18kv63k86t",
-  // Halloween now runs the same sale as the other seasonal themes.
+  // Halloween runs the same sale as the other seasonal themes.
   halloween: "pri_01kch9pkfgcgmaxy18kv63k86t",
 };
+const STANDARD = { logo: "images/logo.png", priceId: PRICE_ID.default, price: "$1.99" };
 
-// Per-theme overlay. Every field is optional; a missing field means "same as the
-// base site". Falling-particle effect is a shared mechanism (theme-body.njk)
-// parameterized by { container, item, glyph | src, count } (src = an image
-// instead of a text glyph; optional durationMin/durationRange/delayMax in
-// seconds, opacityMin/opacityMax, and fromEdges to launch from the left/bottom
-// edges instead of along the bottom). The optional "float" layer drifts images ({ container, item, src,
-// count }) behind the content.
+// Per-theme overlay, applied in the browser by src/theme-runtime.js. Every field is
+// optional; a missing field means "same as the base site". `promo.leadDays` is how many
+// days before the theme's day its season (look + sale) starts.
+// fall: a falling/flying particle layer { container, item, glyph | src (image), count,
+//   durationMin/durationRange/delayMax (s), opacityMin/opacityMax, spread (vw), fromEdges
+//   (launch from the left/bottom edges) }. float: images drifting behind the content
+//   { container, item, src, count }.
 const THEMES = {
-  default: {
-    logo: "images/logo.png",
-  },
   christmas: {
     logo: "images/logo-christmas.png",
     css: "christmas.css",
@@ -40,17 +43,18 @@ const THEMES = {
     badge: "🎄 Christmas Sale! 🎄",
     badgeClass: "christmas-badge",
     sale: { originalPrice: "$1.99", price: "$1" },
-    promo: { day: "12-25", name: "Christmas Sale", emoji: "🎄", beforeLabel: "Christmas is in", liveLabel: "Holiday sale ends in" },
+    // Dec 1 – Dec 28: starts the day after Black Friday's season ends.
+    promo: { day: "12-25", leadDays: 24, name: "Christmas Sale", emoji: "🎄", beforeLabel: "Christmas is in", liveLabel: "Holiday sale ends in" },
     fall: { container: "snow", item: "flake", glyph: "❄️", count: 50 },
   },
   "black-friday": {
-    logo: "images/logo.png",
     css: "black-friday.css",
     cardClass: "blackfriday-special",
     badge: "🔥 BLACK FRIDAY 🔥",
     badgeClass: "blackfriday-badge",
     sale: { originalPrice: "$1.99", price: "$1" },
-    promo: { day: "black-friday", name: "Black Friday Sale", emoji: "🔥", beforeLabel: "Black Friday is in", liveLabel: "Sale ends in" },
+    // Black Friday week through Cyber Monday (2026: Nov 20 – Nov 30).
+    promo: { day: "black-friday", leadDays: 7, name: "Black Friday Sale", emoji: "🔥", beforeLabel: "Black Friday is in", liveLabel: "Sale ends in" },
   },
   halloween: {
     logo: "images/logo-halloween.png",
@@ -60,42 +64,38 @@ const THEMES = {
     badge: "🎃 Halloween Sale! 🎃",
     badgeClass: "halloween-badge",
     sale: { originalPrice: "$1.99", price: "$1" },
-    promo: { day: "10-31", name: "Halloween Sale", emoji: "🎃", beforeLabel: "Halloween is in", liveLabel: "Spooky sale ends in" },
+    // The last two weeks before Halloween (Oct 17 – Nov 3).
+    promo: { day: "10-31", leadDays: 14, name: "Halloween Sale", emoji: "🎃", beforeLabel: "Halloween is in", liveLabel: "Spooky sale ends in" },
     // Bats launch from anywhere along the left/bottom edges and cross the whole
     // screen diagonally in 10–16s, kept faint (35–60% opacity).
     fall: {
       container: "bats", item: "bat", src: "images/bat.svg", count: 7, fromEdges: true,
       durationMin: 10, durationRange: 6, opacityMin: 0.35, opacityMax: 0.6,
     },
-    // Cute jack-o'-lanterns drifting the same way as the bats, behind the page
-    // content (theme-body.njk "float" layer).
+    // Cute jack-o'-lanterns drifting the same way as the bats, behind the page content.
     float: { container: "pumpkins", item: "pumpkin", src: "images/jack-o-lantern.svg", count: 4 },
   },
 };
 
-// Seasonal promotion (special themes with `promo`; see src/promo.js): a hero card counts
-// down to the theme's day (promo.day: "MM-DD" or "black-friday"), then to the end of the
-// sale; the sale ends PROMO_EXTEND_DAYS after the day, in US Pacific time, judged on the
-// visitor's clock -- afterwards the page shows the standard price without a redeploy.
+// The sale/season runs until the end of the day + this many days.
 const PROMO_EXTEND_DAYS = 3;
-// How long before the day a deployed theme counts as in season.
-const PROMO_LEAD_DAYS = 60;
-for (const t of Object.values(THEMES)) {
-  if (t.promo) {
-    Object.assign(t.promo, {
-      extendDays: PROMO_EXTEND_DAYS,
-      leadDays: PROMO_LEAD_DAYS,
-      standardPriceId: PRICE_ID.default,
-      standardPrice: "$1.99",
-      salePrice: t.sale.price,
-      originalPrice: t.sale.originalPrice,
-    });
-  }
+for (const [name, t] of Object.entries(THEMES)) {
+  t.priceId = PRICE_ID[name];
+  Object.assign(t.promo, {
+    extendDays: PROMO_EXTEND_DAYS,
+    salePrice: t.sale.price,
+    originalPrice: t.sale.originalPrice,
+  });
 }
 
-const name = THEMES[process.env.THEME] ? process.env.THEME : "default";
+const requested = process.env.THEME || "default";
+const mode = requested === "plain" ? "plain" : THEMES[requested] ? "fixed" : "auto";
 
-module.exports = Object.assign(
-  { name, isDefault: name === "default", priceId: PRICE_ID[name] },
-  THEMES[name]
-);
+module.exports = {
+  mode,
+  isPlain: mode === "plain",
+  // Built into every page's <img> logos; theme-runtime.js swaps them in season.
+  logo: STANDARD.logo,
+  // window.YSS_SEASON for theme-runtime.js (not emitted for plain builds).
+  client: { force: mode === "fixed" ? requested : null, standard: STANDARD, themes: THEMES },
+};

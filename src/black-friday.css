@@ -1,4 +1,4 @@
-/* Black Friday seasonal theme — loaded only when built with THEME=black-friday.
+/* Black Friday seasonal theme — loaded by theme-runtime.js while Black Friday is the active theme.
    Keeps all base styles (styles.css) and overlays a premium dark sale skin on
    the Pro pricing card. No base layout/content changes. */
 

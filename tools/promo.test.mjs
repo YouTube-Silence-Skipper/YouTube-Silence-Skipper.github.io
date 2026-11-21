@@ -3,7 +3,7 @@ import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import promo from '../src/promo.js';
 
-const { ptMidnight, dayOf, promoState, splitDuration } = promo;
+const { ptMidnight, dayOf, promoState, pickSeason, splitDuration } = promo;
 const at = (iso) => Date.parse(iso);
 const iso = (ms) => new Date(ms).toISOString();
 
@@ -74,4 +74,46 @@ test('Black Friday 2026: live Nov 27 through the end of Nov 30 (Cyber Monday) PT
 test('splitDuration: days/hours/minutes/seconds, never negative', () => {
   assert.deepEqual(splitDuration(((2 * 24 + 3) * 3600 + 4 * 60 + 5) * 1000 + 999), { d: 2, h: 3, m: 4, s: 5 });
   assert.deepEqual(splitDuration(-5000), { d: 0, h: 0, m: 0, s: 0 });
+});
+
+// The live seasons (src/_data/theme.js): lead days 14 / 7 / 24, extend 3.
+const SEASONS = {
+  halloween: { promo: { day: '10-31', leadDays: 14, extendDays: 3 } },
+  'black-friday': { promo: { day: 'black-friday', leadDays: 7, extendDays: 3 } },
+  christmas: { promo: { day: '12-25', leadDays: 24, extendDays: 3 } },
+};
+const pick = (when) => pickSeason(SEASONS, at(when));
+
+test('pickSeason 2026: Halloween Oct 17–Nov 3, Black Friday Nov 20–30, Christmas Dec 1–28 (PT)', () => {
+  assert.equal(pick('2026-10-16T23:59:59-07:00'), null);
+  assert.equal(pick('2026-10-17T00:00:00-07:00'), 'halloween');
+  assert.equal(pick('2026-11-03T23:59:59-08:00'), 'halloween');
+  assert.equal(pick('2026-11-04T00:00:00-08:00'), null);
+  assert.equal(pick('2026-11-19T23:59:59-08:00'), null);
+  assert.equal(pick('2026-11-20T00:00:00-08:00'), 'black-friday');
+  assert.equal(pick('2026-11-30T23:59:59-08:00'), 'black-friday');
+  assert.equal(pick('2026-12-01T00:00:00-08:00'), 'christmas');
+  assert.equal(pick('2026-12-28T23:59:59-08:00'), 'christmas');
+  assert.equal(pick('2026-12-29T00:00:00-08:00'), null);
+  assert.equal(pick('2027-01-15T12:00:00-08:00'), null);
+  assert.equal(pick('2026-07-04T12:00:00-07:00'), null);
+});
+
+test('pickSeason 2027: Black Friday moves with Thanksgiving (Nov 26 → starts Nov 19)', () => {
+  assert.equal(pick('2027-11-18T23:59:59-08:00'), null);
+  assert.equal(pick('2027-11-19T00:00:00-08:00'), 'black-friday');
+});
+
+test('pickSeason: overlapping seasons → the one whose day comes first wins', () => {
+  const overlapping = {
+    christmas: { promo: { day: '12-25', leadDays: 60, extendDays: 3 } },     // from Oct 26
+    'black-friday': { promo: { day: 'black-friday', leadDays: 60, extendDays: 3 } }, // from Sep 28
+    halloween: { promo: { day: '10-31', leadDays: 60, extendDays: 3 } },     // from Sep 1
+  };
+  const p = (when) => pickSeason(overlapping, at(when));
+  assert.equal(p('2026-10-30T12:00:00-07:00'), 'halloween');     // all three in season
+  assert.equal(p('2026-11-03T12:00:00-08:00'), 'halloween');     // Halloween's extension
+  assert.equal(p('2026-11-04T12:00:00-08:00'), 'black-friday');  // BF and Christmas in season
+  assert.equal(p('2026-11-30T12:00:00-08:00'), 'black-friday');
+  assert.equal(p('2026-12-01T12:00:00-08:00'), 'christmas');
 });
