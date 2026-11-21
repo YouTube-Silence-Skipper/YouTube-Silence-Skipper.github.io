@@ -6,7 +6,8 @@
   "scripts": {
     "build": "eleventy",
     "serve": "eleventy --serve",
-    "verify": "node tools/verify-parity.mjs"
+    "verify": "node tools/verify-parity.mjs",
+    "test": "node --test tools/"
   },
   "dependencies": {
     "@11ty/eleventy": "^3.1.6"

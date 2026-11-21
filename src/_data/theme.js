@@ -16,8 +16,8 @@ const PRICE_ID = {
   christmas: "pri_01kch9pkfgcgmaxy18kv63k86t",
   // Black Friday sale. Reuses the $1 sale price id until a dedicated one is set.
   "black-friday": "pri_01kch9pkfgcgmaxy18kv63k86t",
-  // Halloween is a visual-only theme (no discount) → standard price.
-  halloween: "pri_01k2q4bxj662c46peqbp3f2aap",
+  // Halloween now runs the same sale as the other seasonal themes.
+  halloween: "pri_01kch9pkfgcgmaxy18kv63k86t",
 };
 
 // Per-theme overlay. Every field is optional; a missing field means "same as the
@@ -40,6 +40,7 @@ const THEMES = {
     badge: "🎄 Christmas Sale! 🎄",
     badgeClass: "christmas-badge",
     sale: { originalPrice: "$1.99", price: "$1" },
+    promo: { day: "12-25", name: "Christmas Sale", emoji: "🎄", beforeLabel: "Christmas is in", liveLabel: "Holiday sale ends in" },
     fall: { container: "snow", item: "flake", glyph: "❄️", count: 50 },
   },
   "black-friday": {
@@ -49,14 +50,17 @@ const THEMES = {
     badge: "🔥 BLACK FRIDAY 🔥",
     badgeClass: "blackfriday-badge",
     sale: { originalPrice: "$1.99", price: "$1" },
+    promo: { day: "black-friday", name: "Black Friday Sale", emoji: "🔥", beforeLabel: "Black Friday is in", liveLabel: "Sale ends in" },
   },
   halloween: {
     logo: "images/logo-halloween.png",
     css: "halloween.css",
     fontUrl: "https://fonts.googleapis.com/css2?family=Creepster&display=swap",
     cardClass: "halloween-special",
-    badge: "🎃 Happy Halloween 🎃",
+    badge: "🎃 Halloween Sale! 🎃",
     badgeClass: "halloween-badge",
+    sale: { originalPrice: "$1.99", price: "$1" },
+    promo: { day: "10-31", name: "Halloween Sale", emoji: "🎃", beforeLabel: "Halloween is in", liveLabel: "Spooky sale ends in" },
     // Bats launch from anywhere along the left/bottom edges and cross the whole
     // screen diagonally in 10–16s, kept faint (35–60% opacity).
     fall: {
@@ -68,6 +72,26 @@ const THEMES = {
     float: { container: "pumpkins", item: "pumpkin", src: "images/jack-o-lantern.svg", count: 4 },
   },
 };
+
+// Seasonal promotion (special themes with `promo`; see src/promo.js): a hero card counts
+// down to the theme's day (promo.day: "MM-DD" or "black-friday"), then to the end of the
+// sale; the sale ends PROMO_EXTEND_DAYS after the day, in US Pacific time, judged on the
+// visitor's clock -- afterwards the page shows the standard price without a redeploy.
+const PROMO_EXTEND_DAYS = 3;
+// How long before the day a deployed theme counts as in season.
+const PROMO_LEAD_DAYS = 60;
+for (const t of Object.values(THEMES)) {
+  if (t.promo) {
+    Object.assign(t.promo, {
+      extendDays: PROMO_EXTEND_DAYS,
+      leadDays: PROMO_LEAD_DAYS,
+      standardPriceId: PRICE_ID.default,
+      standardPrice: "$1.99",
+      salePrice: t.sale.price,
+      originalPrice: t.sale.originalPrice,
+    });
+  }
+}
 
 const name = THEMES[process.env.THEME] ? process.env.THEME : "default";
 

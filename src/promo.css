@@ -1,0 +1,193 @@
+/* Seasonal promotion card at the bottom-center of the hero (special themes only).
+   Loaded only when the theme has a `promo` (theme-head.njk); promo.js fills the countdown
+   and hides the card once the sale has ended. */
+
+/* Stack the hero's two-column content and the card vertically. */
+.hero.has-promo {
+  flex-direction: column;
+  justify-content: center;
+}
+.hero.has-promo .hero-container {
+  width: 100%;
+}
+
+.promo-card {
+  /* Theme accents (overridden per theme below) */
+  --promo-bg: linear-gradient(135deg, #ff6b35, #f7931e);
+  --promo-fg: #ffffff;
+  --promo-accent: #ffe08a;
+  --promo-unit-bg: rgba(255, 255, 255, 0.16);
+  --promo-glow: rgba(255, 107, 53, 0.45);
+
+  position: relative;
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  /* Gap above the card grows with the screen height: 2.5rem up to ~800px tall (laptops, so
+     the card stays on the first screen), then more on tall screens, capped at 10rem. The hero
+     centers content + card together, so the card moves down by about half the extra gap. */
+  margin: clamp(2.5rem, 50vh - 25rem, 10rem) auto 0;
+  padding: 0.9rem 1rem 0.9rem 1.5rem;
+  max-width: min(860px, calc(100% - 2 * var(--container-padding, 1.5rem)));
+  border-radius: var(--radius-xl, 20px);
+  background: var(--promo-bg);
+  color: var(--promo-fg);
+  text-decoration: none;
+  box-shadow: 0 10px 30px var(--promo-glow);
+  animation: promo-glow 2.4s ease-in-out infinite;
+  transition: transform 0.2s ease;
+}
+.promo-card[hidden] { display: none; }
+.promo-card:hover { transform: translateY(-2px); }
+.promo-card:focus-visible { outline: 3px solid var(--promo-accent); outline-offset: 3px; }
+
+.promo-title {
+  display: flex;
+  flex-direction: column;
+  font-size: 1.15rem;
+  font-weight: 800;
+  line-height: 1.25;
+  white-space: nowrap;
+}
+.promo-price {
+  font-family: inherit;
+  font-size: 0.95rem;
+  font-weight: 600;
+  opacity: 0.95;
+}
+.promo-price s { opacity: 0.7; }
+.promo-price strong { color: var(--promo-accent); font-size: 1.1rem; }
+
+.promo-countdown {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-left: auto;
+}
+.promo-label {
+  font-size: 0.85rem;
+  font-weight: 600;
+  opacity: 0.9;
+  max-width: 7.5rem;
+  line-height: 1.2;
+  text-align: right;
+}
+.promo-units { display: flex; gap: 0.4rem; }
+.promo-unit {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-width: 3rem;
+  padding: 0.35rem 0.4rem;
+  border-radius: var(--radius-md, 10px);
+  background: var(--promo-unit-bg);
+}
+.promo-unit b {
+  font-size: 1.35rem;
+  font-variant-numeric: tabular-nums;
+  line-height: 1.1;
+}
+.promo-unit small {
+  font-size: 0.65rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  opacity: 0.8;
+}
+
+.promo-cta {
+  flex-shrink: 0;
+  padding: 0.65rem 1.1rem;
+  border-radius: var(--radius-pill, 50px);
+  background: var(--promo-accent);
+  color: #1d1208;
+  font-weight: 800;
+  white-space: nowrap;
+}
+
+@keyframes promo-glow {
+  0%, 100% { box-shadow: 0 10px 30px var(--promo-glow); }
+  50%      { box-shadow: 0 10px 42px var(--promo-glow); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .promo-card { animation: none; }
+}
+
+/* ---- Per-theme looks ---- */
+.promo-christmas {
+  --promo-bg: linear-gradient(135deg, #c62828, #8e1b1b);
+  --promo-accent: #ffd54f;
+  --promo-glow: rgba(198, 40, 40, 0.45);
+}
+.promo-christmas .promo-name { font-family: 'Mountains of Christmas', cursive; font-size: 1.5rem; }
+.promo-black-friday {
+  --promo-bg: linear-gradient(135deg, #1a1a1a, #000000);
+  --promo-accent: #ff6b35;
+  --promo-unit-bg: rgba(255, 107, 53, 0.18);
+  --promo-glow: rgba(255, 107, 53, 0.5);
+}
+.promo-black-friday .promo-cta { color: #ffffff; }
+.promo-halloween {
+  --promo-bg: linear-gradient(160deg, #2a0e3f, #160522);
+  --promo-accent: #ff7518;
+  --promo-unit-bg: rgba(255, 117, 24, 0.16);
+  --promo-glow: rgba(255, 117, 24, 0.45);
+  border: 2px solid #ff7518;
+}
+.promo-halloween .promo-name { font-family: 'Creepster', cursive; font-size: 1.45rem; letter-spacing: 0.5px; font-weight: 400; }
+.promo-halloween .promo-cta { color: #160522; }
+
+/* ---- Small screens: a compact bar fixed to the bottom of the screen ----
+   Visible from the first screen; promo.js adds .promo-at-pricing (slides it away) once the
+   pricing section is on screen or scrolled past. */
+@media (max-width: 760px) {
+  .promo-card {
+    position: fixed;
+    left: 0.75rem;
+    right: 0.75rem;
+    bottom: calc(0.75rem + env(safe-area-inset-bottom, 0px));
+    z-index: 1100;
+    margin: 0;
+    max-width: none;
+    gap: 0.6rem;
+    padding: 0.55rem 0.55rem 0.55rem 0.85rem;
+    border-radius: var(--radius-lg, 15px);
+    transition: transform 0.3s ease, opacity 0.3s ease;
+  }
+  .promo-card:hover { transform: none; }
+  .promo-card.promo-at-pricing {
+    transform: translateY(calc(100% + 1.5rem));
+    opacity: 0;
+    pointer-events: none;
+  }
+  .promo-title { font-size: 0.95rem; white-space: nowrap; min-width: 0; flex-shrink: 1; }
+  .promo-name, .promo-price { overflow: hidden; text-overflow: ellipsis; }
+  .promo-countdown, .promo-cta { flex-shrink: 0; }
+  .promo-christmas .promo-name { font-size: 1.15rem; }
+  .promo-halloween .promo-name { font-size: 1.1rem; }
+  .promo-price { font-size: 0.78rem; }
+  .promo-price strong { font-size: 0.95rem; }
+  .promo-price s { display: none; }
+  .promo-label { display: none; }
+  .promo-countdown { margin-left: auto; }
+  .promo-units { gap: 0.2rem; }
+  .promo-unit {
+    flex-direction: row;
+    align-items: baseline;
+    min-width: 0;
+    padding: 0.25rem 0.3rem;
+  }
+  .promo-unit b { font-size: 0.95rem; }
+  /* "days/hrs/min/sec" → "d/h/m/s" */
+  .promo-unit small { font-size: 0; letter-spacing: 0; }
+  .promo-unit small::after { content: attr(data-short); font-size: 0.7rem; margin-left: 1px; text-transform: none; }
+  .promo-cta { padding: 0.55rem 0.75rem; font-size: 0.85rem; }
+  .promo-cta-text { display: none; }
+}
+/* Narrow phones: drop the seconds so the bar fits on one line */
+@media (max-width: 360px) {
+  .promo-unit:last-child { display: none; }
+}
+@media (max-width: 760px) and (prefers-reduced-motion: reduce) {
+  .promo-card { transition: none; }
+}

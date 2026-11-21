@@ -91,7 +91,7 @@ showActivatePro: true
   </div>
 
   <!-- Hero Section -->
-  <section class="hero">
+  <section class="hero{% if theme.promo %} has-promo{% endif %}">
     <div class="hero-container">
       <div class="hero-content">
         <div class="hero-badge">
@@ -171,6 +171,23 @@ showActivatePro: true
         </div>
       </div>
     </div>
+    {%- if theme.promo %}
+    <!-- Seasonal promotion card: countdown + jump to pricing (driven by promo.js; hidden
+         until it runs, and again once the sale has ended) -->
+    <a href="#pricing" id="promo-card" class="promo-card promo-{{ theme.name }}" hidden>
+      <span class="promo-title"><span class="promo-name">{{ theme.promo.emoji }} {{ theme.promo.name }}</span> <span class="promo-price">Pro <s>{{ theme.promo.originalPrice }}</s> <strong>{{ theme.promo.salePrice }}</strong>/month</span></span>
+      <span class="promo-countdown">
+        <span class="promo-label" data-promo-label>{{ theme.promo.beforeLabel }}</span>
+        <span class="promo-units">
+          <span class="promo-unit"><b data-unit="d">0</b><small data-short="d">days</small></span>
+          <span class="promo-unit"><b data-unit="h">00</b><small data-short="h">hrs</small></span>
+          <span class="promo-unit"><b data-unit="m">00</b><small data-short="m">min</small></span>
+          <span class="promo-unit"><b data-unit="s">00</b><small data-short="s">sec</small></span>
+        </span>
+      </span>
+      <span class="promo-cta"><span class="promo-cta-text">Get the deal </span><i class="fas fa-arrow-down"></i></span>
+    </a>
+    {%- endif %}
   </section>
 
   <!-- Features Section -->
@@ -238,10 +255,10 @@ showActivatePro: true
         
         <div class="pricing-card featured{% if theme.cardClass %} {{ theme.cardClass }}{% endif %}">
           {%- if theme.badge %}
-          <div class="{{ theme.badgeClass }}">{{ theme.badge }}</div>
+          <div class="{{ theme.badgeClass }}"{% if theme.promo %} data-promo-badge{% endif %}>{{ theme.badge }}</div>
           {%- endif %}
           <div class="plan-name">{% if theme.planIcon %}<i class="{{ theme.planIcon }}"></i> {% endif %}Pro</div>
-          <div class="plan-price">{% if theme.sale %}<span class="original-price">{{ theme.sale.originalPrice }}</span> {{ theme.sale.price }}{% else %}$1.99{% endif %}<span>/month</span></div>
+          <div class="plan-price"{% if theme.promo %} data-promo-price{% endif %}>{% if theme.sale %}<span class="original-price">{{ theme.sale.originalPrice }}</span> {{ theme.sale.price }}{% else %}$1.99{% endif %}<span>/month</span></div>
           <div class="plan-description">Unlock the full potential & save more time</div>
           <ul class="plan-features">
             <li><i class="fas fa-check check"></i> Everything in Free Plan</li>

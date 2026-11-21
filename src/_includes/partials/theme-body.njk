@@ -1,5 +1,9 @@
 {%- if not theme.isDefault %}
   <script>window.YSS_PRICE_ID = '{{ theme.priceId }}';</script>
+{%- if theme.promo %}
+  <script>window.YSS_PROMO = {{ theme.promo | dump | safe }};</script>
+  <script src="promo.js"></script>
+{%- endif %}
 {%- if theme.fall %}
   <div class="{{ theme.fall.container }}"></div>
   <script>

@@ -8,6 +8,8 @@ module.exports = function (eleventyConfig) {
     "src/script.js",
     "src/activate-pro.js",
     "src/browser-links.js",
+    "src/promo.js",
+    "src/promo.css",
     "src/images",
     "src/CNAME",
     "src/robots.txt",
