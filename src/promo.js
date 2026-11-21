@@ -125,14 +125,14 @@
   }
   api.now = function () { return Date.now() + offset; };
 
-  // Back to the standard price: checkout price id, the Pro card's price, the sale badge and
+  // Back to the standard price: checkout price id, the Pro card's price, the sale badges and
   // the promotion card. (The theme's decorations stay until the next page load.)
   api.endSale = function (std) {
     root.YSS_PRICE_ID = std.priceId;
     document.querySelectorAll('[data-theme-price]').forEach(function (el) {
       el.innerHTML = std.price + '<span>/month</span>';
     });
-    document.querySelectorAll('[data-theme-badge]').forEach(function (el) { el.hidden = true; });
+    document.querySelectorAll('[data-theme-badge], [data-theme-nav-badge]').forEach(function (el) { el.hidden = true; });
     var card = document.getElementById('promo-card');
     if (card) card.hidden = true;
     var hero = document.querySelector('.hero.has-promo');

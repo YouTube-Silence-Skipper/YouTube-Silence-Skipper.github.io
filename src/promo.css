@@ -137,6 +137,67 @@
 .promo-halloween .promo-name { font-family: 'Creepster', cursive; font-size: 1.45rem; letter-spacing: 0.5px; font-weight: 400; }
 .promo-halloween .promo-cta { color: #160522; }
 
+/* ---- Sale badge next to the header logo ----
+   theme-runtime.js fills it ("🎃 Halloween Sale · $1"), adds promo-<theme> for the colors
+   above, and unhides it; promo.endSale hides it again. */
+.nav-brand {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  flex-shrink: 0; /* like .logo itself: never squeeze the logo text */
+}
+/* Default colors at zero specificity, so the per-theme .promo-<theme> rules above win. */
+:where(.nav-sale-badge) {
+  --promo-bg: linear-gradient(135deg, #ff6b35, #f7931e);
+  --promo-fg: #ffffff;
+  --promo-accent: #ffe08a;
+  --promo-glow: rgba(255, 107, 53, 0.45);
+}
+/* Rounded-rectangle badge with a "border beam": two bright arcs of the theme's accent color,
+   half a turn apart, orbit the border. Three background layers: the badge fill (padding-box), the rotating
+   conic-gradient beam, and a dim accent ring under it (both border-box, seen through the
+   transparent border). */
+@property --nav-beam-angle {
+  syntax: '<angle>';
+  inherits: false;
+  initial-value: 0deg;
+}
+.nav-sale-badge {
+  flex-shrink: 0;
+  padding: 0.3rem 0.7rem;
+  border: 2px solid transparent;
+  border-radius: 8px;
+  background:
+    var(--promo-bg) padding-box,
+    conic-gradient(from var(--nav-beam-angle),
+      transparent 0 33%, var(--promo-accent) 42%, #ffffff 45%, var(--promo-accent) 48%, transparent 50%,
+      transparent 50% 83%, var(--promo-accent) 92%, #ffffff 95%, var(--promo-accent) 98%, transparent 100%) border-box,
+    linear-gradient(color-mix(in srgb, var(--promo-accent) 35%, transparent), color-mix(in srgb, var(--promo-accent) 35%, transparent)) border-box;
+  color: var(--promo-fg);
+  font-size: 0.8rem;
+  font-weight: 700;
+  line-height: 1.3;
+  white-space: nowrap;
+  text-decoration: none;
+  box-shadow: 0 2px 12px var(--promo-glow);
+  animation: nav-beam 3s linear infinite;
+  transition: transform 0.2s ease;
+}
+@keyframes nav-beam {
+  to { --nav-beam-angle: 360deg; }
+}
+.nav-sale-badge[hidden] { display: none; }
+.nav-sale-badge:hover { transform: translateY(-1px); }
+@media (prefers-reduced-motion: reduce) {
+  /* No orbiting light: a steady accent border instead. */
+  .nav-sale-badge { animation: none; border-color: var(--promo-accent); background: var(--promo-bg) padding-box; }
+}
+/* The full desktop menu leaves no room for it between 951px and 1150px (the menu collapses
+   into the ☰ button at 950px and below, which frees the space again). */
+@media (min-width: 951px) and (max-width: 1150px) {
+  .nav-sale-badge { display: none; }
+}
+
 /* ---- Small screens: a compact bar fixed to the bottom of the screen ----
    Visible from the first screen; promo.js adds .promo-at-pricing (slides it away) once the
    pricing section is on screen or scrolled past. */
@@ -183,6 +244,11 @@
   .promo-unit small::after { content: attr(data-short); font-size: 0.7rem; margin-left: 1px; text-transform: none; }
   .promo-cta { padding: 0.55rem 0.75rem; font-size: 0.85rem; }
   .promo-cta-text { display: none; }
+  /* The bottom bar already carries the sale on phones; keep the header uncluttered. With the
+     badge gone, let the wrapper drop out of layout so the logo sizes against the header as
+     before (styles.css limits .logo to a % of its parent on phones). */
+  .nav-sale-badge { display: none; }
+  .nav-brand { display: contents; }
 }
 /* Narrow phones: drop the seconds so the bar fits on one line */
 @media (max-width: 360px) {

@@ -1,9 +1,19 @@
 <nav class="navbar">
     <div class="nav-container">
+      {#- Seasonal sale badge next to the logo (not on pro-success: the visitor just paid).
+          Shown by theme-runtime.js while a sale is on; styled in promo.css. #}
+      {%- set navSaleBadge = not theme.isPlain and page.fileSlug != 'pro-success' %}
+      {%- if navSaleBadge %}
+      <div class="nav-brand">
+      {%- endif %}
       <a href="{% if navVariant == 'home' %}#{% else %}index.html{% endif %}" class="logo">
         <img src="{{ theme.logo }}" alt="YouTube Silence Skipper Logo">{% include "partials/theme-logo.njk" %}
         <span>YouTube Silence Skipper</span>
       </a>
+      {%- if navSaleBadge %}
+      <a href="{% if navVariant == 'home' %}#pricing{% else %}index.html#pricing{% endif %}" class="nav-sale-badge" data-theme-nav-badge hidden></a>
+      </div>
+      {%- endif %}
       <ul class="nav-menu">
         {%- if navVariant == 'home' %}
         <li><a href="#features">Features</a></li>

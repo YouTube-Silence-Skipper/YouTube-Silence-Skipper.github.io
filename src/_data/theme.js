@@ -29,7 +29,8 @@ const STANDARD = { logo: "images/logo.png", priceId: PRICE_ID.default, price: "$
 
 // Per-theme overlay, applied in the browser by src/theme-runtime.js. Every field is
 // optional; a missing field means "same as the base site". `promo.leadDays` is how many
-// days before the theme's day its season (look + sale) starts.
+// days before the theme's day its season (look + sale) starts; `promo.navBadge` is the
+// short sale label next to the header logo.
 // fall: a falling/flying particle layer { container, item, glyph | src (image), count,
 //   durationMin/durationRange/delayMax (s), opacityMin/opacityMax, spread (vw), fromEdges
 //   (launch from the left/bottom edges) }. float: images drifting behind the content
@@ -45,7 +46,7 @@ const THEMES = {
     badgeClass: "christmas-badge",
     sale: { originalPrice: "$1.99", price: "$1" },
     // Dec 1 – Dec 28: starts the day after Black Friday's season ends.
-    promo: { day: "12-25", leadDays: 24, name: "Christmas Sale", emoji: "🎄", beforeLabel: "Christmas is in", liveLabel: "Holiday sale ends in" },
+    promo: { day: "12-25", leadDays: 24, name: "Christmas Sale", navBadge: "Christmas Sale", emoji: "🎄", beforeLabel: "Christmas is in", liveLabel: "Christmas sale ends in" },
     fall: { container: "snow", item: "flake", glyph: "❄️", count: 50 },
   },
   "black-friday": {
@@ -55,7 +56,7 @@ const THEMES = {
     badgeClass: "blackfriday-badge",
     sale: { originalPrice: "$1.99", price: "$1" },
     // Black Friday week through Cyber Monday (2026: Nov 20 – Nov 30).
-    promo: { day: "black-friday", leadDays: 7, name: "Black Friday Sale", emoji: "🔥", beforeLabel: "Black Friday is in", liveLabel: "Sale ends in" },
+    promo: { day: "black-friday", leadDays: 7, name: "Black Friday Sale", navBadge: "Black Friday", emoji: "🔥", beforeLabel: "Black Friday is in", liveLabel: "Sale ends in" },
   },
   halloween: {
     logo: "images/logo-halloween.png",
@@ -66,7 +67,7 @@ const THEMES = {
     badgeClass: "halloween-badge",
     sale: { originalPrice: "$1.99", price: "$1" },
     // The last two weeks before Halloween (Oct 17 – Nov 3).
-    promo: { day: "10-31", leadDays: 14, name: "Halloween Sale", emoji: "🎃", beforeLabel: "Halloween is in", liveLabel: "Spooky sale ends in" },
+    promo: { day: "10-31", leadDays: 14, name: "Halloween Sale", navBadge: "Halloween Sale", emoji: "🎃", beforeLabel: "Halloween is in", liveLabel: "Spooky sale ends in" },
     // Bats launch from anywhere along the left/bottom edges and cross the whole
     // screen diagonally in 10–16s, kept faint (35–60% opacity).
     fall: {

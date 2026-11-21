@@ -13,7 +13,8 @@
  *   - Logos: each themed <img data-theme-logo> calls YSSTheme.logo(img) right after itself,
  *     so the seasonal logo replaces the default one before it is painted.
  *   - After DOMContentLoaded: the Pro pricing card (class, badge, icon, sale price), the
- *     hero promotion card (index), and the falling/floating decoration layers.
+ *     sale badge next to the header logo, the hero promotion card (index), and the
+ *     falling/floating decoration layers.
  */
 (function (root) {
   'use strict';
@@ -127,8 +128,18 @@
     document.body.appendChild(layer);
   }
 
+  // Sale badge next to the header logo: "🎃 Halloween Sale · $1" (promo.endSale hides it).
+  function navBadge() {
+    var badge = document.querySelector('[data-theme-nav-badge]');
+    if (!badge || !saleOn || !t.promo.navBadge) return;
+    badge.textContent = t.promo.emoji + ' ' + t.promo.navBadge + ' · ' + t.promo.salePrice;
+    badge.classList.add('promo-' + name);
+    badge.hidden = false;
+  }
+
   function applyPage() {
     decoratePricing();
+    navBadge();
     if (saleOn) P.startCard(name, t.promo, std, stateAt);
     if (t.fall) fallLayer(t.fall);
     if (t.float) floatLayer(t.float);
